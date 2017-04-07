@@ -7,7 +7,12 @@
    		<title>conocer</title>
 
     	<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
     	<link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/datepicker.css" rel="stylesheet">
+      <link href="src/css/nav.css" rel="stylesheet">
+
 		<style>
 		body {
 			background-color: #f1f1f1;
@@ -29,250 +34,95 @@
       }
 		</style>
   	</head>
-  	<body>
+  	<body>  
+      
   		<nav class="navbar navbar-default" role="navigation">
-			<ul class="nav navbar-nav">
-			</ul>
+			 <ul class="nav navbar-nav">
+			 </ul>
 				<img src="img/SEP_logo.png" style="margin-top: 15px;">
-				<img src="img/conocer_logo.png" style="float:right; margin: 0px 0px 15px 15px;">
-      		
-		</nav> 
+				<img src="img/conocer_logo.png" style="width: 230px;float:right; margin: 10px 0px 15px 15px;">      
+		  </nav> 
 
-    <div id="login-panel" class="panel panel-primary margin-panels">
-      <div class="panel panel-heading">
-        Login
+
+      <?php 
+      $page = $_GET["page"];
+      switch ($page) {
+        case 'main':
+          echo '
+      <div class="margin-panels">
+        <ul id="navbar" class="nav nav-justified">
+          <li id="registro" class="nav-menu active"><a class="tool" data-toggle="tooltip" title="Registra, edita o agrega nuevas visitas">Registro</a></li>
+          <li id="reporte" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Filtra y genera reportes">Reporte</a></li>
+          <li id="estadisticas" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Genera estadísticas con la información en la base de datos">Estadísticas</a></li>
+          <li id="Monitoreo" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Monitorea las visitas">Monitoreo</a></li>
+        </ul>
       </div>
-      <div class="panel panel-body">
-        <div class="form-group row">
-          <label class=" col-md-5" for="name"> Usuario: </label>
-          <div class="col-md-5">
-            <input type="text" id="user" name="user" class="form-control" placeholder="Usuario" maxlength="20">
+          ';
+          echo "<div class='global-page page-registro'>";
+          include("Forms/Registrar.php");
+          include("Forms/Captura.php");
+          include("Forms/Monitor.php");
+          echo "</div>";
+          echo "<div class='global-page page-reporte' style='display:none'>";
+          include("Forms/Reporte.php");
+          echo "</div>";
+          echo "<div class='global-page page-estadisticas' style='display:none'>";
+          include("Forms/Estadisticas.php");
+          echo "</div>";
+          echo "<div class='global-page page-Monitoreo' style='display:none'>";
+          include("Forms/Monitoreo.php");
+          echo "</div>";
+        break;     
+        default:
+      ?>
+      <div id="login-panel" class="panel panel-primary margin-panels">
+        <div class="panel panel-heading">
+          Login
+        </div>
+        <div class="panel panel-body">
+          <div class="form-group row">
+            <label class=" col-md-5" for="name"> Usuario: </label>
+            <div class="col-md-5">
+              <input type="text" id="user" name="user" class="form-control" placeholder="Usuario" maxlength="20">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class=" col-md-5" for="user"> Contraseña: </label>
+            <div class="col-md-5">
+              <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" maxlength="20">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-5">
+              <input type="button" id="btnLogin" class="btn btn-lg btn-primary" value="Login">
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <label class=" col-md-5" for="user"> Contraseña: </label>
-          <div class="col-md-5">
-            <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña" maxlength="20">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-md-5">
-            <input type="submit" class="btn btn-lg btn-primary" value="Login">
-          </div>
-        </div>
       </div>
-    </div>
+      <?php
+            break;
+        }
+        ?>      
+    <!-- Modal -->
+    <div id="myModal"class="modal fade" tabindex="-1" role="dialog" style="text-align:center;">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
+                <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body">
 
-    <div class="margin-panels">
-      <div class="row" style="text-aling:rigth;">
-        <div class="col-md-3 col-md-offset-9">
-            <input class="form-control" placeholder="Buscar">
-        </div>
-      </div>
-    </div>
+              </div>
+              <div class="modal-footer">
+                
+              </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-  		<div id="panel1" class="panel panel-primary margin-panels">
-  			<div class="panel panel-heading">
-  				Panel
-  			</div>
-  			<div class="panel panel-body">
-  				<div class="row">
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Folio" disabled>
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Fecha" disabled>
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Hora" disabled>
-  					</div>  					   					
-  				</div>
-  				<div class="row">
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Nombres">
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Apellido Paterno">
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Apellido Materno">
-  					</div>  					   					
-  				</div>
-  				<div class="row">
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Email">
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Teléfono">
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="CURP">
-  					</div>  					   					
-  				</div>
-   				<div class="row">
-  					<div class="col-md-6">
-  						<input type="text" class="form-control" placeholder="Nombre de la empresa">
-  					</div>
-  					<div class="col-md-6">
-  						<select class="form-control" placeholder="Tipo de Empresa">
-  							<option selected value="-1" disabled>Seleccione tipo de empresa</option>
-  							<option value="1">Prestador de servicios</option>
-  							<option value="2">OC</option>
-  							<option value="3">Independiente</option>
-  						</select>
-  					</div>  					   					
-  				</div>
-  				<div class="row">
-  					<div class="col-md-6">
-  						<select class="form-control" placeholder="Entidad Federativa">
-  							<option selected value="-1" disabled>Seleccione entidad federativa</option>
-  							<option>Aguascalientes</option>
-		                    <option>Baja California</option>
-		                    <option>Baja California Sur</option>
-		                    <option>Campeche</option>
-		                    <option>Chiapas</option>
-		                    <option>Chihuahua</option>
-		                    <option>Coahuila</option>
-		                    <option>Colima</option>
-		                    <option>Distrito Federal</option>
-		                    <option>Durango</option>
-		                    <option>Estado de México</option>
-		                    <option>Guanajuato</option>
-		                    <option>Guerrero</option>
-		                    <option>Hidalgo</option>
-		                    <option>Jalisco</option>
-		                    <option>Michoacán</option>
-		                    <option>Morelos</option>
-		                    <option>Nayarit</option>
-		                    <option>Nuevo León</option>
-		                    <option>Oaxaca</option>
-		                    <option>Puebla</option>
-		                    <option>Querétaro</option>
-		                    <option>Quintana Roo</option>
-		                    <option>San Luis Potosí</option>
-		                    <option>Sinaloa</option>
-		                    <option>Sonora</option>
-		                    <option>Tabasco</option>
-		                    <option>Tamaulipas</option>
-		                    <option>Tlaxcala</option>
-		                    <option>Veracruz</option>
-		                    <option>Yucatán</option>
-		                    <option>Zacatecas</option>
-  						</select>
-  					</div> 
-   					<div class="col-md-6">
-  						<select class="form-control" placeholder="Medio de Contacto">
-  							<option selected value="-1" disabled>Seleccione medio de contacto</option>
-  							<option value="1">Vía correo electrónico</option>
-  							<option value="2">Vía Chat de la página web</option>
-  							<option value="3">Vía telefónica</option>
-  							<option value="3">Vía personal</option>
-  						</select>
-  					</div> 				   					
-  				</div>
-  				<div class="row">
-  					<div class="col-md-12">
-  						<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Registrar</button>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
-
-
-  		<div id="panel2" class="panel panel-primary margin-panels">
-  			<div class="panel panel-heading">
-  				Panel
-  			</div>
-  			<div class="panel panel-body">
-  				<div class="row">
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Folio" disabled>
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Fecha" disabled>
-  					</div>
-  					<div class="col-md-4">
-  						<input type="text" class="form-control" placeholder="Hora" disabled>
-  					</div>  					   					
-  				</div>
-   				<div class="row">
-  					<div class="col-md-6">
-  						<select class="form-control" placeholder="Ocupación">
-  							<option selected value="-1" disabled>Seleccione ocupación</option>
-  							<option value="1">Desempleado</option>
-  							<option value="2">Empleado Sector Público</option>
-  							<option value="3">Empleado Sector Privado</option>
-  							<option value="4">Dueño de Empresa</option>
-  							<option value="5">Profesionista Independiente</option>
-  							<option value="6">Jubilado</option>
-  							<option value="7">Estudiante</option>
-  						</select>  					
-  					</div>
-  					<div class="col-md-6">
-  						<select class="form-control" placeholder="Escolaridad">
-  							<option selected value="-1" disabled>Seleccione último grado de escolaridad</option>
-  							<option value="1">Ninguno</option>
-  							<option value="2">Primaria</option>
-  							<option value="3">Secundaria</option>
-  							<option value="4">Preparatoria</option>
-  							<option value="5">Carrera Técnica</option>
-  							<option value="6">Licenciatura</option>
-  							<option value="7">Maestría / Doctorado</option>
-  						</select>
-  					</div>  					   					
-  				</div>
-  				<div class="row">
-  					<div class="col-md-4">
-  						<select class="form-control" placeholder="Estandar Buscado">
-  							<option selected value="-1" disabled>Seleccione estandar buscado</option>
-  							
-  						</select>
-   					</div>
-  					<div class="col-md-4">
-  						<input class="form-control" placeholder="Prestador de Servicio">				
-  					</div>
-  					<div class="col-md-4">
-  						<select class="form-control" placeholder="Estado donde se localiza">
-  							<option selected value="-1" disabled>Seleccione estado donde se localiza</option>
-  							<option>Aguascalientes</option>
-		                    <option>Baja California</option>
-		                    <option>Baja California Sur</option>
-		                    <option>Campeche</option>
-		                    <option>Chiapas</option>
-		                    <option>Chihuahua</option>
-		                    <option>Coahuila</option>
-		                    <option>Colima</option>
-		                    <option>Distrito Federal</option>
-		                    <option>Durango</option>
-		                    <option>Estado de México</option>
-		                    <option>Guanajuato</option>
-		                    <option>Guerrero</option>
-		                    <option>Hidalgo</option>
-		                    <option>Jalisco</option>
-		                    <option>Michoacán</option>
-		                    <option>Morelos</option>
-		                    <option>Nayarit</option>
-		                    <option>Nuevo León</option>
-		                    <option>Oaxaca</option>
-		                    <option>Puebla</option>
-		                    <option>Querétaro</option>
-		                    <option>Quintana Roo</option>
-		                    <option>San Luis Potosí</option>
-		                    <option>Sinaloa</option>
-		                    <option>Sonora</option>
-		                    <option>Tabasco</option>
-		                    <option>Tamaulipas</option>
-		                    <option>Tlaxcala</option>
-		                    <option>Veracruz</option>
-		                    <option>Yucatán</option>
-		                    <option>Zacatecas</option>
-  						</select>
-  					</div>  					   					
-  				</div>
-  			</div>
-  		</div>
-		<!-- Modal -->
-		<div id="myModal"class="modal fade" tabindex="-1" role="dialog" style="text-align:center;">
+		<!-- loading Modal -->
+		<div id="myModalLoading"class="modal fade" tabindex="-1" role="dialog" style="text-align:center;">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				<!--<div class="modal-header">
@@ -280,6 +130,7 @@
         				<h4 class="modal-title">Modal title</h4>
       				</div>-->
       				<div class="modal-body">
+                <div id="alertEstatus" role="alert" style="display: none;"></div>
       					<img src="img/loading.gif" style="width:150px; display: block; margin: 0 auto;"/>
         				<p>Cargando, espere un momento.</p>
       				</div>
@@ -292,22 +143,23 @@
 		</div><!-- /.modal -->
 
     	<!-- Bootstrap -->
-    	<script src="js/j.js"></script>	
+    	<script src="js/jquery-3.1.1.min.js"></script>	
     	<script src="js/bootstrap.min.js"></script>
-		<!-- SCRIPTS -->
-		<script>
-		$("#prro").click(function(){
-			$("#myModal").modal({show: true, backdrop: 'static', keyboard: false});
-			$.ajax({
-				url: "BLL/index.php?fn=lol",
-				datatype: "json",
-				type: "post",
-				success: function(response){
-					console.log(response.success);
-					$("#myModal").modal("hide");
-				}
-			});			
-		});
-		</script>
+      <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+      <script src="js/select2-4.0.3/dist/js/select2.full.min.js"></script>
+      <script src="js/validate/jquery.validate.min.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+      <!-- CUSTOMS SCRIPTS-->
+      <script src="src/js/Global.js"></script>
+      <script src="src/js/Load_Page.js"></script>
+      <script src="src/js/login.js"></script>
+      <script src="src/js/Registrar.js"></script>
+      <script src="src/js/Captura.js"></script>
+      <script src="src/js/Monitor.js"></script>
+      <script src="src/js/Reporte.js"></script>
+      <script src="src/js/charts.js"></script>
+      
 	</body>
 </html>
