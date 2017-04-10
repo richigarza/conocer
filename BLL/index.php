@@ -36,7 +36,12 @@
 				$result["success"] = true;
 			break;
 			case "capturar":
-				$result["success"] = true;
+				$page = new Page();
+				$result = $page->setSolicitud($_POST);
+			break;
+			case "visita":
+				$page = new Page();
+				$result = $page->setVisita($_GET);
 			break;
 			case "getEstandares":
 				$page = new Page();

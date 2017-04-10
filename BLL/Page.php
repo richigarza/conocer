@@ -23,9 +23,19 @@
 
 	Class Page{
 
+		function setVisita($array){
+			$paramString = "CALL sp_setVisita(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', @output)";
+			$comand = new dbMySQL();
+			$result = $comand->execSP($paramString);
+			//$list = array();
+
+			$result["query"] = $paramString;
+			return $result;
+		}
+
 		function setSolicitante($array){
-			//$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? $array["txtFechaNacimiento"] : "NULL";
-			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", '".$array["txtFechaNacimiento"]."')";
+			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
+			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].")";
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
 			//$list = array();
@@ -34,6 +44,18 @@
 			return $result;
 		}
 		
+		function setSolicitud($array){
+			$array["ddlOcupacion"] = $array["ddlOcupacion"] !=  NULL  ? $array["ddlOcupacion"] : "NULL";
+			$array["ddlEscolaridad"] = $array["ddlEscolaridad"] !=  NULL  ? $array["ddlEscolaridad"] : "NULL";
+			$paramString = "CALL sp_setCaptura(".$array["Folio"].", ".$array["ddlOcupacion"].", ".$array["ddlEscolaridad"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', @output)";
+			$comand = new dbMySQL();
+			$result = $comand->execSP($paramString);
+			//$list = array();
+
+			$result["query"] = $paramString;
+			return $result;	
+		}
+
 		function getEstandares(){
 			$paramString = "SELECT descripcion, codigo 
 							FROM CatalogoEstandares";
@@ -42,7 +64,7 @@
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array('codigo' => $value->codigo, 
-								'descripcion' => ($value->descripcion)
+								'descripcion' => utf8_encode($value->descripcion)
 								);
 			}
 			$result["output"] = $list;
@@ -56,8 +78,8 @@
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
-				$list[] = array('idEstado' => ($value->idEstado), 
-								'estado' => ($value->estado)
+				$list[] = array('idEstado' => utf8_encode($value->idEstado), 
+								'estado' => utf8_encode($value->estado)
 								);
 			}
 			$result["output"] = $list;
@@ -65,14 +87,14 @@
 		}
 
 		function getEstadoEstandares($string){
-			$paramString = "SELECT DISTINCT e.idEstado AS idEstado,  e.estado AS estado FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Prestador p ON (p.cedulaP = rel.cedulaP) INNER JOIN Estados e ON (e.idEstado = p.idEstado) WHERE rel.codigo like '%".$string."%' ORDER BY e.idEstado";
+			$paramString = "SELECT DISTINCT e.idEstado AS idEstado,  e.estado AS estado FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) INNER JOIN Estados e ON (e.idEstado = r.idEstado) WHERE rel.codigo like '%".$string."%' ORDER BY e.idEstado";
 
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
-				$list[] = array('idEstado' => ($value->idEstado), 
-								'estado' => ($value->estado)
+				$list[] = array('idEstado' => utf8_encode($value->idEstado), 
+								'estado' => utf8_encode($value->estado)
 								);
 			}
 			$result["output"] = $list;
@@ -81,14 +103,14 @@
 
 		function getPrestadorEstadoEstandares($array){
 			//print_r($array);
-			$paramString = "SELECT DISTINCT ec.cedulaE AS cedula, ec.nombreEmpresa AS nombreEmpresa FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Prestador p ON (p.cedulaP = rel.cedulaP) INNER JOIN EmpresaCertificadora ec ON (ec.cedulaE = rel.cedulaE) WHERE rel.codigo like '%".$array["estandar"]."%' AND p.idEstado='".$array["estado"]."' ORDER BY ec.nombreEmpresa";
+			$paramString = "SELECT DISTINCT p.cedulaP AS cedula, p.nombreEmpresa AS nombreEmpresa FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Prestador p ON (p.cedulaP = rel.cedulaP) INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) WHERE rel.codigo like '%".$array["estandar"]."%' AND r.idEstado='".$array["estado"]."' ORDER BY p.nombreEmpresa";
 			//echo $paramString;
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array('cedula' => $value->cedula, 
-								'nombreEmpresa' => ($value->nombreEmpresa)
+								'nombreEmpresa' => utf8_encode($value->nombreEmpresa)
 								);
 			}
 			$result["output"] = $list;
@@ -97,33 +119,33 @@
 
 		function getRepresentantePrestadorEstadoEstandares($array){
 			//print_r($array);
-			$paramString = "SELECT p.cedulaP, p.nombrePrestador FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Prestador p ON (p.cedulaP = rel.cedulaP) WHERE rel.cedulaE='".$array["prestador"]."' AND rel.codigo like '%".$array["estandar"]."%'";
+			$paramString = "SELECT r.cedulaR, r.nombrePrestador FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) WHERE rel.cedulaP='".$array["prestador"]."' AND rel.codigo like '%".$array["estandar"]."%'";
 			//echo $paramString;
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
-				$list[] = array('cedulaP' => $value->cedulaP,
-								'nombrePrestador' => ($value->nombrePrestador)
+				$list[] = array('cedulaR' => $value->cedulaR,
+								'nombrePrestador' => utf8_encode($value->nombrePrestador)
 								);
 			}
 			$result["output"] = $list;
 			return $result;
 		}
-		function getRepresentante($cedulaP){
-			$paramString = "SELECT p.nombrePrestador, p.direccion, p.colonia, p.codigoPostal, p.ciudad, p.email, p.telefono  FROM Prestador p WHERE p.cedulaP='".$cedulaP."' ";
+		function getRepresentante($cedulaR){
+			$paramString = "SELECT r.nombrePrestador, r.direccion, r.colonia, r.codigoPostal, r.ciudad, r.email, r.telefono  FROM Representante r WHERE r.cedulaR='".$cedulaR."' ";
 			//echo $paramString;
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array(
-								'nombrePrestador' => ($value->nombrePrestador),
-								'direccion' => ($value->direccion),
-								'colonia' => ($value->colonia),
+								'nombrePrestador' => utf8_encode($value->nombrePrestador),
+								'direccion' => utf8_encode($value->direccion),
+								'colonia' => utf8_encode($value->colonia),
 								'codigoPostal' => $value->codigoPostal,
-								'ciudad' => ($value->ciudad),
-								'email' => ($value->email),
+								'ciudad' => utf8_encode($value->ciudad),
+								'email' => utf8_encode($value->email),
 								'telefono' => $value->telefono
 								);
 			}
