@@ -3,7 +3,7 @@
           Panel de Atención
         </div>
         <div class="panel panel-body">
-          <form id="formRegistrar" name="formRegistrar" action="">
+          <form id="formMonitor" name="formMonitor" action="">
             <div class="row">
               <div class="col-md-4">
                 <label>Folio</label>
@@ -21,39 +21,36 @@
             <div class="row panel-margin">
               <div class="col-md-3">
                 <label>Motivo</label>
-                <select id="Motivo" class="form-control">
-                  <option>Informativo</option>
-                  <option>Trámite</option>
-                  <option>Requisitos</option>
-                  <option>Seguimiento</option>                        
+                <select id="ddlMotivo" name="ddlMotivo" class="form-control">
+                  <option value="1">Informativo</option>
+                  <option value="2">Trámite</option>
+                  <option value="3">Requisitos</option>
+                  <option value="4">Seguimiento</option>                        
                 </select>
               </div>
             </div>
             <div class="row panel-margin">
               <div class="col-md-4">
                 <label>Asunto</label>
-                <textarea id="Asunto" class="form-control" rows="3" placeholder="Asunto"></textarea>
+                <textarea id="txtAreaAsunto" name="txtAreaAsunto" class="form-control" rows="3" placeholder="Asunto"></textarea>
               </div>
             </div>
             <div class="row panel-margin">
               <div class="col-md-6">
                 <label>Dirigido a</label>
-                <select class="form-control">
+                <select name="ddlDirigidoA" id="ddlDirigidoA" class="form-control">
                   <option selected value="-1" disabled>Seleccione a donde va dirgido</option>
-                  <option>DIRECCIÓN DE PROMOCÍON Y APOYO A PRESTADORES (ACREDITACIÓN INICIAL)</option>
-                  <option>DIRECCIÓN DE ACREDITACIÓN Y CERTIFICACIÓN (MESA DE AYUDA/DUPLICADOS/CERTIFICADOS EN EC Ó NTCL)</option>
-                  <option>DIRECCIÓN DE EXCELENCIA EN SERVICIO A USUARIOS (RENAC/QUEJAS)</option>
-                  <option>DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)</option>
+                  <option value="1">DIRECCIÓN DE PROMOCÍON Y APOYO A PRESTADORES (ACREDITACIÓN INICIAL)</option>
+                  <option value="2">DIRECCIÓN DE ACREDITACIÓN Y CERTIFICACIÓN (MESA DE AYUDA/DUPLICADOS/CERTIFICADOS EN EC Ó NTCL)</option>
+                  <option value="3">DIRECCIÓN DE EXCELENCIA EN SERVICIO A USUARIOS (RENAC/QUEJAS)</option>
+                  <option value="4">DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)</option>
                 </select>
               </div>
             </div>
             <div class="row panel-margin">
               <div class="col-md-6">
                 <label>Comentarios</label>
-                <div class="input-group">
-                  <span class="input-group-addon"><input id="Recordatorio" name="Recordatorio" type="checkbox" value="option1"></span>
-                  <textarea id="Comentarios" class="form-control" rows="4" placeholder="Comentarios"></textarea>
-                </div>
+                <textarea id="txtAreaComentarios" name="txtAreaComentarios" class="form-control" rows="4" placeholder="Comentarios"></textarea>
               </div>
             </div>
             <div class="row panel-margin">
@@ -61,29 +58,29 @@
                 <label>Estatus</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="Resolucion" id="optionsRadios1" value="Atendido" checked>Atendido
+                    <input type="radio" name="rdioResolucion" id="rdioResolucion3" value="3" checked>Atendido
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="Resolucion" id="optionsRadios2" value="Tramite">En Trámite
+                    <input type="radio" name="rdioResolucion" id="rdioResolucion2" value="2">En Trámite
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="Resolucion" id="optionsRadios2" value="Pendiente">Pendiente
+                    <input type="radio" name="rdioResolucion" id="rdioResolucion1" value="1">Pendiente
                   </label>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-2">
-                <button id="btnAgregarVisita" class="btn btn-primary btn-lg">Agregar visita</button>
+                <button type="submit" id="btnAgregarVisita" class="btn btn-success">Agregar visita</button>
               </div>
               <div class="col-md-offset-1 col-md-2">
-                <button id="" class="btn btn-primary" style="display: none;">Nueva Visita</button>
+                <button id="" class="btn btn-primary">Nueva Visita</button>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
