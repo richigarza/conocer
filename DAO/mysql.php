@@ -14,18 +14,25 @@
 			$conn = $this->createConnection();
 			try{				
 				if($conn->query($SP)){
-					echo "true";
+					$res = $conn->query("SELECT @output");
+					//while(
+					$obj = $res->fetch_object();
+					$result["result"] = get_object_vars($obj);
+					$result["success"] = true;
+					$res->close();
 				}
 				else{
-					echo "prro";
+					$result["success"] = false;
 				}
 			}
 			catch(Exception $e){
-				echo 'Exception error: ', $e->getMessage();
+				$result["msg"] = 'Exception error: '. $e->getMessage();
+				$result["success"] = false;
 			}
 			finally{
 				mysqli_close($conn);
 			}
+			return $result;
 		}
 
 		function insertQuery($query){
