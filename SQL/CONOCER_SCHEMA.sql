@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS dbCONOCER;
 CREATE DATABASE dbCONOCER;
 
+
 CREATE USER 'conocer'@'localhost' IDENTIFIED BY '123pormi';
 GRANT ALL PRIVILEGES ON dbCONOCER.* TO 'conocer'@'localhost';
 COMMIT;
@@ -134,13 +135,14 @@ DROP procedure IF EXISTS `sp_setCaptura`;
 DELIMITER $$
 USE `dbCONOCER`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setCaptura`(
-IN idSolicitante INT, 
-IN ocupacion INT, 
-IN escolaridad INT, 
-IN estandar VARCHAR(50), 
-IN idEstado INT, 
-IN prestador VARCHAR(50),
-IN representante VARCHAR(50) 
+	IN idSolicitante INT, 
+	IN ocupacion INT, 
+	IN escolaridad INT, 
+	IN estandar VARCHAR(50), 
+	IN idEstado INT, 
+	IN prestador VARCHAR(50),
+	IN representante VARCHAR(50),
+	OUT output INT
 )
 BEGIN
 	
@@ -155,6 +157,36 @@ BEGIN
 	INSERT INTO Solicitud (idSolicitante, ocupacion, escolaridad, idEstandar, idEstado, idPrestador, idRepresentante) 
     VALUES(idSolicitante, ocupacion, escolaridad, idEstandar, idEstado, idPrestador, idRepresentante);
 
+    SELECT LAST_INSERT_ID() INTO output;
+
 END$$
 
 DELIMITER ;
+
+
+USE `dbCONOCER`;
+DROP procedure IF EXISTS `sp_setVisita`;
+
+DELIMITER $$
+USE `dbCONOCER`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setVisita`(
+	IN idSolicitud INT, 
+	IN motivo INT, 
+	IN asunto VARCHAR(200), 
+	IN dirigidoA INT, 
+	IN comentarios VARCHAR(200), 
+	IN estatus INT,
+	IN tiempoAtencion VARCHAR(15),
+	OUT output INT
+)
+BEGIN
+
+	INSERT INTO Visita (idSolicitud, motivo, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
+    VALUES(idSolicitud, motivo, asunto, dirigidoA, comentarios, estatus, tiempoAtencion);
+
+    SELECT LAST_INSERT_ID() INTO output;
+
+END$$
+
+DELIMITER ;
+
