@@ -30,19 +30,9 @@ CREATE TABLE dbCONOCER.Estados(
 DROP TABLE IF EXISTS dbCONOCER.CatalogoEstandares;
 
 CREATE TABLE dbCONOCER.CatalogoEstandares(
-	id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	idEstandar INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	descripcion VARCHAR(300) NOT NULL COMMENT "Descrioción de los estandars",
 	codigo VARCHAR(10) NOT NULL COMMENT "Código de Estandar",
-	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
-	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
-);
-
-DROP TABLE IF EXISTS dbCONOCER.EmpresaCertificadora;
-
-CREATE TABLE dbCONOCER.EmpresaCertificadora (
-	idEmpresa INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	cedulaE VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
-	nombreEmpresa VARCHAR(200) NOT NULL COMMENT "Nombre ECE/OC",
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
 );
@@ -51,7 +41,17 @@ DROP TABLE IF EXISTS dbCONOCER.Prestador;
 
 CREATE TABLE dbCONOCER.Prestador (
 	idPrestador INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula CE/EI",
+	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
+	nombreEmpresa VARCHAR(200) NOT NULL COMMENT "Nombre ECE/OC",
+	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
+	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
+)DEFAULT CHARSET=utf8 COMMENT "Empresa certificadora o Prestador";
+
+DROP TABLE IF EXISTS dbCONOCER.Representante;
+
+CREATE TABLE dbCONOCER.Representante (
+	idRepresentante INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	cedulaR VARCHAR(50) NOT NULL COMMENT "Cedula CE/EI",
 	nombrePrestador VARCHAR(250) NOT NULL COMMENT "Nombre CE/EI",
 	direccion VARCHAR(100) NOT NULL COMMENT "Dirección",
 	colonia VARCHAR(100) NOT NULL COMMENT "Nombre de la colonia",
@@ -59,27 +59,27 @@ CREATE TABLE dbCONOCER.Prestador (
 	ciudad VARCHAR(100) NOT NULL COMMENT "Ciudad",
 	email VARCHAR(100) NOT NULL COMMENT "Correo electrónico",
 	telefono VARCHAR(100) NOT NULL COMMENT "Número telefónico",
-	idEstado int(5) NOT NULL COMMENT "Entidad Federativa",
+	idEstado INT(5) NOT NULL COMMENT "Entidad Federativa",
 	cedulaE VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
-);
+)DEFAULT CHARSET=utf8 COMMENT "Representante del prestador";
 
 DROP TABLE IF EXISTS dbCONOCER.Rel_PrestadorEmpresaCodigos;
 
 CREATE TABLE dbCONOCER.Rel_PrestadorEmpresaCodigos (
-	id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	cedulaE VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
-	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula CE/EI",
+	idRel_PrestadorEmpresaCodigos INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
+	cedulaR VARCHAR(50) NOT NULL COMMENT "Cedula CE/EI",
 	codigo VARCHAR(500) NOT NULL COMMENT "Código de Estandar",
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
-);
+)DEFAULT CHARSET=utf8 COMMENT "Tabla de relacion Estandar, prestador y representante";
 
 DROP TABLE IF EXISTS dbCONOCER.Solicitante;
 
 CREATE TABLE dbCONOCER.Solicitante (
-	id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	idSolicitante INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	solicitanteType INT(1) NOT NULL COMMENT "Identificador del tipo de Solicitante",
 	nombre VARCHAR(50) COMMENT "Nombres de la persona",
 	apellidoPaterno VARCHAR(20) COMMENT "Apellido paterno",
@@ -101,14 +101,14 @@ CREATE TABLE dbCONOCER.Solicitante (
 DROP TABLE IF EXISTS dbCONOCER.Solicitud;
 
 CREATE TABLE dbCONOCER.Solicitud (
-	id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	idSolicitud INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	idSolicitante INT(10) NOT NULL COMMENT "Identificador del solicitante",
-	ocupacion INT(1) NOT NULL COMMENT "Ocupación del Solicitante",
-	escolaridad INT(1) NOT NULL COMMENT "Escolaridad del Solicitante",
-	estandar INT(10) NOT NULL COMMENT "Estandar buscado",
-	estado INT(2) NOT NULL COMMENT "Estado donde se localiza",
-	prestador INT(2) NOT NULL COMMENT "Prestador del servicio",
-	representante INT(10) NOT NULL COMMENT "Representante",
+	ocupacion INT(1) COMMENT "Ocupación del Solicitante",
+	escolaridad INT(1) COMMENT "Escolaridad del Solicitante",
+	idEstandar INT(10) NOT NULL COMMENT "Estandar buscado",
+	idEstado INT(2) NOT NULL COMMENT "Estado donde se localiza",
+	idPrestador INT(10) NOT NULL COMMENT "Prestador del servicio",
+	idRepresentante INT(10) NOT NULL COMMENT "Representante",
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
 );
@@ -116,7 +116,7 @@ CREATE TABLE dbCONOCER.Solicitud (
 DROP TABLE IF EXISTS dbCONOCER.Visita;
 
 CREATE TABLE dbCONOCER.Visita (
-	id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	idVisita INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	idSolicitud INT(10) NOT NULL COMMENT "Identificador del solicitud",
 	motivo INT(2) NOT NULL COMMENT "Motivo de la visita",
 	asunto VARCHAR(200) NOT NULL COMMENT "Asunto de la visita",
@@ -127,3 +127,34 @@ CREATE TABLE dbCONOCER.Visita (
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
 );
+
+USE `dbCONOCER`;
+DROP procedure IF EXISTS `sp_setCaptura`;
+
+DELIMITER $$
+USE `dbCONOCER`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setCaptura`(
+IN idSolicitante INT, 
+IN ocupacion INT, 
+IN escolaridad INT, 
+IN estandar VARCHAR(50), 
+IN idEstado INT, 
+IN prestador VARCHAR(50),
+IN representante VARCHAR(50) 
+)
+BEGIN
+	
+    DECLARE idEstandar INT(10);
+    DECLARE idPrestador INT(10);
+    DECLARE idRepresentante INT(10);
+    
+	SELECT ce.idEstandar INTO idEstandar FROM CatalogoEstandares ce WHERE ce.codigo LIKE CONCAT('%', estandar, '%');
+	SELECT p.idPrestador INTO idPrestador FROM Prestador p WHERE p.cedulaP=prestador;
+    SELECT r.idRepresentante INTO idRepresentante FROM Representante r WHERE r.cedulaR=representante;
+        
+	INSERT INTO Solicitud (idSolicitante, ocupacion, escolaridad, idEstandar, idEstado, idPrestador, idRepresentante) 
+    VALUES(idSolicitante, ocupacion, escolaridad, idEstandar, idEstado, idPrestador, idRepresentante);
+
+END$$
+
+DELIMITER ;
