@@ -7,31 +7,77 @@ CAPTURA.app = (function($, window, document, undefined){
 		datos["Folio"] = $("#txtFolio2").val();
 		datos["Fecha"] = $("#txtFecha2").val();
 		datos["Hora"] = $("#txtHora2").val();
-		//datos[""] = $("#txt").val();	
+		datos["ddlOcupacion"] = $("#ddlTipoEmpresa").val() === null ? null : $("#ddlOcupacion").val();
+		datos["ddlEscolaridad"] = $("#ddlTipoEmpresa").val() === null ? null : $("#ddlEscolaridad").val();
+		datos["ddlEstandar"] = $("#ddlEstandar").val();
+		datos["ddlEstadoEstandar"] = $("#ddlEstadoEstandar").val();
+		datos["ddlPrestadorEstadoEstandar"] = $("#ddlPrestadorEstadoEstandar").val();
+		datos["ddlRepresentante"] = $("#ddlRepresentante").val();
+		//datos[""] = $("#txt").val();
 		return datos;
 	}
+	var capturarSolicitud = function(){
+		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
+		var datos = CAPTURA.app.obtenCamposCaptura();
+		console.log(datos);	
+		GLOBAL.app.sendJson("BLL/index.php?fn=capturar", datos, function(response){
+			if(response.success){
+				console.log(response);
+				GLOBAL.app.showAlert("alert alert-success", "Los datos se capturaron correctamente, en breve seras redireccionado.");
+				setTimeout(function() { $("#panel2").hide(); }, 3000);
+				setTimeout(function() { $("#panel3").show(); }, 3000);
+			}
+			else
+			{
+				GLOBAL.app.showAlert("alert alert-danger", "Ocurrio un error al capturar los datos.");
+			}		
+			GLOBAL.app.closeLoadingModal();
+		});	
+	}
+
+	var valida = $("form[name='formCaptura']").validate({
+		rules: {			
+			ddlOcupacion: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
+			ddlEscolaridad: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
+			ddlEstandar: { required: true },
+			ddlEstadoEstandar: {required: true},
+			ddlPrestadorEstadoEstandar: { required: true },
+			ddlRepresentante: { required: true}
+		},
+		// Specify validation error messages
+    	messages: {
+    		ddlOcupacion: "Debe inidcar la ocupación.",
+			ddlEscolaridad: "Debe indicar la escolaridad.",
+			ddlEstandar: "Debe indicar un estandar.",
+			ddlEstadoEstandar: "Debe indicar un estado.",
+			ddlPrestadorEstadoEstandar: "Debe indicar un prestador.",
+			ddlRepresentante: "Debe indicar un representante."
+    	},
+	    highlight: function(element) {
+	        $(element).closest('.col-md-4').addClass('has-error');
+	    },
+	    unhighlight: function(element) {
+	        $(element).closest('.col-md-4').removeClass('has-error');
+	    },
+	    errorElement: 'span',
+        errorClass: 'error',
+		errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    	submitHandler: function(form) {
+      		CAPTURA.app.capturarSolicitud();
+    	}
+	});
+
 	return{
-		obtenCamposCaptura : obtenCamposCaptura
+		obtenCamposCaptura : obtenCamposCaptura,
+		capturarSolicitud : capturarSolicitud
 	}
 }($, window, document, undefined));
-
-$("#btnCapturar").click(function(){
-	$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
-	var datos = CAPTURA.app.obtenCamposCaptura();	
-	GLOBAL.app.sendJson("BLL/index.php?fn=capturar", datos, function(response){
-		if(response.success){
-			console.log(response);
-			GLOBAL.app.showAlert("alert alert-success", "Los datos se capturaron correctamente, en breve seras redireccionado.");
-			setTimeout(function() { $("#panel2").hide(); }, 3000);
-			setTimeout(function() { $("#panel3").show(); }, 3000);
-		}
-		else
-		{
-			GLOBAL.app.showAlert("alert alert-danger", "Ocurrio un error al capturar los datos.");
-		}		
-		GLOBAL.app.closeLoadingModal();
-	});			
-});
 
 $("#ddlEstandar").on('change', function (){
 	var datos = {};
@@ -72,7 +118,7 @@ $("#ddlPrestadorEstadoEstandar").on('change', function (){
 			$("#ddlRepresentante").empty();
 			$("#ddlRepresentante").append('<option selected value="-1" disabled>Seleccione prestador de serivicio</option>');
 			response.output.forEach(function(obj){
-				GLOBAL.app.insertDDL("ddlRepresentante", obj.cedulaP, obj.nombrePrestador);
+				GLOBAL.app.insertDDL("ddlRepresentante", obj.cedulaR, obj.nombrePrestador);
 			});
 		}
 	});
@@ -96,3 +142,4 @@ $("#btnVerRepresentante").click(function(){
 		});	
 	}
 });
+
