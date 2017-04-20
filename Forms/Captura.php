@@ -3,7 +3,7 @@
           Panel de Captura
         </div>
         <div class="panel panel-body">
-          <form name="formCaptura">
+          <form name="formCaptura" id="formCaptura">
             <div class="row">
               <div class="col-md-4">
                 <label>Folio</label>
@@ -74,7 +74,7 @@
                     </select>
                   </div>
                   <div class="input-group-btn">
-                    <button id="btnVerRepresentante" class="btn btn-info">
+                    <button id="btnVerRepresentante" class="btn btn-info" type="button">
                       <span class="glyphicon glyphicon-search"></span> ver
                     </button>
                   </div>
@@ -83,7 +83,13 @@
 
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-1">
+                <button id="btnBackCaptura" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-circle-arrow-left"></i> Regresar</button>
+              </div>
+              <div class="col-md-1">
+                <button id="btnLimpiarCaptura" class="btn btn-default" type="button">Limpiar</button>
+              </div>
+              <div class="col-md-1">
                 <button id="btnCapturar" type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Capturar</button>
               </div>
             </div>

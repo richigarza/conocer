@@ -74,7 +74,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-1">
+                <button id="btnBackMonitor" class="btn btn-danger" type="button"><i class="glyphicon glyphicon-circle-arrow-left"></i> Regresar</button>
+              </div>
+              <div class="col-md-1">
+                <button id="btnLimpiarMonitor" class="btn btn-default" type="button">Limpiar</button>
+              </div>
+              <div class="col-md-1">
                 <button type="submit" id="btnAgregarVisita" class="btn btn-success">Agregar visita</button>
               </div>
               <div class="col-md-offset-1 col-md-2">

@@ -41,10 +41,15 @@ form .error {
               <div class="reloj" id="Centesimas">:00</div></div>
           </div>
           <div class="col-md-3 col-md-offset-6">
-          	<div class="input-group">
-          		<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-              	<input class="form-control" placeholder="Buscar">
-            </div>
+            <form name="formSearch">
+            	<div class="input-group">
+            		<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input id="txtBuscar" name="txtBuscar" class="form-control" placeholder="Buscar">
+                <div class="input-group-btn">
+                  <button id="btnBuscar" class="btn btn-info" >ir</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -54,7 +59,7 @@ form .error {
           Panel de Registro
         </div>
         <div class="panel panel-body">
-          <form name="formRegistrar">
+          <form name="formRegistrar" id="formRegistrar">
             <div class="row" style="display:none;">
               <div class="col-md-4">
                 <label class="control-label">Folio</label>
@@ -158,7 +163,7 @@ form .error {
                     <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                    <input id="txtFechaNacimiento" name="txtFechaNacimiento" class="form-control datepicker" placeholder="Fecha de nacimiento" data-date-viewmode="years">
+                    <input id="txtFechaNacimiento" type="text" name="txtFechaNacimiento" class="form-control datepicker" placeholder="Fecha de nacimiento" data-date-viewmode="years">
                 </div>
               </div>                        
             </div>
@@ -184,7 +189,10 @@ form .error {
             	</div>
            </div>
             <div class="row" id="divBotones" style="display:none;">
-              <div class="col-md-12">
+              <div class="col-md-1">
+                <button id="btnLimpiarRegistrar" class="btn btn-default" type="button">Limpiar</button>
+              </div>
+              <div class="col-md-1">
                 <button id="btnRegistrar" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-plus"></i> Registrar</button>
               </div>
             </div>
