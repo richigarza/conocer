@@ -22,6 +22,10 @@
 				//$User = new BLLUser();				
 				//$result["success"] = $User->createUser($user);
 			break;
+			case "buscar":
+				$page = new Page();
+				$result = $page->getBusqueda($_POST['str']);
+			break;
 			case "login":
 				$User = new BLLUser();				
 				$result = $User->login($_POST);
@@ -41,7 +45,7 @@
 			break;
 			case "visita":
 				$page = new Page();
-				$result = $page->setVisita($_GET);
+				$result = $page->setVisita($_POST);
 			break;
 			case "getEstandares":
 				$page = new Page();

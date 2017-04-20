@@ -23,6 +23,28 @@
 
 	Class Page{
 
+		function getBusqueda($str){
+			$paramString = "SELECT * FROM Solicitante WHERE idSolicitante LIKE '%".$str."%' OR nombre LIKE '%".$str."%' OR apellidoPaterno LIKE '%".$str."%' OR apellidoMaterno LIKE '%".$str."%' OR nombreEmpresa LIKE '%".$str."%' OR email LIKE '%".$str."%' OR telefono LIKE '%".$str."%'";
+			$comand = new dbMySQL();
+			$result = $comand->executeQuery($paramString);
+			$list = array();
+			foreach ($result["output"] as $value) {
+				$list[] = array(
+								'idSolicitante' => $value->idSolicitante,
+								'solicitanteType' => $value->solicitanteType,
+								'nombre' => utf8_encode($value->nombre), 
+								'apellidoPaterno' => utf8_encode($value->apellidoPaterno),
+								'apellidoMaterno' => utf8_encode($value->apellidoMaterno),
+								'nombreEmpresa' => utf8_encode($value->nombreEmpresa),
+								'email' => utf8_encode($value->email),
+								'telefono' => utf8_encode($value->telefono)
+								);
+			}
+			$result["output"] = $list;
+			$result["query"] = $paramString;
+			return $result;
+		}
+
 		function setVisita($array){
 			$paramString = "CALL sp_setVisita(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', @output)";
 			$comand = new dbMySQL();
