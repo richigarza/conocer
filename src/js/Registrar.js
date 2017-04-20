@@ -26,7 +26,8 @@ REGISTRAR.app = (function($, window, document, undefined){
 	}
 	var registrarCliente = function(){
 		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
-		var datos = REGISTRAR.app.obtenCamposCapturaRegistro();	
+		var datos = REGISTRAR.app.obtenCamposCapturaRegistro();
+		datos["Pantalla"] = GLOBAL.app.readCookie("Pantalla");
 		console.log(datos); 
 		GLOBAL.app.sendJson("BLL/index.php?fn=registrar", datos, function(response){
 				if(response.success){
@@ -35,8 +36,7 @@ REGISTRAR.app = (function($, window, document, undefined){
 					$(".txtFolio").val(response.folio);
 					$(".txtFecha").val(response.date);
 					$(".txtHora").val(response.hour);
-					setTimeout(function() { $("#panel1").hide(); }, 3000);
-					setTimeout(function() { $("#panel2").show(); }, 3000);
+					GLOBAL.app.redirect("panel1", "panel2");
 				}
 				else
 				{
@@ -94,14 +94,73 @@ REGISTRAR.app = (function($, window, document, undefined){
     	submitHandler: function(form) {
       		REGISTRAR.app.registrarCliente();
     	}
+    });
+    
+    var buscar = function(){
+		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});		
+		var datos = {};
+		datos["str"] = $("#txtBuscar").val();
+		GLOBAL.app.sendJson("BLL/index.php?fn=buscar", datos, function(response){
+				if(response.success){
+					console.log(response);
+					var tblName = "<table class='table interactive table-striped table-hover'><thead class=''><th>id</th><th>Nombre solicitante</th><th>email</th><th>telefono</th><th></th></thead><tbody>";
+					var footer = '<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>';
+					response.output.forEach(function(obj){
+						var name = obj['solicitanteType'] == 1 ? obj['nombre'] + ' ' + obj['apellidoPaterno'] + ' ' + obj['apellidoMaterno'] : obj['nombreEmpresa'];
+						tblName = tblName + "<tr><td>"+obj['idSolicitante']+"</td><td>"+name+"</td><td>"+obj['email']+"</td><td>"+obj['telefono']+"</td><td><button class='btn btn-info'>ver</button></td></tr>";
+					});
+					tblName = tblName + "</tbody></table>";
+					GLOBAL.app.showModal("Busqueda", tblName, footer);
+					}		
+					GLOBAL.app.closeLoadingModal();
+			});			
+    }	
+
+    var validaBusqueda = $("form[name='formSearch']").validate({
+		rules: {
+
+		},
+		// Specify validation error messages
+    	messages: {
+
+    	},
+	    highlight: function(element) {
+	        $(element).closest('.col-md-4').addClass('has-error');
+	    },
+	    unhighlight: function(element) {
+	        $(element).closest('.col-md-4').removeClass('has-error');
+	    },
+	    errorElement: 'span',
+        errorClass: 'error',
+		errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    	submitHandler: function(form) {
+      		REGISTRAR.app.buscar();
+    	}
 	});
+
+
+	var actualizaPantalla = function(){
+		var pantallaEstatus = GLOBAL.app.readCookie('Pantalla');
+		if(pantallaEstatus == 'Actualizar'){
+			$('#btnRegistrar').text('Actualizar');
+		}else{
+			$('#btnRegistrar').text('Registrar');
+		}
+	}
 
 	return{
 		obtenCamposCapturaRegistro : obtenCamposCapturaRegistro,
-		registrarCliente : registrarCliente
+		registrarCliente : registrarCliente,
+		buscar : buscar,
+		actualizaPantalla : actualizaPantalla
 	}
 }($, window, document, undefined));
-
 
 // Validaciones
 $("#ddlTipoRegistro").change(function(){
@@ -131,10 +190,9 @@ $("#ddlTipoRegistro").change(function(){
 
 });
 
-/*
-$(document).ready(function(){
-	$("form#formRegistrar").submit(function(e){
-		e.preventDefault();
-	});
+$("#btnLimpiarRegistrar").click(function(){
+	GLOBAL.app.limpiarFormulario('formRegistrar');
 });
-*/
+
+// Actualiza Pantalla
+REGISTRAR.app.actualizaPantalla();
