@@ -16,5 +16,3 @@ $("#btnLogin").click(function(){
 	});
 	
 });
-
-
