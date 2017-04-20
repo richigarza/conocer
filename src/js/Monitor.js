@@ -19,6 +19,7 @@ MONITOR.app = (function($, window, document, undefined){
 	var capturarVisita = function(){
 		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
 		var datos = MONITOR.app.obtenCamposVisita();	
+		datos["Pantalla"] = GLOBAL.app.readCookie("Pantalla");
 		console.log(datos);
 		GLOBAL.app.sendJson("BLL/index.php?fn=visita", datos, function(response){
 			console.log(response)

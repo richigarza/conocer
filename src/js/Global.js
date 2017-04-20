@@ -27,7 +27,7 @@ GLOBAL.app = (function($, window, document, undefined) {
 			$("#alertEstatus").attr("class", "");
 			$("#alertEstatus").text("");
 			$("#myModalLoading").modal("hide");
-			}, 3000);
+			}, 1000);
 	}
 
 	var showModal = function (header, body, footer){
@@ -43,13 +43,121 @@ GLOBAL.app = (function($, window, document, undefined) {
 			text: text
 		}));
 	}
+	
+	var createCookie = function(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
+
+	var readCookie = function(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+
+	var eraseCookie = function(name) {
+		createCookie(name,"",-1);
+	}
+
+	//Recolectar datos de un formulario y almacenarlos en un diccionario
+	var recolectarDatos = function(formId){
+	    var datos = {};
+	    $("form#"+formId+" input[type='text']").each(function(){
+	        //if($(this).val() == "") $(this).val("test");
+	        datos[this.id] = $(this).val();
+	    });
+	    $("form#"+formId+" textarea").each(function(){
+	        //if($(this).val() == "") $(this).val("test");
+	        datos[this.id] = $(this).val();
+	    });
+	    $("form#"+formId+" select").each(function(){
+	        datos[this.id] = $("form#"+formId+" #"+this.id+" option:selected").val();
+	    });
+	    $("form#"+formId+" input[type='checkbox']").each(function(){
+	        if($(this).is(":checked")) datos[this.id] = "si";
+	        else datos[this.id] = "no";
+	    });
+	    $("form#"+formId+" input[type='radio']").each(function(){
+	        datos[$(this).attr("name")] = $("form#"+formID+" input[name="+$(this).attr("name")+"]:checked").val();
+	    });
+	    //console.log(length(datos));
+	    return datos;
+	}
+
+	var limpiarFormulario = function(formId){
+    	$("form#"+formId+" input[type='text']").each(function(){
+	        //if($(this).val() == "") $(this).val("test");
+	        $(this).val('');
+	    });
+	    $("form#"+formId+" textarea").each(function(){
+	        //if($(this).val() == "") $(this).val("test");
+	        $(this).val('');
+	    });
+	    $("form#"+formId+" select").each(function(){
+	        $("form#"+formId+" #"+this.id).val('-1');
+	    });
+	    $("form#"+formId+" input[type='checkbox']").each(function(){
+	        $(this).prop('checked', false);
+	    });
+	    $("form#"+formId+" input[type='radio']").each(function(){
+	        var name = $(this).prop("name");
+	        $("#"+name+"No").prop('checked', true);
+	        
+	    });
+	}
+
+	//Cargar valores de un diccionario en un formulario
+	var llenarFormulario = function(formID, datos){
+	    $("form#"+formId+" input[type='text']").each(function(){
+	        $(this).val(datos[this.id]);
+	    });
+	    $("form#"+formId+" textarea").each(function(){
+	        $(this).val(datos[this.id]);
+	    });
+	    $("form#"+formId+" select").each(function(){
+	        $(this).val(datos[this.id]);
+	    });
+	    $("form#"+formId+" input[type='checkbox']").each(function(){
+	        if(datos[this.id] == "si"){
+	            $(this).prop('checked', true);
+	        }else{
+	            $(this).prop('checked', false);
+	        }
+	    });
+	    $("form#"+formId+" input[type='radio']").each(function(){
+	        $("form#"+formId+" input[name="+this.name+"][value=" + datos[this.name]+ "]").prop('checked', true);
+	    });
+	    return;
+	}
+
+	var redirect = function(actual, next){
+		setTimeout(function() { $("#"+actual).hide("slow"); }, 3000);
+		setTimeout(function() { $("#"+next).show("slow"); }, 3000);
+	}
 
 	return {
 		sendJson : sendJson,
 		showAlert : showAlert,
 		closeLoadingModal : closeLoadingModal,
 		showModal : showModal,
-		insertDDL : insertDDL
+		insertDDL : insertDDL,
+		createCookie : createCookie,
+		readCookie : readCookie,
+		eraseCookie : eraseCookie,
+		recolectarDatos : recolectarDatos,
+		limpiarFormulario : limpiarFormulario,
+		llenarFormulario : llenarFormulario,
+		redirect : redirect
 	}
 }($, window, document, undefined));
 

@@ -19,13 +19,13 @@ CAPTURA.app = (function($, window, document, undefined){
 	var capturarSolicitud = function(){
 		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
 		var datos = CAPTURA.app.obtenCamposCaptura();
+		datos["Pantalla"] = GLOBAL.app.readCookie("Pantalla");
 		console.log(datos);	
 		GLOBAL.app.sendJson("BLL/index.php?fn=capturar", datos, function(response){
 			if(response.success){
 				console.log(response);
 				GLOBAL.app.showAlert("alert alert-success", "Los datos se capturaron correctamente, en breve seras redireccionado.");
-				setTimeout(function() { $("#panel2").hide(); }, 3000);
-				setTimeout(function() { $("#panel3").show(); }, 3000);
+				GLOBAL.app.redirect("panel2", "panel3");
 			}
 			else
 			{
@@ -143,3 +143,12 @@ $("#btnVerRepresentante").click(function(){
 	}
 });
 
+$("#btnLimpiarRegistrar").click(function(){
+	GLOBAL.app.limpiarFormulario('formCaptura');
+});
+
+$("#btnBackCaptura").click(function(){
+	GLOBAL.app.createCookie('Pantalla', 'Actualizar', 1);
+	REGISTRAR.app.actualizaPantalla();
+	GLOBAL.app.redirect("panel2", "panel1");
+});
