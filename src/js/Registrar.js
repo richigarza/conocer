@@ -220,7 +220,7 @@ function loadPage(tipoRegistro){
 }
 
 $("#ddlTipoRegistro").change(function(){
-	loadPage(this.id);
+	loadPage(this.value);
 });
 
 $("#btnLimpiarRegistrar").click(function(){
