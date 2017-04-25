@@ -1,4 +1,25 @@
-      <div id="panel3" class="panel panel-primary margin-panels" style="display:none;">
+      <div id="panel2_1" class="panel panel-primary margin-panels" style="display:none;">
+        <div class="panel panel-heading">
+          Panel de Visitas
+        </div>
+        <div class="panel panel-body">
+          <div class="table-responsive scroll-table">
+            <table class="table" id="tblVisitas">
+              <thead>
+                <th>Fecha</th><th>Motivo</th><th>Asunto</th><th>Comentarios</th><th>Estatus</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <button id="" class="btn btn-primary">Nueva Visita</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="panel2" class="panel panel-primary margin-panels" style="display:none;">
         <div class="panel panel-heading">
           Panel de Atención
         </div>
@@ -19,7 +40,7 @@
               </div>                        
             </div>
             <div class="row panel-margin">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label>Motivo</label>
                 <select id="ddlMotivo" name="ddlMotivo" class="form-control">
                   <option value="1">Informativo</option>
@@ -28,11 +49,51 @@
                   <option value="4">Seguimiento</option>                        
                 </select>
               </div>
+              <div class="col-md-4">
+                <label>Estandar buscado</label>
+                <select id="ddlEstandar" name="ddlEstandar" class="form-control select2" placeholder="Estandar Buscado">
+                  <option selected value="-1" disabled>Seleccione estandar buscado</option>                
+                </select>
+              </div>                      
+              <div class="col-md-4">
+                <label>Estado donde se localiza</label>
+                <select id="ddlEstadoEstandar" name="ddlEstadoEstandar" class="form-control select2" placeholder="Estado donde se localiza">
+                  <option selected value="-1" disabled>Seleccione estado donde se localiza</option>
+                </select>             
+              </div>
             </div>
             <div class="row panel-margin">
               <div class="col-md-4">
+                <label>Prestador del servicio</label>
+                <select id="ddlPrestadorEstadoEstandar" name="ddlPrestadorEstadoEstandar" class="form-control select2" placeholder="Estado donde se localiza">
+                  <option selected value="-1" disabled>Seleccione prestador de serivicio</option>
+                </select>             
+              </div>
+              <div class="col-md-4">
+                <label>Representante</label>
+                <div class="input-group input-group-sm ">
+                  <div class="select2-container">
+                    <select id="ddlRepresentante" name="ddlRepresentante" class="form-control select2" placeholder="Prestador de Servicio">
+                      <option selected value="-1" disabled>Seleccione al representante</option>
+                    </select>
+                  </div>
+                  <div class="input-group-btn">
+                    <button id="btnVerRepresentante" class="btn btn-info" type="button">
+                      <span class="glyphicon glyphicon-search"></span> ver
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row panel-margin">
+              <div class="col-md-6">
                 <label>Asunto</label>
                 <textarea id="txtAreaAsunto" name="txtAreaAsunto" class="form-control" rows="3" placeholder="Asunto"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Comentarios</label>
+                <textarea id="txtAreaComentarios" name="txtAreaComentarios" class="form-control" rows="3" placeholder="Comentarios"></textarea>
               </div>
             </div>
             <div class="row panel-margin">
@@ -45,12 +106,6 @@
                   <option value="3">DIRECCIÓN DE EXCELENCIA EN SERVICIO A USUARIOS (RENAC/QUEJAS)</option>
                   <option value="4">DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)</option>
                 </select>
-              </div>
-            </div>
-            <div class="row panel-margin">
-              <div class="col-md-6">
-                <label>Comentarios</label>
-                <textarea id="txtAreaComentarios" name="txtAreaComentarios" class="form-control" rows="4" placeholder="Comentarios"></textarea>
               </div>
             </div>
             <div class="row panel-margin">
@@ -82,9 +137,6 @@
               </div>
               <div class="col-md-1">
                 <button type="submit" id="btnAgregarVisita" class="btn btn-success">Agregar visita</button>
-              </div>
-              <div class="col-md-offset-1 col-md-2">
-                <button id="" class="btn btn-primary">Nueva Visita</button>
               </div>
             </div>
           </form>

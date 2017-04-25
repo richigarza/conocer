@@ -63,7 +63,7 @@ form .error {
             <div class="row" style="display:none;">
               <div class="col-md-4">
                 <label class="control-label">Folio</label>
-                <input id="txtFolio" type="text" class="form-control txtFolio" placeholder="Folio" disabled>
+                <input id="txtFolio" name="txtFolio" type="text" class="form-control txtFolio" placeholder="Folio" disabled>
               </div>
               <div class="col-md-4">
                 <label class="control-label">Fecha</label>	
@@ -184,10 +184,37 @@ form .error {
                   <option value="3">Vía personal</option>
                 </select>
               </div>                              
-            	<div class="col-md-4">
-
+            	<div class="col-md-4 tipoPersona">
+                <label>Escolaridad</label>
+                <select class="form-control" placeholder="Escolaridad" id="ddlEscolaridad" name="ddlEscolaridad">
+                  <option selected value="-1" disabled>Seleccione último grado de escolaridad</option>
+                  <option value="1">Ninguno</option>
+                  <option value="2">Primaria</option>
+                  <option value="3">Secundaria</option>
+                  <option value="4">Preparatoria</option>
+                  <option value="5">Carrera Técnica</option>
+                  <option value="6">Licenciatura</option>
+                  <option value="7">Maestría / Doctorado</option>
+                </select>
             	</div>
            </div>
+            <div class="row" id="divContacto3" style="display:none;">
+              <div class="col-md-4">
+                <label>Ocupación</label>
+                <select class="form-control" placeholder="Ocupación" id="ddlOcupacion" name="ddlOcupacion">
+                  <option selected value="-1" disabled>Seleccione ocupación</option>
+                  <option value="1">Desempleado</option>
+                  <option value="2">Empleado Sector Público</option>
+                  <option value="3">Empleado Sector Privado</option>
+                  <option value="4">Dueño de Empresa</option>
+                  <option value="5">Profesionista Independiente</option>
+                  <option value="6">Jubilado</option>
+                  <option value="7">Estudiante</option>
+                </select>           
+              </div>
+              <div class="col-md-4">
+              </div>
+            </div>
             <div class="row" id="divBotones" style="display:none;">
               <div class="col-md-1">
                 <button id="btnLimpiarRegistrar" class="btn btn-default" type="button">Limpiar</button>
