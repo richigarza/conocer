@@ -23,8 +23,67 @@
 
 	Class Page{
 
+		function getSolicitantePorId($id){
+			$paramString = "SELECT * FROM Solicitante WHERE idSolicitante='".$id."'";
+			$comand = new dbMySQL();
+			$result = $comand->executeQuery($paramString);
+			$list = array();
+			foreach ($result["output"] as $value) {
+				$list[] = array(
+								'txtFolio' => $value->idSolicitante,
+								'ddlTipoRegistro' => $value->solicitanteType,
+								'txtNombres' => utf8_encode($value->nombre), 
+								'txtApellidoP' => utf8_encode($value->apellidoPaterno),
+								'txtApellidoM' => utf8_encode($value->apellidoMaterno),
+								'txtNombreEmpresa' => utf8_encode($value->nombreEmpresa),
+								'txtEmail' => utf8_encode($value->email),
+								'txtTelefono' => utf8_encode($value->telefono),
+								'rdioMigrante' => utf8_encode($value->migrante),
+								'rdioCertificacion' => utf8_encode($value->certificado),
+								'rdioEstandar' => utf8_encode($value->estandarizado),
+								'ddlTipoEmpresa' => utf8_encode($value->tipoEmpresa),
+								'ddlEntidadFederativa' => utf8_encode($value->idEstado),
+								'ddlMedioContacto' => utf8_encode($value->medioContacto),
+								'txtFechaNacimiento' => utf8_encode($value->fechaNacimiento),
+								'ddlOcupacion' => utf8_encode($value->ocupacion),
+								'ddlEscolaridad' => utf8_encode($value->escolaridad)
+								);
+			}
+			$result["output"] = $list;
+			$result["query"] = $paramString;
+			return $result;
+		}
+
+		function getBusquedaVisitasPorIdSolicitante($idSolicitante){
+			$paramString = "SELECT * FROM Visita WHERE idSolicitante='".$idSolicitante."'";
+			$comand = new dbMySQL();
+			$result = $comand->executeQuery($paramString);
+			$list = array();
+			foreach ($result["output"] as $value) {
+				$list[] = array(
+								'idVisita' => utf8_encode($value->escolaridad),
+								'motivo' => utf8_encode($value->escolaridad),
+								'idEstandar' => utf8_encode($value->escolaridad),
+								'idEstado' => utf8_encode($value->escolaridad),
+								'idPrestador' => utf8_encode($value->escolaridad),
+								'idRepresentante' => utf8_encode($value->escolaridad),
+								'asunto' => utf8_encode($value->escolaridad),
+								'dirigidoA' => utf8_encode($value->escolaridad),
+								'comentarios' => utf8_encode($value->escolaridad),
+								'estatus' => utf8_encode($value->escolaridad),
+								'tiempoAtencion' => utf8_encode($value->escolaridad),
+								'createdDate' => utf8_encode($value->escolaridad),
+								'lastUpdate' => utf8_encode($value->escolaridad)
+								);
+			}
+			$result["output"] = $list;
+			$result["query"] = $paramString;
+			return $result;
+		}
+
 		function getBusqueda($str){
-			$paramString = "SELECT * FROM Solicitante WHERE idSolicitante LIKE '%".$str."%' OR nombre LIKE '%".$str."%' OR apellidoPaterno LIKE '%".$str."%' OR apellidoMaterno LIKE '%".$str."%' OR nombreEmpresa LIKE '%".$str."%' OR email LIKE '%".$str."%' OR telefono LIKE '%".$str."%'";
+			//idSolicitante LIKE '%".$str."%' OR nombre LIKE '%".$str."%' OR apellidoPaterno LIKE '%".$str."%' OR apellidoMaterno LIKE '%".$str."%' OR nombreEmpresa LIKE '%".$str."%' OR
+			$paramString = "SELECT * FROM Solicitante WHERE  email LIKE '%".$str."%' OR telefono LIKE '%".$str."%'";
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
@@ -57,7 +116,9 @@
 
 		function setSolicitante($array){
 			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
-			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].")";
+			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
+			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
+			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento, escolaridad, ocupacion) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].", ".$array["ddlEscolaridad"].", ".$array["ddlOcupacion"].")";
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
 			//$list = array();
@@ -65,17 +126,18 @@
 			$result["lol"] = $paramString;
 			return $result;
 		}
-		
-		function setSolicitud($array){
-			$array["ddlOcupacion"] = $array["ddlOcupacion"] !=  NULL  ? $array["ddlOcupacion"] : "NULL";
-			$array["ddlEscolaridad"] = $array["ddlEscolaridad"] !=  NULL  ? $array["ddlEscolaridad"] : "NULL";
-			$paramString = "CALL sp_setCaptura(".$array["Folio"].", ".$array["ddlOcupacion"].", ".$array["ddlEscolaridad"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', @output)";
+
+		function updateSolicitante($array){
+			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
+			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
+			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
+			$paramString = "UPDATE Solicitante SET solicitanteType=".$array["ddlTipoRegistro"].", nombre='".$array["txtNombres"]."', apellidoPaterno='".$array["txtApellidoP"]."', apellidoMaterno='".$array["txtApellidoM"]."', migrante=".$array["rdioMigrante"].", certificado=".$array["rdioCertificacion"].", estandarizado=".$array["rdioEstandar"].", email='".$array["txtEmail"]."', telefono='".$array["txtTelefono"]."', nombreEmpresa='".$array["txtNombreEmpresa"]."', tipoEmpresa=".$array["ddlTipoEmpresa"].", idEstado=".$array["ddlEntidadFederativa"].", medioContacto=".$array["ddlMedioContacto"].", fechaNacimiento=".$array["txtFechaNacimiento"].", escolaridad=".$array["ddlEscolaridad"].", ocupacion=".$array["ddlOcupacion"]." WHERE idSolicitante=".$array["txtFolio"];
 			$comand = new dbMySQL();
-			$result = $comand->execSP($paramString);
+			$result = $comand->insertQuery($paramString);
 			//$list = array();
 
-			$result["query"] = $paramString;
-			return $result;	
+			$result["lol"] = $paramString;
+			return $result;
 		}
 
 		function getEstandares(){

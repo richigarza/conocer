@@ -26,6 +26,11 @@
 				$page = new Page();
 				$result = $page->getBusqueda($_POST['str']);
 			break;
+			case "buscarPorId":
+				$page = new Page();
+				$result = $page->getSolicitantePorId($_POST['id']);
+				$result["visitas"] = $page->getBusquedaVisitasPorIdSolicitante($_POST['id']);
+			break;
 			case "login":
 				$User = new BLLUser();				
 				$result = $User->login($_POST);
@@ -33,11 +38,15 @@
 			case "registrar":
 				//less 						$result = 
 				$page = new Page();
-				$result = $page->setSolicitante($_POST);
+				if($_POST["pantalla"] == "Registrar"){
+					$result = $page->setSolicitante($_POST);
+				}else{
+					$result = $page->updateSolicitante($_POST);
+				}
 				date_default_timezone_set("America/Monterrey");
 				$result["date"] = date("d/m/Y"); 
 				$result["hour"] = date("h:i:s a");  
-				$result["success"] = true;
+				//$result["success"] = true;
 			break;
 			case "capturar":
 				$page = new Page();
