@@ -3,6 +3,9 @@ var GLOBAL = window.GLOBAL || {}
 
 GLOBAL.app = (function($, window, document, undefined) {
 	
+	//////////////////////////////////////////////
+	// JSON
+	//////////////////////////////////////////////
 	var sendJson = function (url, datos, successCallback){
 		var result;
 		$.ajax({
@@ -15,6 +18,9 @@ GLOBAL.app = (function($, window, document, undefined) {
 		});
 	}
 
+	//////////////////////////////////////////////
+	// Modal
+	//////////////////////////////////////////////
 	var showAlert = function (alertClass, alertMsg){
 		$("#alertEstatus").show();
 		$("#alertEstatus").attr("class", alertClass);
@@ -37,13 +43,19 @@ GLOBAL.app = (function($, window, document, undefined) {
 		$("#myModal").modal("show");
 	}
 
+	//////////////////////////////////////////////
+	// Carga DropDownList
+	//////////////////////////////////////////////
 	var insertDDL = function(id, value, text){
 		$("#"+id).append($('<option>', {
 			value: value,
 			text: text
 		}));
 	}
-	
+
+	//////////////////////////////////////////////
+	// Cookies
+	//////////////////////////////////////////////
 	var createCookie = function(name,value,days) {
 		if (days) {
 			var date = new Date();
@@ -65,10 +77,13 @@ GLOBAL.app = (function($, window, document, undefined) {
 		return null;
 	}
 
-	var eraseCookie = function(name) {
+	var destroyCookie = function(name) {
 		createCookie(name,"",-1);
 	}
 
+	//////////////////////////////////////////////
+	// Actualiza Pantallas
+	//////////////////////////////////////////////
 	//Recolectar datos de un formulario y almacenarlos en un diccionario
 	var recolectarDatos = function(formId){
 	    var datos = {};
@@ -94,6 +109,7 @@ GLOBAL.app = (function($, window, document, undefined) {
 	    return datos;
 	}
 
+	// Limpia los formularios
 	var limpiarFormulario = function(formId){
     	$("form#"+formId+" input[type='text']").each(function(){
 	        //if($(this).val() == "") $(this).val("test");
@@ -117,7 +133,7 @@ GLOBAL.app = (function($, window, document, undefined) {
 	}
 
 	//Cargar valores de un diccionario en un formulario
-	var llenarFormulario = function(formID, datos){
+	var llenarFormulario = function(formId, datos){
 	    $("form#"+formId+" input[type='text']").each(function(){
 	        $(this).val(datos[this.id]);
 	    });
@@ -140,6 +156,9 @@ GLOBAL.app = (function($, window, document, undefined) {
 	    return;
 	}
 
+	//////////////////////////////////////////////
+	// Redirecciona las pantallas (html)
+	//////////////////////////////////////////////
 	var redirect = function(actual, next){
 		setTimeout(function() { $("#"+actual).hide("slow"); }, 3000);
 		setTimeout(function() { $("#"+next).show("slow"); }, 3000);
@@ -153,7 +172,7 @@ GLOBAL.app = (function($, window, document, undefined) {
 		insertDDL : insertDDL,
 		createCookie : createCookie,
 		readCookie : readCookie,
-		eraseCookie : eraseCookie,
+		destroyCookie : destroyCookie,
 		recolectarDatos : recolectarDatos,
 		limpiarFormulario : limpiarFormulario,
 		llenarFormulario : llenarFormulario,

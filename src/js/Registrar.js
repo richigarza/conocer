@@ -4,9 +4,10 @@ REGISTRAR.app = (function($, window, document, undefined){
 	// Registro
 	function obtenCamposCapturaRegistro(){
 		var datos = {};
-		//datos["Folio"] = $("#txtFolio").val();
+		datos["txtFolio"] = $("#txtFolio").val();
 		//datos["Fecha"] = $("#txtFecha").val();
 		//datos["Hora"] = $("#txtHora").val();
+		datos["pantalla"] = GLOBAL.app.readCookie('Pantalla');
 		datos["ddlTipoRegistro"] = $("#ddlTipoRegistro").val();	
 		datos["rdioMigrante"] = $("input[name=rdioMigrante]:checked").val();
 		datos["rdioCertificacion"] = $("input[name=rdioCertificacion]:checked").val();
@@ -21,6 +22,8 @@ REGISTRAR.app = (function($, window, document, undefined){
 		datos["txtFechaNacimiento"] = $("#ddlTipoRegistro").val() == "1" ? $("#txtFechaNacimiento").val() : null;
 		datos["ddlEntidadFederativa"] = $("#ddlEntidadFederativa").val();
 		datos["ddlMedioContacto"] = $("#ddlMedioContacto").val();
+		datos["ddlOcupacion"] = $("#ddlOcupacion").val() === null ? "0" : $("#ddlOcupacion").val();
+		datos["ddlEscolaridad"] = $("#ddlEscolaridad").val() === null ? "0" : $("#ddlEscolaridad").val();
 		//datos[""] = $("#txt").val();
 		return datos;
 	}
@@ -37,6 +40,7 @@ REGISTRAR.app = (function($, window, document, undefined){
 					$(".txtFecha").val(response.date);
 					$(".txtHora").val(response.hour);
 					GLOBAL.app.redirect("panel1", "panel2");
+					GLOBAL.app.redirect("panel1", "panel2_1");
 				}
 				else
 				{
@@ -96,6 +100,27 @@ REGISTRAR.app = (function($, window, document, undefined){
     	}
     });
     
+	var buscarPorId = function(id){
+		var datos = {};
+		datos["id"] = id;
+		var resultado = {};
+		GLOBAL.app.sendJson("BLL/index.php?fn=buscarPorId", datos, function(response){
+			if(response.success){
+				GLOBAL.app.limpiarFormulario('formRegistrar');
+				GLOBAL.app.limpiarFormulario('formMonitor');
+				$("#tblVisitas tbody").empty();
+				GLOBAL.app.destroyCookie('Pantalla');
+				GLOBAL.app.createCookie('Pantalla', 'Actualizar', 1);
+				actualizaPantalla();
+				GLOBAL.app.llenarFormulario('formRegistrar', response.output[0]);
+				loadPage(response.output[0]["ddlTipoRegistro"]);
+				console.log(response);
+				$("#myModal").modal("hide");
+			}
+		});
+		return resultado;
+	}
+
     var buscar = function(){
 		$("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});		
 		var datos = {};
@@ -103,14 +128,18 @@ REGISTRAR.app = (function($, window, document, undefined){
 		GLOBAL.app.sendJson("BLL/index.php?fn=buscar", datos, function(response){
 				if(response.success){
 					console.log(response);
-					var tblName = "<table class='table interactive table-striped table-hover'><thead class=''><th>id</th><th>Nombre solicitante</th><th>email</th><th>telefono</th><th></th></thead><tbody>";
+					var tblName = "<div class='table-responsive scroll-table'><table class='table interactive table-striped table-hover'><thead class=''><th>id</th><th>Nombre solicitante</th><th>email</th><th>telefono</th><th></th></thead><tbody>";
 					var footer = '<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>';
 					response.output.forEach(function(obj){
 						var name = obj['solicitanteType'] == 1 ? obj['nombre'] + ' ' + obj['apellidoPaterno'] + ' ' + obj['apellidoMaterno'] : obj['nombreEmpresa'];
-						tblName = tblName + "<tr><td>"+obj['idSolicitante']+"</td><td>"+name+"</td><td>"+obj['email']+"</td><td>"+obj['telefono']+"</td><td><button class='btn btn-info'>ver</button></td></tr>";
+						tblName = tblName + "<tr><td>"+obj['idSolicitante']+"</td><td>"
+													  +name+"</td><td>"+obj['email']+"</td><td>"
+													  +obj['telefono']+"</td><td><a data-value='"
+													  +obj['idSolicitante']+"' class='btnVerBusqueda btn btn-info'>ver</a></td></tr>";
 					});
-					tblName = tblName + "</tbody></table>";
+					tblName = tblName + "</tbody></table></div>";
 					GLOBAL.app.showModal("Busqueda", tblName, footer);
+					inicializaBotones();
 					}		
 					GLOBAL.app.closeLoadingModal();
 			});			
@@ -157,23 +186,24 @@ REGISTRAR.app = (function($, window, document, undefined){
 	return{
 		obtenCamposCapturaRegistro : obtenCamposCapturaRegistro,
 		registrarCliente : registrarCliente,
+		buscarPorId : buscarPorId,
 		buscar : buscar,
 		actualizaPantalla : actualizaPantalla
 	}
 }($, window, document, undefined));
 
 // Validaciones
-$("#ddlTipoRegistro").change(function(){
+function loadPage(tipoRegistro){
 	CRONOMETRO.app.inicio();
-	if(this.value==1){
+	if(tipoRegistro==1){
 		$("#divMigrante").show();
 		$("#divCuentaEstandar").hide();
 		$("#divNombres").show();
 		$("#divEmpresa").hide();
 		$("#divCuentaCertificacion").show();
 		$("#divColBirthDate").show();
-		$("#ddlOcupacion").prop('disabled', false);
-		$("#ddlEscolaridad").prop('disabled', false);
+		$("#divContacto3").show();
+		$(".tipoPersona").show();
 	}else{
 		$("#divMigrante").hide();
 		$("#divCuentaEstandar").show();
@@ -181,18 +211,26 @@ $("#ddlTipoRegistro").change(function(){
 		$("#divEmpresa").show();
 		$("#divCuentaCertificacion").hide();
 		$("#divColBirthDate").hide();
-		$("#ddlOcupacion").prop('disabled', true);
-		$("#ddlEscolaridad").prop('disabled', true);
+		$("#divContacto3").hide();
+		$(".tipoPersona").hide();
 	}
 	$("#divContacto1").show();
 	$("#divContacto2").show();
 	$("#divBotones").show();
+}
 
+$("#ddlTipoRegistro").change(function(){
+	loadPage(this.id);
 });
 
 $("#btnLimpiarRegistrar").click(function(){
 	GLOBAL.app.limpiarFormulario('formRegistrar');
 });
 
+function inicializaBotones(){
+	$(".btnVerBusqueda").on("click", function(){
+		REGISTRAR.app.buscarPorId($(this).attr("data-value"));
+	});
+}
 // Actualiza Pantalla
 REGISTRAR.app.actualizaPantalla();
