@@ -1,40 +1,43 @@
-
+USE dbCONOCER;
 
 INSERT INTO dbCONOCER.User (firstName, lastName, userName, password, email, userType) VALUES('admin', 'admin', 'admin', '1234', '', 2);
 INSERT INTO dbCONOCER.User (firstName, lastName, userName, password, email, userType) VALUES('Richi', 'Garza', 'RichiGarza', '1234', '', 2);
 
-INSERT INTO dbConocer.Estados(estado) VALUES('Aguascalientes');
-INSERT INTO dbConocer.Estados(estado) VALUES('Baja California');
-INSERT INTO dbConocer.Estados(estado) VALUES('Baja California Sur');
-INSERT INTO dbConocer.Estados(estado) VALUES('Campeche');
-INSERT INTO dbConocer.Estados(estado) VALUES('Coahuila de Zaragoza');
-INSERT INTO dbConocer.Estados(estado) VALUES('Colima');
-INSERT INTO dbConocer.Estados(estado) VALUES('Chiapas');
-INSERT INTO dbConocer.Estados(estado) VALUES('Chihuahua');
-INSERT INTO dbConocer.Estados(estado) VALUES('Ciudad de Mexico');
-INSERT INTO dbConocer.Estados(estado) VALUES('Durango');
-INSERT INTO dbConocer.Estados(estado) VALUES('Guanajuato');
-INSERT INTO dbConocer.Estados(estado) VALUES('Guerrero');
-INSERT INTO dbConocer.Estados(estado) VALUES('Hidalgo');
-INSERT INTO dbConocer.Estados(estado) VALUES('Jalisco');
-INSERT INTO dbConocer.Estados(estado) VALUES('México');
-INSERT INTO dbConocer.Estados(estado) VALUES('Michoacán de Ocampo');
-INSERT INTO dbConocer.Estados(estado) VALUES('Morelos');
-INSERT INTO dbConocer.Estados(estado) VALUES('Nayarit');
-INSERT INTO dbConocer.Estados(estado) VALUES('Nuevo León');
-INSERT INTO dbConocer.Estados(estado) VALUES('Oaxaca');
-INSERT INTO dbConocer.Estados(estado) VALUES('Puebla');
-INSERT INTO dbConocer.Estados(estado) VALUES('Querétaro');
-INSERT INTO dbConocer.Estados(estado) VALUES('Quintana Roo');
-INSERT INTO dbConocer.Estados(estado) VALUES('San Luis Potosí');
-INSERT INTO dbConocer.Estados(estado) VALUES('Sinaloa');
-INSERT INTO dbConocer.Estados(estado) VALUES('Sonora');
-INSERT INTO dbConocer.Estados(estado) VALUES('Tabasco');
-INSERT INTO dbConocer.Estados(estado) VALUES('Tamaulipas');
-INSERT INTO dbConocer.Estados(estado) VALUES('Tlaxcala');
-INSERT INTO dbConocer.Estados(estado) VALUES('Veracruz de Ignacio de la Llave');
-INSERT INTO dbConocer.Estados(estado) VALUES('Yucatán');
-INSERT INTO dbConocer.Estados(estado) VALUES('Zacatecas');
+INSERT INTO dbCONOCER.CatalogoEstatus(estatus) VALUES ('Pendiente'),('En Tramite'),('Atendido');
+INSERT INTO dbCONOCER.CatalogoMotivo(motivo) VALUES ('Informativo'),('Tramite'),('Requisitos'),('Seguimiento');
+
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Aguascalientes');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California Sur');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Campeche');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Coahuila de Zaragoza');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Colima');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Chiapas');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Chihuahua');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Ciudad de Mexico');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Durango');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Guanajuato');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Guerrero');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Hidalgo');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Jalisco');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('México');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Michoacán de Ocampo');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Morelos');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Nayarit');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Nuevo León');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Oaxaca');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Puebla');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Querétaro');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Quintana Roo');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('San Luis Potosí');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Sinaloa');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Sonora');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Tabasco');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Tamaulipas');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Tlaxcala');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Veracruz de Ignacio de la Llave');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Yucatán');
+INSERT INTO dbCONOCER.Estados(estado) VALUES('Zacatecas');
 
 
 INSERT INTO dbCONOCER.CatalogoEstandares (codigo, descripcion) VALUES('EC0001', 'Prestación de servicios de traducción de textos de lengua española a lengua indígena y viceversa en el ámbito de procuración y administración de justicia');
