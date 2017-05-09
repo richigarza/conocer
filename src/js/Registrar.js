@@ -41,6 +41,9 @@ REGISTRAR.app = (function($, window, document, undefined){
 					$(".txtHora").val(response.hour);
 					GLOBAL.app.redirect("panel1", "panel2");
 					GLOBAL.app.redirect("panel1", "panel2_1");
+					GLOBAL.app.destroyCookie('Pantalla');
+					GLOBAL.app.createCookie('Pantalla', 'Registrar', 1);
+					actualizaPantallaMonitor();
 				}
 				else
 				{
@@ -55,12 +58,12 @@ REGISTRAR.app = (function($, window, document, undefined){
 			ddlTipoRegistro: { required: true },
 			rdioMigrante: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
 			rdioCertificacion: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
-			txtNombres: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
-			txtApellidoP: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
-			txtApellidoM: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
-			txtNombreEmpresa: { required: function() { return $("#ddlTipoRegistro").val() != 1 } },
-			ddlTipoEmpresa: { required: function() { return $("#ddlTipoRegistro").val() != 1 } },
-			rdioEstandar: { required: function() { return $("#ddlTipoRegistro").val() != 1 } },
+			txtNombres: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			txtApellidoP: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			txtApellidoM: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			txtNombreEmpresa: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
+			ddlTipoEmpresa: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
+			rdioEstandar: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
 			txtFechaNacimiento: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
 			ddlEntidadFederativa: { required: true },
 			ddlMedioContacto: { required: true}
@@ -99,7 +102,7 @@ REGISTRAR.app = (function($, window, document, undefined){
       		REGISTRAR.app.registrarCliente();
     	}
     });
-    
+
 	var buscarPorId = function(id){
 		var datos = {};
 		datos["id"] = id;
@@ -113,7 +116,8 @@ REGISTRAR.app = (function($, window, document, undefined){
 				GLOBAL.app.createCookie('Pantalla', 'Actualizar', 1);
 				actualizaPantalla();
 				GLOBAL.app.llenarFormulario('formRegistrar', response.output[0]);
-				loadPage(response.output[0]["ddlTipoRegistro"]);
+				MONITOR.app.llenaTablaVisita(response.visitas);
+				loadPageRegistrar(response.output[0]["ddlTipoRegistro"]);
 				console.log(response);
 				$("#myModal").modal("hide");
 			}
@@ -192,35 +196,9 @@ REGISTRAR.app = (function($, window, document, undefined){
 	}
 }($, window, document, undefined));
 
-// Validaciones
-function loadPage(tipoRegistro){
-	CRONOMETRO.app.inicio();
-	if(tipoRegistro==1){
-		$("#divMigrante").show();
-		$("#divCuentaEstandar").hide();
-		$("#divNombres").show();
-		$("#divEmpresa").hide();
-		$("#divCuentaCertificacion").show();
-		$("#divColBirthDate").show();
-		$("#divContacto3").show();
-		$(".tipoPersona").show();
-	}else{
-		$("#divMigrante").hide();
-		$("#divCuentaEstandar").show();
-		$("#divNombres").hide();
-		$("#divEmpresa").show();
-		$("#divCuentaCertificacion").hide();
-		$("#divColBirthDate").hide();
-		$("#divContacto3").hide();
-		$(".tipoPersona").hide();
-	}
-	$("#divContacto1").show();
-	$("#divContacto2").show();
-	$("#divBotones").show();
-}
 
 $("#ddlTipoRegistro").change(function(){
-	loadPage(this.value);
+	loadPageRegistrar(this.value);
 });
 
 $("#btnLimpiarRegistrar").click(function(){
@@ -230,6 +208,8 @@ $("#btnLimpiarRegistrar").click(function(){
 function inicializaBotones(){
 	$(".btnVerBusqueda").on("click", function(){
 		REGISTRAR.app.buscarPorId($(this).attr("data-value"));
+		GLOBAL.app.redirect("panel2", "panel1");
+		GLOBAL.app.redirect("panel2_1", "panel1");
 	});
 }
 // Actualiza Pantalla
