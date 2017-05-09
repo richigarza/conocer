@@ -34,6 +34,50 @@ LOAD_PAGE.app = (function($, window, document, undefined){
 	}
 }($, window, document, undefined));
 
+function loadPageVisita(tipoRegistro){
+	if (tipoRegistro==3) {
+		$(".vistaMesa").show();
+		$(".vistaNormal").hide();
+	}else{
+		$(".vistaMesa").hide();
+		$(".vistaNormal").show();
+	}
+}
+// Validaciones
+function loadPageRegistrar(tipoRegistro){
+	CRONOMETRO.app.inicio();
+	if(tipoRegistro==1){
+		$("#divMigrante").show();
+		$("#divCuentaEstandar").hide();
+		$("#divNombres").show();
+		$("#divEmpresa").hide();
+		$("#divCuentaCertificacion").show();
+		$("#divColBirthDate").show();
+		$(".tipoPersona").show();
+	}else if (tipoRegistro==2){
+		$("#divMigrante").hide();
+		$("#divCuentaEstandar").show();
+		$("#divNombres").hide();
+		$("#divEmpresa").show();
+		$("#divCuentaCertificacion").hide();
+		$("#divColBirthDate").hide();
+		$(".tipoPersona").hide();
+	}
+	else{
+		$("#divMigrante").hide();
+		$("#divCuentaEstandar").hide();
+		$("#divNombres").show();
+		$("#divEmpresa").hide();
+		$("#divCuentaCertificacion").hide();
+		$("#divColBirthDate").hide();
+		$(".tipoPersona").hide();
+	}
+	$("#divContacto1").show();
+	$("#divContacto2").show();
+	$("#divBotones").show();
+	loadPageVisita(tipoRegistro);
+}
+
 //////////////////////////////////////////////
 // Nav
 //////////////////////////////////////////////
