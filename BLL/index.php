@@ -18,6 +18,11 @@
 		$result = array();
 		$fn = $_GET["fn"];
 		switch($fn){
+			case "test":
+				$page = new Page();
+				//if($_POST["pantalla"] == "Registrar"){
+				$result = $page->setVisita($_GET);
+			break;
 			case "newUser":
 				//$User = new BLLUser();				
 				//$result["success"] = $User->createUser($user);
@@ -30,6 +35,10 @@
 				$page = new Page();
 				$result = $page->getSolicitantePorId($_POST['id']);
 				$result["visitas"] = $page->getBusquedaVisitasPorIdSolicitante($_POST['id']);
+			break;
+			case "buscarPorIdVisita":
+				$page = new Page();
+				$result = $page->getVisitaPorId($_POST['id']);
 			break;
 			case "login":
 				$User = new BLLUser();				
@@ -54,7 +63,11 @@
 			break;
 			case "visita":
 				$page = new Page();
+				//if($_POST["pantalla"] == "Registrar"){
 				$result = $page->setVisita($_POST);
+				//}else{
+				//	$result = $page->uptadeVisita($_POST);
+				//}
 			break;
 			case "getEstandares":
 				$page = new Page();

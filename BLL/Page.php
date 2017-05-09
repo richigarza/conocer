@@ -7,12 +7,10 @@
 	class Estandar{
 		private $codigo;
 		private $descripcion;
-
 		public function __construct($codigo, $descripcion){
 			$this->$codigo = $codigo;
 			$this->$descripcion = $descripcion;
 		}
-
 		function setCodigo($codigo){
 			$this->$codigo = $codigo;
 		}
@@ -20,9 +18,7 @@
 			$this->$descripcion = $descripcion;
 		}
 	}
-
 	Class Page{
-
 		function getSolicitantePorId($id){
 			$paramString = "SELECT * FROM Solicitante WHERE idSolicitante='".$id."'";
 			$comand = new dbMySQL();
@@ -54,33 +50,61 @@
 			return $result;
 		}
 
-		function getBusquedaVisitasPorIdSolicitante($idSolicitante){
-			$paramString = "SELECT * FROM Visita WHERE idSolicitante='".$idSolicitante."'";
+        function getVisitaPorId($id){
+			$paramString="SELECT v.idSolicitante AS idSolicitante, v.idVisita AS idVisita, v.motivo AS motivo, ce.codigo AS Estandar, v.idEstado AS idEstado, p.cedulaP AS Prestador, r.cedulaR AS Representante, v.asunto AS asunto, v.dirigidoA AS dirigidoA, v.comentarios AS comentarios, v.estatus AS estatus, v.tiempoAtencion, v.createdDate AS createdDate, v.lastUpdate AS lastUpdate FROM Visita v  INNER JOIN CatalogoEstandares ce ON (ce.idEstandar = v.idEstandar) INNER JOIN Prestador p ON (p.idPrestador = v.idPrestador) INNER JOIN Representante r ON (r.idRepresentante = v.idRepresentante) WHERE idVisita=".$id;
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array(
-								'idVisita' => utf8_encode($value->escolaridad),
-								'motivo' => utf8_encode($value->escolaridad),
-								'idEstandar' => utf8_encode($value->escolaridad),
-								'idEstado' => utf8_encode($value->escolaridad),
-								'idPrestador' => utf8_encode($value->escolaridad),
-								'idRepresentante' => utf8_encode($value->escolaridad),
-								'asunto' => utf8_encode($value->escolaridad),
-								'dirigidoA' => utf8_encode($value->escolaridad),
-								'comentarios' => utf8_encode($value->escolaridad),
-								'estatus' => utf8_encode($value->escolaridad),
-								'tiempoAtencion' => utf8_encode($value->escolaridad),
-								'createdDate' => utf8_encode($value->escolaridad),
-								'lastUpdate' => utf8_encode($value->escolaridad)
+								'txtFolio3' => $value->idSolicitante,
+				                'idVisita' => $value->idVisita,
+				                'ddlMotivo' => $value->motivo,
+				                'ddlEstandar' => $value->Estandar,//
+				                'ddlEstadoEstandar' => $value->idEstado,
+				                'ddlPrestadorEstadoEstandar' => $value->Prestador,//
+				                'ddlRepresentante' => $value->Representante,//
+				                'txtAreaAsunto' => utf8_encode($value->asunto),
+				                'ddlDirigidoA' => $value->dirigidoA,
+				                'txtAreaComentarios' => utf8_encode($value->comentarios),
+				                'rdioResolucion' => utf8_encode($value->estatus),
+				                'tiempoAtencion' => utf8_encode($value->tiempoAtencion),
+				                'createdDate' => utf8_encode($value->createdDate),
+				                'lastUpdate' => utf8_encode($value->lastUpdate)
+				                );
+			}
+			$result["output"] = $list;
+			$result["query"] = $paramString;
+			return $result;
+        }
+
+		function getBusquedaVisitasPorIdSolicitante($idSolicitante){
+			$paramString = "CALL sp_getVisitaPorIdSolicitante(".$idSolicitante.")";
+			//"SELECT * FROM Visita v INNER JOIN CatalogoEstatus ce ON (ce.id = v.estatus) WHERE idSolicitante='".$idSolicitante."'";
+			$comand = new dbMySQL();
+			$result = $comand->executeQuery($paramString);
+			$list = array();
+			foreach ($result["output"] as $value) {
+				$list[] = array(
+								'idVisita' => $value->idVisita,
+								'motivo' => $value->motivo,
+								'idEstandar' => $value->idEstandar,
+								'idEstado' => $value->idEstado,
+								'idPrestador' => $value->idPrestador,
+								'idRepresentante' => $value->idRepresentante,
+								'asunto' => utf8_encode($value->asunto),
+								'dirigidoA' => $value->dirigidoA,
+								'comentarios' => utf8_encode($value->comentarios),
+								'estatus' => utf8_encode($value->estatus),
+								'tiempoAtencion' => utf8_encode($value->tiempoAtencion),
+								'createdDate' => utf8_encode($value->createdDate),
+								'lastUpdate' => utf8_encode($value->lastUpdate)
 								);
 			}
 			$result["output"] = $list;
 			$result["query"] = $paramString;
 			return $result;
 		}
-
 		function getBusqueda($str){
 			//idSolicitante LIKE '%".$str."%' OR nombre LIKE '%".$str."%' OR apellidoPaterno LIKE '%".$str."%' OR apellidoMaterno LIKE '%".$str."%' OR nombreEmpresa LIKE '%".$str."%' OR
 			$paramString = "SELECT * FROM Solicitante WHERE  email LIKE '%".$str."%' OR telefono LIKE '%".$str."%'";
@@ -103,17 +127,16 @@
 			$result["query"] = $paramString;
 			return $result;
 		}
-
 		function setVisita($array){
-			$paramString = "CALL sp_setVisita(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', @output)";
+			$paramString = "CALL sp_setVisita(".$array["idVisita"].",".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', '".$array["Pantalla"]."',@output)";
+			//$paramString = "INSERT INTO Visita (idSolicitante, motivo, idEstandar, idEstado, idPrestador, idRepresentante, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) VALUES(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '')";
 			$comand = new dbMySQL();
 			$result = $comand->execSP($paramString);
+			//$result = $comand->insertQuery($paramString);
 			//$list = array();
-
 			$result["query"] = $paramString;
 			return $result;
 		}
-
 		function setSolicitante($array){
 			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
@@ -122,11 +145,9 @@
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
 			//$list = array();
-
-			$result["lol"] = $paramString;
+			$result["query"] = $paramString;
 			return $result;
 		}
-
 		function updateSolicitante($array){
 			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
@@ -135,11 +156,10 @@
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
 			//$list = array();
-
-			$result["lol"] = $paramString;
+			$result["folio"] = $array["txtFolio"];
+			$result["query"] = $paramString;
 			return $result;
 		}
-
 		function getEstandares(){
 			$paramString = "SELECT descripcion, codigo 
 							FROM CatalogoEstandares";
@@ -154,10 +174,8 @@
 			$result["output"] = $list;
 			return $result;
 		}
-
 		function getEstados(){
-			$paramString = "SELECT DISTINCT e.idEstado AS idEstado, e.estado AS estado FROM Estados e";
-
+			$paramString = "CALL sp_getEstados()";//"SELECT DISTINCT e.idEstado AS idEstado, e.estado AS estado FROM Estados e";
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
@@ -169,10 +187,8 @@
 			$result["output"] = $list;
 			return $result;
 		}
-
 		function getEstadoEstandares($string){
 			$paramString = "SELECT DISTINCT e.idEstado AS idEstado,  e.estado AS estado FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) INNER JOIN Estados e ON (e.idEstado = r.idEstado) WHERE rel.codigo like '%".$string."%' ORDER BY e.idEstado";
-
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
 			$list = array();
@@ -184,7 +200,6 @@
 			$result["output"] = $list;
 			return $result;
 		}
-
 		function getPrestadorEstadoEstandares($array){
 			//print_r($array);
 			$paramString = "SELECT DISTINCT p.cedulaP AS cedula, p.nombreEmpresa AS nombreEmpresa FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Prestador p ON (p.cedulaP = rel.cedulaP) INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) WHERE rel.codigo like '%".$array["estandar"]."%' AND r.idEstado='".$array["estado"]."' ORDER BY p.nombreEmpresa";
@@ -200,7 +215,6 @@
 			$result["output"] = $list;
 			return $result;
 		}
-
 		function getRepresentantePrestadorEstadoEstandares($array){
 			//print_r($array);
 			$paramString = "SELECT r.cedulaR, r.nombrePrestador FROM Rel_PrestadorEmpresaCodigos rel INNER JOIN Representante r ON (r.cedulaR = rel.cedulaR) WHERE rel.cedulaP='".$array["prestador"]."' AND rel.codigo like '%".$array["estandar"]."%'";
