@@ -160,8 +160,8 @@ GLOBAL.app = (function($, window, document, undefined) {
 	// Redirecciona las pantallas (html)
 	//////////////////////////////////////////////
 	var redirect = function(actual, next){
-		setTimeout(function() { $("#"+actual).hide("slow"); }, 3000);
-		setTimeout(function() { $("#"+next).show("slow"); }, 3000);
+		$("#"+actual).hide("slow");
+		$("#"+next).show("slow");
 	}
 
 	return {
