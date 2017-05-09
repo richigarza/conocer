@@ -8,7 +8,7 @@ COMMIT;
 
 -- Tabla de Usuarios
 DROP TABLE IF EXISTS dbCONOCER.User;
-
+SELECT 'User';
 CREATE TABLE dbCONOCER.User(
 	idUser INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	firstName VARCHAR(25) NOT NULL COMMENT "Nombres del usuario",
@@ -22,14 +22,14 @@ CREATE TABLE dbCONOCER.User(
 )DEFAULT CHARSET=utf8 COMMENT "Tabla de Usuarios";
 
 DROP TABLE IF EXISTS dbCONOCER.Estados;
-
+SELECT 'Estados';
 CREATE TABLE dbCONOCER.Estados(
 	idEstado INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	estado VARCHAR(40) NOT NULL COMMENT "Nombre de la entidad federativa"
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoEstandares;
-
+SELECT 'CatalogoEstandares';
 CREATE TABLE dbCONOCER.CatalogoEstandares(
 	idEstandar INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	descripcion VARCHAR(300) NOT NULL COMMENT "Descrioción de los estandars",
@@ -39,7 +39,7 @@ CREATE TABLE dbCONOCER.CatalogoEstandares(
 );
 
 DROP TABLE IF EXISTS dbCONOCER.Prestador;
-
+SELECT 'Prestador';
 CREATE TABLE dbCONOCER.Prestador (
 	idPrestador INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
@@ -49,7 +49,7 @@ CREATE TABLE dbCONOCER.Prestador (
 )DEFAULT CHARSET=utf8 COMMENT "Empresa certificadora o Prestador";
 
 DROP TABLE IF EXISTS dbCONOCER.Representante;
-
+SELECT 'Representante';
 CREATE TABLE dbCONOCER.Representante (
 	idRepresentante INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	cedulaR VARCHAR(50) NOT NULL COMMENT "Cedula CE/EI",
@@ -67,7 +67,7 @@ CREATE TABLE dbCONOCER.Representante (
 )DEFAULT CHARSET=utf8 COMMENT "Representante del prestador";
 
 DROP TABLE IF EXISTS dbCONOCER.Rel_PrestadorEmpresaCodigos;
-
+SELECT 'Rel_PrestadorEmpresaCodigos';
 CREATE TABLE dbCONOCER.Rel_PrestadorEmpresaCodigos (
 	idRel_PrestadorEmpresaCodigos INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	cedulaP VARCHAR(50) NOT NULL COMMENT "Cedula ECE/OC",
@@ -78,7 +78,7 @@ CREATE TABLE dbCONOCER.Rel_PrestadorEmpresaCodigos (
 )DEFAULT CHARSET=utf8 COMMENT "Tabla de relacion Estandar, prestador y representante";
 
 DROP TABLE IF EXISTS dbCONOCER.Solicitante;
-
+SELECT 'Solicitante';
 CREATE TABLE dbCONOCER.Solicitante (
 	idSolicitante INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	solicitanteType INT(1) NOT NULL COMMENT "Identificador del tipo de Solicitante",
@@ -103,15 +103,19 @@ CREATE TABLE dbCONOCER.Solicitante (
 
 
 DROP TABLE IF EXISTS dbCONOCER.Visita;
-
+SELECT 'Visita';
 CREATE TABLE dbCONOCER.Visita (
 	idVisita INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	idSolicitante INT(10) NOT NULL COMMENT "Identificador del Solicitante",
+	idTipoLlamada INT(2) COMMENT "Identificador del tipo de llamada",
+	idCursosCapacitacion INT(2) COMMENT "Identificador de certificar cursos de capacitación"
 	motivo INT(2) NOT NULL COMMENT "Motivo de la visita",
 	idEstandar INT(10) NOT NULL COMMENT "Estandar buscado",
 	idEstado INT(2) NOT NULL COMMENT "Estado donde se localiza",
 	idPrestador INT(10) NOT NULL COMMENT "Prestador del servicio",
 	idRepresentante INT(10) NOT NULL COMMENT "Representante",
+	idMedioEntero INT(2) NOT NULL COMMENT "Identificador del medio por el cual se entero",
+	idSecretaria INT(2) COMMENT "Identificador de la secretaria por el cual se entero",
 	asunto VARCHAR(200) NOT NULL COMMENT "Asunto de la visita",
 	dirigidoA INT(2) NOT NULL COMMENT "Dirección al que es dirigida la solicitud",
 	comentarios VARCHAR(200) NOT NULL COMMENT "Comentarios de la visita",
@@ -122,102 +126,17 @@ CREATE TABLE dbCONOCER.Visita (
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoEstatus;
-
+SELECT 'CatalogoEstatus';
 CREATE TABLE dbCONOCER.CatalogoEstatus(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	estatus VARCHAR(20) NOT NULL COMMENT "nombre del estatus" 
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoMotivo;
-
+SELECT 'CatalogoMotivo';
 CREATE TABLE dbCONOCER.CatalogoMotivo(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	motivo VARCHAR(20) NOT NULL COMMENT "nombre del motivo" 
 );
 
-USE `dbCONOCER`;
-DROP procedure IF EXISTS `sp_setVisita`;
-DROP procedure IF EXISTS `sp_getVisitaPorIdSolicitante`;
-
-DELIMITER $$
-USE `dbCONOCER`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setVisita`(
-	IN idVisita INT,
-    IN idSolicitante INT, 
-	IN motivo INT, 
-	IN estandar varchar(20), 
-	IN idEstado INT, 
-	IN prestador varchar(20), 
-	IN representante varchar(20),
-	IN asunto VARCHAR(200), 
-	IN dirigidoA INT, 
-	IN comentarios VARCHAR(200), 
-	IN estatus INT,
-	IN tiempoAtencion VARCHAR(15),
-    IN pantalla VARCHAR(20),
-	OUT output INT
-)
-BEGIN
-
-	DECLARE idEstandar INT(10);
-	DECLARE idPrestador INT(10);
-	DECLARE idRepresentante INT(10);
-    
-	SELECT ce.idEstandar INTO idEstandar FROM CatalogoEstandares ce WHERE ce.codigo LIKE CONCAT('%', estandar, '%');
-	SELECT p.idPrestador INTO idPrestador FROM Prestador p WHERE p.cedulaP=prestador;
-	SELECT r.idRepresentante INTO idRepresentante FROM Representante r WHERE r.cedulaR=representante;
-
-	IF pantalla='Registrar'
-	THEN 
-		INSERT INTO Visita (idSolicitante, motivo, idEstandar, idEstado, idPrestador, idRepresentante, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
-		VALUES(idSolicitante, motivo, idEstandar, idEstado, idPrestador, idRepresentante, asunto, dirigidoA, comentarios, estatus, tiempoAtencion);
-
-	SELECT LAST_INSERT_ID() INTO output;
-	ELSE 
-		UPDATE Visita 
-        SET 
-                motivo=motivo, 
-                idEstandar=idEstandar, 
-                idEstado=idEstado, 
-                idPrestador=idPrestador, 
-                idRepresentante=idRepresentante, 
-                asunto=asunto, 
-                dirigidoA=dirigidoA, 
-                comentarios=comentarios, 
-                estatus=estatus, 
-                tiempoAtencion=tiempoAtencion
-        WHERE idVisita=idVisita;
-        
-        SELECT idVisita INTO output;
-        
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getVisitaPorIdSolicitante`(
-IN idSolicitante INT
-)
-BEGIN
-
-SELECT 
-			v.idVisita AS idVisita,
-			cm.motivo AS motivo,
-			v.idEstandar AS idEstandar,
-			v.idEstado AS idEstado,
-			v.idPrestador AS idPrestador,
-			v.idRepresentante AS idRepresentante,
-			v.asunto AS asunto,
-			v.dirigidoA AS dirigidoA,
-			v.comentarios AS comentarios,
-			ce.estatus AS estatus,
-			v.tiempoAtencion AS tiempoAtencion,
-			v.createdDate AS createdDate,
-			v.lastUpdate AS lastUpdate
-FROM Visita v 
-INNER JOIN CatalogoEstatus ce ON (ce.id = v.estatus) 
-INNER JOIN CatalogoMotivo cm ON (cm.id = v.motivo)
-WHERE v.idSolicitante=idSolicitante;
-
-
-END$$
-
-DELIMITER ;
 
