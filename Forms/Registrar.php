@@ -81,6 +81,7 @@ form .error {
                   <option selected value="-1" disabled>Seleccione tipo de registro</option>
                   <option value="1">Persona</option>
                   <option value="2">Empresa</option>
+                  <option value="3">Mesa de servicio</option>
                 </select>
               </div>
             </div>
@@ -198,7 +199,7 @@ form .error {
                 </select>
             	</div>
            </div>
-            <div class="row" id="divContacto3" style="display:none;">
+            <div class="row tipoPersona" style="display:none;">
               <div class="col-md-4">
                 <label>Ocupación</label>
                 <select class="form-control" placeholder="Ocupación" id="ddlOcupacion" name="ddlOcupacion">
