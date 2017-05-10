@@ -59,11 +59,15 @@
 				$list[] = array(
 								'txtFolio3' => $value->idSolicitante,
 				                'idVisita' => $value->idVisita,
+				                'ddlTipoLlamada' => $value->idTipoLlamada,
+				                'ddlCurso' => $value->idCursosCapacitacion,
 				                'ddlMotivo' => $value->motivo,
 				                'ddlEstandar' => $value->Estandar,//
 				                'ddlEstadoEstandar' => $value->idEstado,
 				                'ddlPrestadorEstadoEstandar' => $value->Prestador,//
 				                'ddlRepresentante' => $value->Representante,//
+				                'ddlMedio' => $value->idMedioEntero,
+				                'ddlSecretaria' => $value->idSecretaria,
 				                'txtAreaAsunto' => utf8_encode($value->asunto),
 				                'ddlDirigidoA' => $value->dirigidoA,
 				                'txtAreaComentarios' => utf8_encode($value->comentarios),
@@ -128,7 +132,14 @@
 			return $result;
 		}
 		function setVisita($array){
-			$paramString = "CALL sp_setVisita(".$array["idVisita"].",".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', '".$array["Pantalla"]."',@output)";
+			$array["ddlTipoLlamada"] = $array["ddlTipoLlamada"]==null ? 0 : $array["ddlTipoLlamada"];
+			$array["ddlCurso"] = $array["ddlCurso"]==null ? 0 : $array["ddlCurso"];
+			$array["ddlMotivo"] = $array["ddlMotivo"]==null ? 0 : $array["ddlMotivo"];
+			$array["ddlSecretaria"] = $array["ddlSecretaria"]==null ? 0 : $array["ddlSecretaria"];
+			$array["txtAreaAsunto"] = $array["txtAreaAsunto"]==null ? '' : $array["txtAreaAsunto"];
+			$array["ddlDirigidoA"] = $array["ddlDirigidoA"]=null ? 0 : $array["ddlDirigidoA"];
+
+			$paramString = "CALL sp_setVisita(".$array["idVisita"].",".$array["Folio"].", ".$array["ddlTipoLlamada"].", ".$array["ddlCurso"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["ddlMedio"].", '".$array["ddlSecretaria"].", ".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', '".$array["Pantalla"]."',@output)";
 			//$paramString = "INSERT INTO Visita (idSolicitante, motivo, idEstandar, idEstado, idPrestador, idRepresentante, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) VALUES(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '')";
 			$comand = new dbMySQL();
 			$result = $comand->execSP($paramString);
