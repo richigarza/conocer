@@ -43,7 +43,7 @@ REGISTRAR.app = (function($, window, document, undefined){
 					GLOBAL.app.redirect("panel1", "panel2_1");
 					GLOBAL.app.destroyCookie('Pantalla');
 					GLOBAL.app.createCookie('Pantalla', 'Registrar', 1);
-					actualizaPantallaMonitor();
+					MONITOR.app.actualizaPantallaMonitor();
 				}
 				else
 				{

@@ -87,8 +87,8 @@ MONITOR.app = (function($, window, document, undefined){
 			ddlRepresentante: { required: true},
 			ddlMedio: { required: true},
 			ddlSecretaria: { required: function() { return $("#ddlMedio").val() == 4 } },
-			txtAreaAsunto: {required: required: function() { return $("#ddlTipoRegistro").val() != 3 }},
-			ddlDirigidoA: { required: required: function() { return $("#ddlTipoRegistro").val() != 3 } },
+			txtAreaAsunto: {required: function() { return $("#ddlTipoRegistro").val() != 3 } },
+			ddlDirigidoA: { required: function() { return $("#ddlTipoRegistro").val() != 3 } },
 			txtAreaComentarios: { required: true},
 			rdioResolucion: { required: true}
 		},
@@ -195,6 +195,18 @@ MONITOR.app = (function($, window, document, undefined){
 			2000);
 	}
 
+	var actualizaPantallaMonitor = function(){
+		$("#btnAgregarVisita").show();
+		var pantallaEstatus = GLOBAL.app.readCookie('Pantalla');
+		if(pantallaEstatus == 'Actualizar'){
+			$('#btnAgregarVisita').text('Actualizar');
+		}else{
+			$('#btnAgregarVisita').text('Agregar visita');
+			$('#btnAgregarVisita').attr("data-value", "0");
+		}
+	}
+
+
 	return {
 		obtenCamposVisita : obtenCamposVisita,
 		buscarPorIdVisita : buscarPorIdVisita,
@@ -203,20 +215,11 @@ MONITOR.app = (function($, window, document, undefined){
 		estandarOnChange : estandarOnChange,
 		estadoEstandarOnChange : estadoEstandarOnChange,
 		prestadorEstadoEstandarOnChange : prestadorEstadoEstandarOnChange,
-		llenaEstandar : llenaEstandar
+		llenaEstandar : llenaEstandar,
+		actualizaPantallaMonitor : actualizaPantallaMonitor
 	}
 }($, window, document, undefined));
 
-var actualizaPantallaMonitor = function(){
-	$("#btnAgregarVisita").show();
-	var pantallaEstatus = GLOBAL.app.readCookie('Pantalla');
-	if(pantallaEstatus == 'Actualizar'){
-		$('#btnAgregarVisita').text('Actualizar');
-	}else{
-		$('#btnAgregarVisita').text('Agregar visita');
-		$('#btnAgregarVisita').attr("data-value", "0");
-	}
-}
 
 $("#ddlTipoLlamada").on("change", function(){
 	if ($(this).val()==3) {
@@ -253,7 +256,7 @@ $("#btnLimpiarMonitor").click(function(){
 	GLOBAL.app.limpiarFormulario('formMonitor');
 	GLOBAL.app.destroyCookie('Pantalla');
 	GLOBAL.app.createCookie('Pantalla', 'Registrar', 1);
-	actualizaPantallaMonitor();
+	MONITOR.app.actualizaPantallaMonitor();
 });
 
 $("#btnBackMonitor").click(function(){
