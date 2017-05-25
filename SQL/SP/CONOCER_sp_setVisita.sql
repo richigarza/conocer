@@ -6,11 +6,15 @@ USE `dbCONOCER`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setVisita`(
 	IN idVisita INT,
     IN idSolicitante INT, 
+    IN idTipoLlamada INT,
+    IN idCursosCapacitacion INT,
 	IN motivo INT, 
 	IN estandar varchar(20), 
 	IN idEstado INT, 
 	IN prestador varchar(20), 
 	IN representante varchar(20),
+    IN idMedioEntero INT,
+    IN idSecretaria INT,
 	IN asunto VARCHAR(200), 
 	IN dirigidoA INT, 
 	IN comentarios VARCHAR(200), 
@@ -24,6 +28,8 @@ BEGIN
 	DECLARE idEstandar INT(10);
 	DECLARE idPrestador INT(10);
 	DECLARE idRepresentante INT(10);
+
+	SET SQL_SAFE_UPDATES = 0;
     
 	SELECT ce.idEstandar INTO idEstandar FROM CatalogoEstandares ce WHERE ce.codigo LIKE CONCAT('%', estandar, '%');
 	SELECT p.idPrestador INTO idPrestador FROM Prestador p WHERE p.cedulaP=prestador;
@@ -31,7 +37,7 @@ BEGIN
 
 	IF pantalla='Registrar'
 	THEN 
-		INSERT INTO Visita (idSolicitante, idTipoLlamada, idCursosCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
+		INSERT INTO Visita (idSolicitante, idTipoLlamada, idCursoCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
 		VALUES(idSolicitante, idTipoLlamada, idCursosCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion);
 
 	SELECT LAST_INSERT_ID() INTO output;

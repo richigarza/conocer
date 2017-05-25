@@ -108,7 +108,7 @@ CREATE TABLE dbCONOCER.Visita (
 	idVisita INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	idSolicitante INT(10) NOT NULL COMMENT "Identificador del Solicitante",
 	idTipoLlamada INT(2) COMMENT "Identificador del tipo de llamada",
-	idCursosCapacitacion INT(2) COMMENT "Identificador de certificar cursos de capacitación"
+	idCursosCapacitacion INT(2) COMMENT "Identificador de certificar cursos de capacitación",
 	motivo INT(2) NOT NULL COMMENT "Motivo de la visita",
 	idEstandar INT(10) NOT NULL COMMENT "Estandar buscado",
 	idEstado INT(2) NOT NULL COMMENT "Estado donde se localiza",
