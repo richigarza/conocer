@@ -39,7 +39,7 @@
                 <input id="txtHora3" type="text" class="form-control txtHora" placeholder="Hora" disabled>
               </div>                        
             </div>
-            <div class="row vistaMesa">
+            <div class="row">
               <div class="col-md-4">
                 <label class="control-label">Tipo de llamada</label>
                 <select class="form-control" placeholder="Tipo de Llamada" id="ddlTipoLlamada" name="ddlTipoLlamada">
@@ -53,13 +53,14 @@
                 </select>
               </div> 
               <div class="col-md-4" id="divCurso" style="display: none;">
-                <label class="control-label">Certificar cursos de capacitación</label>
+                <label class="control-label">Tipo de registro</label>
                 <select class="form-control" placeholder="Tipo de Llamada" id="ddlCurso" name="ddlCurso">
                   <option selected value="-1" disabled>Seleccione cursos de capacitación</option>
                   <option value="1">CVC</option>
                   <option value="2">RENEC</option>
                   <option value="3">RENAP</option>
                   <option value="4">RENAC</option>
+	 <option value="5">Certificar cursos de capacitación</option>
                 </select>
               </div>
             </div>
@@ -205,6 +206,9 @@
               <div class="col-md-1">
                 <button type="submit" id="btnAgregarVisita" data-value="0" class="btn btn-success">Agregar visita</button>
               </div>
+	 <div class="col-md-1">
+	 <a href="index.php?page=main" class="btn btn-primary">Nuevo Registro</a>
+</div>
             </div>
           </form>
         </div>

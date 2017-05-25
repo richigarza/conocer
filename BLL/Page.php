@@ -28,21 +28,21 @@
 				$list[] = array(
 								'txtFolio' => $value->idSolicitante,
 								'ddlTipoRegistro' => $value->solicitanteType,
-								'txtNombres' => utf8_encode($value->nombre), 
-								'txtApellidoP' => utf8_encode($value->apellidoPaterno),
-								'txtApellidoM' => utf8_encode($value->apellidoMaterno),
-								'txtNombreEmpresa' => utf8_encode($value->nombreEmpresa),
-								'txtEmail' => utf8_encode($value->email),
-								'txtTelefono' => utf8_encode($value->telefono),
-								'rdioMigrante' => utf8_encode($value->migrante),
-								'rdioCertificacion' => utf8_encode($value->certificado),
-								'rdioEstandar' => utf8_encode($value->estandarizado),
-								'ddlTipoEmpresa' => utf8_encode($value->tipoEmpresa),
-								'ddlEntidadFederativa' => utf8_encode($value->idEstado),
-								'ddlMedioContacto' => utf8_encode($value->medioContacto),
-								'txtFechaNacimiento' => utf8_encode($value->fechaNacimiento),
-								'ddlOcupacion' => utf8_encode($value->ocupacion),
-								'ddlEscolaridad' => utf8_encode($value->escolaridad)
+								'txtNombres' => ($value->nombre), 
+								'txtApellidoP' => ($value->apellidoPaterno),
+								'txtApellidoM' => ($value->apellidoMaterno),
+								'txtNombreEmpresa' => ($value->nombreEmpresa),
+								'txtEmail' => ($value->email),
+								'txtTelefono' => ($value->telefono),
+								'rdioMigrante' => ($value->migrante),
+								'rdioCertificacion' => ($value->certificado),
+								'rdioEstandar' => ($value->estandarizado),
+								'ddlTipoEmpresa' => ($value->tipoEmpresa),
+								'ddlEntidadFederativa' => ($value->idEstado),
+								'ddlMedioContacto' => ($value->medioContacto),
+								'txtFechaNacimiento' => ($value->fechaNacimiento),
+								'ddlOcupacion' => ($value->ocupacion),
+								'ddlEscolaridad' => ($value->escolaridad)
 								);
 			}
 			$result["output"] = $list;
@@ -68,13 +68,13 @@
 				                'ddlRepresentante' => $value->Representante,//
 				                'ddlMedio' => $value->idMedioEntero,
 				                'ddlSecretaria' => $value->idSecretaria,
-				                'txtAreaAsunto' => utf8_encode($value->asunto),
+				                'txtAreaAsunto' => ($value->asunto),
 				                'ddlDirigidoA' => $value->dirigidoA,
-				                'txtAreaComentarios' => utf8_encode($value->comentarios),
-				                'rdioResolucion' => utf8_encode($value->estatus),
-				                'tiempoAtencion' => utf8_encode($value->tiempoAtencion),
-				                'createdDate' => utf8_encode($value->createdDate),
-				                'lastUpdate' => utf8_encode($value->lastUpdate)
+				                'txtAreaComentarios' => ($value->comentarios),
+				                'rdioResolucion' => ($value->estatus),
+				                'tiempoAtencion' => ($value->tiempoAtencion),
+				                'createdDate' => ($value->createdDate),
+				                'lastUpdate' => ($value->lastUpdate)
 				                );
 			}
 			$result["output"] = $list;
@@ -96,13 +96,13 @@
 								'idEstado' => $value->idEstado,
 								'idPrestador' => $value->idPrestador,
 								'idRepresentante' => $value->idRepresentante,
-								'asunto' => utf8_encode($value->asunto),
+								'asunto' => ($value->asunto),
 								'dirigidoA' => $value->dirigidoA,
-								'comentarios' => utf8_encode($value->comentarios),
-								'estatus' => utf8_encode($value->estatus),
-								'tiempoAtencion' => utf8_encode($value->tiempoAtencion),
-								'createdDate' => utf8_encode($value->createdDate),
-								'lastUpdate' => utf8_encode($value->lastUpdate)
+								'comentarios' => ($value->comentarios),
+								'estatus' => ($value->estatus),
+								'tiempoAtencion' => ($value->tiempoAtencion),
+								'createdDate' => ($value->createdDate),
+								'lastUpdate' => ($value->lastUpdate)
 								);
 			}
 			$result["output"] = $list;
@@ -119,12 +119,12 @@
 				$list[] = array(
 								'idSolicitante' => $value->idSolicitante,
 								'solicitanteType' => $value->solicitanteType,
-								'nombre' => utf8_encode($value->nombre), 
-								'apellidoPaterno' => utf8_encode($value->apellidoPaterno),
-								'apellidoMaterno' => utf8_encode($value->apellidoMaterno),
-								'nombreEmpresa' => utf8_encode($value->nombreEmpresa),
-								'email' => utf8_encode($value->email),
-								'telefono' => utf8_encode($value->telefono)
+								'nombre' => ($value->nombre), 
+								'apellidoPaterno' => ($value->apellidoPaterno),
+								'apellidoMaterno' => ($value->apellidoMaterno),
+								'nombreEmpresa' => ($value->nombreEmpresa),
+								'email' => ($value->email),
+								'telefono' => ($value->telefono)
 								);
 			}
 			$result["output"] = $list;
@@ -132,14 +132,14 @@
 			return $result;
 		}
 		function setVisita($array){
-			$array["ddlTipoLlamada"] = $array["ddlTipoLlamada"]==null ? 0 : $array["ddlTipoLlamada"];
-			$array["ddlCurso"] = $array["ddlCurso"]==null ? 0 : $array["ddlCurso"];
-			$array["ddlMotivo"] = $array["ddlMotivo"]==null ? 0 : $array["ddlMotivo"];
-			$array["ddlSecretaria"] = $array["ddlSecretaria"]==null ? 0 : $array["ddlSecretaria"];
-			$array["txtAreaAsunto"] = $array["txtAreaAsunto"]==null ? '' : $array["txtAreaAsunto"];
-			$array["ddlDirigidoA"] = $array["ddlDirigidoA"]=null ? 0 : $array["ddlDirigidoA"];
+			$array["ddlTipoLlamada"] = $array["ddlTipoLlamada"]==NULL ? '0' : $array["ddlTipoLlamada"];
+			$array["ddlCurso"] = $array["ddlCurso"]==NULL ? '0' : $array["ddlCurso"];
+			$array["ddlMotivo"] = $array["ddlMotivo"]==NULL ? '0' : $array["ddlMotivo"];
+			$array["ddlSecretaria"] = $array["ddlSecretaria"]==NULL ? '0' : $array["ddlSecretaria"];
+			$array["txtAreaAsunto"] = $array["txtAreaAsunto"]==NULL ? '' : $array["txtAreaAsunto"];
+			$array["ddlDirigidoA"] = $array["ddlDirigidoA"]=NULL ? '0' : $array["ddlDirigidoA"];
 
-			$paramString = "CALL sp_setVisita(".$array["idVisita"].",".$array["Folio"].", ".$array["ddlTipoLlamada"].", ".$array["ddlCurso"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["ddlMedio"].", '".$array["ddlSecretaria"].", ".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', '".$array["Pantalla"]."',@output)";
+			$paramString = "CALL sp_setVisita(".$array["idVisita"].",".$array["Folio"].", ".$array["ddlTipoLlamada"].", ".$array["ddlCurso"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', ".$array["ddlMedio"].", ".$array["ddlSecretaria"].", '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '', '".$array["Pantalla"]."',@output)";
 			//$paramString = "INSERT INTO Visita (idSolicitante, motivo, idEstandar, idEstado, idPrestador, idRepresentante, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) VALUES(".$array["Folio"].", ".$array["ddlMotivo"].", '".$array["ddlEstandar"]."', '".$array["ddlEstadoEstandar"]."', '".$array["ddlPrestadorEstadoEstandar"]."', '".$array["ddlRepresentante"]."', '".$array["txtAreaAsunto"]."', ".$array["ddlDirigidoA"].", '".$array["txtAreaComentarios"]."', ".$array["rdioResolucion"].", '')";
 			$comand = new dbMySQL();
 			$result = $comand->execSP($paramString);
@@ -150,6 +150,8 @@
 		}
 		function setSolicitante($array){
 			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
+			$array["txtFechaNacimiento"] = $array["txtFechaNacimiento"] == "" ? "NULL" : $array["txtFechaNacimiento"];
+			$array["txtFechaNacimiento"] = $array["txtFechaNacimiento"] == "''" ? "NULL" : $array["txtFechaNacimiento"];
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
 			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
 			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento, escolaridad, ocupacion) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].", ".$array["ddlEscolaridad"].", ".$array["ddlOcupacion"].")";
@@ -179,7 +181,7 @@
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array('codigo' => $value->codigo, 
-								'descripcion' => utf8_encode($value->descripcion)
+								'descripcion' => ($value->descripcion)
 								);
 			}
 			$result["output"] = $list;
@@ -191,8 +193,8 @@
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
-				$list[] = array('idEstado' => utf8_encode($value->idEstado), 
-								'estado' => utf8_encode($value->estado)
+				$list[] = array('idEstado' => ($value->idEstado), 
+								'estado' => ($value->estado)
 								);
 			}
 			$result["output"] = $list;
@@ -204,8 +206,8 @@
 			$result = $comand->executeQuery($paramString);
 			$list = array();
 			foreach ($result["output"] as $value) {
-				$list[] = array('idEstado' => utf8_encode($value->idEstado), 
-								'estado' => utf8_encode($value->estado)
+				$list[] = array('idEstado' => ($value->idEstado), 
+								'estado' => ($value->estado)
 								);
 			}
 			$result["output"] = $list;
@@ -220,7 +222,7 @@
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array('cedula' => $value->cedula, 
-								'nombreEmpresa' => utf8_encode($value->nombreEmpresa)
+								'nombreEmpresa' => ($value->nombreEmpresa)
 								);
 			}
 			$result["output"] = $list;
@@ -235,7 +237,7 @@
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array('cedulaR' => $value->cedulaR,
-								'nombrePrestador' => utf8_encode($value->nombrePrestador)
+								'nombrePrestador' => ($value->nombrePrestador)
 								);
 			}
 			$result["output"] = $list;
@@ -249,12 +251,12 @@
 			$list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array(
-								'nombrePrestador' => utf8_encode($value->nombrePrestador),
-								'direccion' => utf8_encode($value->direccion),
-								'colonia' => utf8_encode($value->colonia),
+								'nombrePrestador' => ($value->nombrePrestador),
+								'direccion' => ($value->direccion),
+								'colonia' => ($value->colonia),
 								'codigoPostal' => $value->codigoPostal,
-								'ciudad' => utf8_encode($value->ciudad),
-								'email' => utf8_encode($value->email),
+								'ciudad' => ($value->ciudad),
+								'email' => ($value->email),
 								'telefono' => $value->telefono
 								);
 			}

@@ -7,17 +7,17 @@ MONITOR.app = (function($, window, document, undefined){
 		datos["Folio"] = $("#txtFolio2").val();
 		datos["Fecha"] = $("#txtFecha2").val();
 		datos["Hora"] = $("#txtHora2").val();
-		datos["ddlTipoLlamada"] = $("#ddlTipoLlamada").val() || $("#ddlTipoLlamada").val()!='-1' ? $("#ddlTipoLlamada").val() : 0;
-		datos["ddlCurso"] = $("#ddlCurso").val() || $("#ddlCurso").val()!='-1' ? $("#ddlCurso").val() : 0;
-		datos["ddlMotivo"] = $("#ddlMotivo").val() || $("#ddlMotivo").val()!='-1' ? $("#ddlMotivo").val() : 0;
+		datos["ddlTipoLlamada"] = $("#ddlTipoLlamada").val() ? $("#ddlTipoLlamada").val() : 0;
+		datos["ddlCurso"] = $("#ddlCurso").val() ? $("#ddlCurso").val() : 0;
+		datos["ddlMotivo"] = $("#ddlMotivo").val() ? $("#ddlMotivo").val() : 0;
 		datos["ddlEstandar"] = $("#ddlEstandar").val();
 		datos["ddlEstadoEstandar"] = $("#ddlEstadoEstandar").val();
 		datos["ddlPrestadorEstadoEstandar"] = $("#ddlPrestadorEstadoEstandar").val();
 		datos["ddlRepresentante"] = $("#ddlRepresentante").val();
 		datos["ddlMedio"] = $("#ddlMedio").val();
-    	datos["ddlSecretaria"] = $("#ddlSecretaria").val() || $("#ddlSecretaria").val()!='-1' ? $("#ddlSecretaria").val() : 0;
+    	datos["ddlSecretaria"] = $("#ddlSecretaria").val() ? $("#ddlSecretaria").val() : 0;
 		datos["txtAreaAsunto"] = $("#txtAreaAsunto").val();
-		datos["ddlDirigidoA"] = $("#ddlDirigidoA").val() || $("#ddlDirigidoA").val()!='-1' ? $("#ddlDirigidoA").val() : 0;
+		datos["ddlDirigidoA"] = $("#ddlDirigidoA").val() ? $("#ddlDirigidoA").val() : 0;
 		datos["txtAreaComentarios"] = $("#txtAreaComentarios").val();
 		datos["rdioResolucion"] = $("input[name=rdioResolucion]:checked").val();
 		//datos[""] = $("#txt").val();	
@@ -78,17 +78,17 @@ MONITOR.app = (function($, window, document, undefined){
 
 	var valida = $("form[name='formMonitor']").validate({
 		rules: {	
-			ddlTipoLlamada: { required: function() { return $("#ddlTipoRegistro").val() == 3 } },
-			ddlCurso: { required: function() { return $("#ddlTipoRegistro").val() != 3 } },
-			ddlMotivo: { required: function() { return $("#ddlTipoLlamada").val() == 3 } },
-			ddlEstandar: { required: true},
-			ddlEstadoEstandar: { required: true},
-			ddlPrestadorEstadoEstandar: { required: true},
-			ddlRepresentante: { required: true},
+		    //ddlTipoLlamada: { required: function() { return $("#ddlTipoRegistro").val() == 3 } },
+		    //ddlCurso: { required: function() { return $("#ddlTipoRegistro").val() != 3 } },
+		    //ddlMotivo: { required: function() { return $("#ddlTipoLlamada").val() == 3 } },
+			//ddlEstandar: { required: true},
+			//ddlEstadoEstandar: { required: true},
+			//ddlPrestadorEstadoEstandar: { required: true},
+			//ddlRepresentante: { required: true},
 			ddlMedio: { required: true},
 			ddlSecretaria: { required: function() { return $("#ddlMedio").val() == 4 } },
 			txtAreaAsunto: {required: function() { return $("#ddlTipoRegistro").val() != 3 } },
-			ddlDirigidoA: { required: function() { return $("#ddlTipoRegistro").val() != 3 } },
+			//ddlDirigidoA: { required: function() { return $("#ddlTipoRegistro").val() != 3 } },
 			txtAreaComentarios: { required: true},
 			rdioResolucion: { required: true}
 		},

@@ -56,15 +56,15 @@ REGISTRAR.app = (function($, window, document, undefined){
 	var valida = $("form[name='formRegistrar']").validate({
 		rules: {
 			ddlTipoRegistro: { required: true },
-			rdioMigrante: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
+			//rdioMigrante: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
 			rdioCertificacion: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
-			txtNombres: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
-			txtApellidoP: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
-			txtApellidoM: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			//txtNombres: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			//txtApellidoP: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
+			//txtApellidoM: { required: function() { return $("#ddlTipoRegistro").val() != 2 } },
 			txtNombreEmpresa: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
 			ddlTipoEmpresa: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
 			rdioEstandar: { required: function() { return $("#ddlTipoRegistro").val() == 2 } },
-			txtFechaNacimiento: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
+			//txtFechaNacimiento: { required: function() { return $("#ddlTipoRegistro").val() == 1 } },
 			ddlEntidadFederativa: { required: true },
 			ddlMedioContacto: { required: true}
 		},

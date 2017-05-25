@@ -98,12 +98,45 @@
           </div>
           	<div class="row panel-margin">
               <div class="col-md-4">
-              	  <label class="control-label">Medio por el cual se enteró</label>
+                  <label class="control-label">Medio por el cual se enteró</label>
                   <select class="form-control" placeholder="Tipo de Llamada" id="ddlMedio" name="ddlMedio">
-	                  <option selected value="-1" disabled>Seleccione un medio</option>
-	                  <option value="1">Secretaría de Gobierno</option>
+                    <option selected value="-1" disabled>Seleccione un medio</option>
+                    <option value="1">Trabajo</option>
+                    <option value="2">Internet</option>
+                    <option value="3">Tiene una certificación</option>
+                    <option value="4">Secretaría de gobierno</option>
+                    <option value="5">No proporciona</option>
+                    <option value="6">Amistad</option>
+                    <option value="7">Curso</option>
+                    <option value="8">Escuela</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                  <label class="control-label">Secretaría de gobierno</label>
+                  <select class="form-control" placeholder="Secretaría de gobierno" id="ddlMedio" name="ddlMedio">
+                    <option selected value="-1" disabled>Seleccione una secretaría</option>
+                    <option value="1">CONACYT</option>
+                    <option value="2">FIDE</option>
+                    <option value="3">FOVISSSTE</option>
+                    <option value="4">IMSS</option>
+                    <option value="5">INAES</option>
+                    <option value="6">INFONAVIT</option>
+                    <option value="7">PGR</option>
+                    <option value="8">Portal del empleo</option>
+                    <option value="9">SAGARPA</option>
+                    <option value="10">SCT</option>
+                    <option value="11">SECRETARÍA DE ECONOMÍA</option>
+                    <option value="12">SECRETARÍA DE ENERGÍA</option>
+                    <option value="13">SECRETARÍA DE SALUD</option>
+                    <option value="14">SECTOR</option>
+                    <option value="15">SEDESOL</option>
+                    <option value="16">SEGOB</option>
+                    <option value="17">SEP</option>
+                    <option value="18">SFP</option>
+                    <option value="19">SRE</option>
+                    <option value="20">STPS</option>
 
-	              </select>
+                </select>
               </div>
             </div>
             <div class="row panel-margin">

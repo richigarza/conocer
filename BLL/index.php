@@ -45,7 +45,6 @@
 				$result = $User->login($_POST);
 			break;
 			case "registrar":
-				//less 						$result = 
 				$page = new Page();
 				if($_POST["pantalla"] == "Registrar"){
 					$result = $page->setSolicitante($_POST);

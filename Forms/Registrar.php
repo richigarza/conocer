@@ -173,6 +173,7 @@ form .error {
                 <label class="control-label">Entidad Federativa</label>
                 <select class="form-control" placeholder="Entidad Federativa" id="ddlEntidadFederativa" name="ddlEntidadFederativa">
                   <option selected value="-1" disabled>Seleccione entidad federativa</option>
+  <option value="0">No especifica</option>
                 </select>
               </div> 
               <div class="col-md-4">
