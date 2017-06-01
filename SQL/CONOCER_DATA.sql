@@ -6,6 +6,22 @@ INSERT INTO dbCONOCER.User (firstName, lastName, userName, password, email, user
 INSERT INTO dbCONOCER.CatalogoEstatus(estatus) VALUES ('Pendiente'),('En Tramite'),('Atendido');
 INSERT INTO dbCONOCER.CatalogoMotivo(motivo) VALUES ('Informativo'),('Tramite'),('Requisitos'),('Seguimiento');
 
+INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía correo electrónico');
+INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía chat de la página web');
+INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía telefónica');
+INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía personal');
+
+INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('Hombre');
+INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('Mujer');
+INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('No especifica');
+
+INSERT INTO dbCONOCER.CatalogoResolucion(descripcion) VALUES('Pendiente');
+INSERT INTO dbCONOCER.CatalogoResolucion(descripcion) VALUES('En Trámite');
+INSERT INTO dbCONOCER.CatalogoResolucion(descripcion) VALUES('Atendido');
+
+INSERT INTO dbCONOCER.CatalogoRespuesta(bitVal, descripcion) VALUES(0, 'No');
+INSERT INTO dbCONOCER.CatalogoRespuesta(bitVal, descripcion) VALUES(1, 'Si');
+
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Aguascalientes');
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California');
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California Sur');

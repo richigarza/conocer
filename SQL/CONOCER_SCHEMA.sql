@@ -6,6 +6,41 @@ CREATE USER 'conocer'@'localhost' IDENTIFIED BY '123Pormi!';
 GRANT ALL PRIVILEGES ON dbCONOCER.* TO 'conocer'@'localhost';
 COMMIT;
 
+-- Tabla CatalogoResolucion
+DROP TABLE IF EXISTS dbCONOCER.CatalogoResolucion;
+SELECT 'CatalogoResolucion';
+CREATE TABLE dbCONOCER.CatalogoResolucion(
+	idResolucion INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro", 
+	descripcion VARCHAR(50) NOT NULL COMMENT "Descripción de Resolución."
+)DEFAULT CHARSET=utf8 COMMENT "Tabla de Catalogo de Resolución";
+
+CatalogoRespuesta
+-- Tabla CatalogoMedioContacto
+DROP TABLE IF EXISTS dbCONOCER.CatalogoRespuesta;
+SELECT 'CatalogoRespuesta';
+CREATE TABLE dbCONOCER.CatalogoRespuesta(
+	idRespuesta INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro", 
+	bitVal BIT NOT NULL COMMENT "BIT Identificador del registro", 
+	descripcion VARCHAR(50) NOT NULL COMMENT "Descripción de Respuestas."
+)DEFAULT CHARSET=utf8 COMMENT "Tabla de Catalogo de Respuestas,";
+
+-- Tabla CatalogoMedioContacto
+DROP TABLE IF EXISTS dbCONOCER.CatalogoMedioContacto;
+SELECT 'CatalogoMedioContacto';
+CREATE TABLE dbCONOCER.CatalogoMedioContacto(
+	idMedioContacto INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro", 
+	descripcion VARCHAR(50) NOT NULL COMMENT "Descripción del medio de contacto."
+)DEFAULT CHARSET=utf8 COMMENT "Tabla de Catalogo del Medio de Contacto";
+
+-- Tabla CatalogoGenero
+DROP TABLE IF EXISTS dbCONOCER.CatalogoGenero;
+SELECT 'CatalogoGenero';
+CREATE TABLE dbCONOCER.CatalogoGenero(
+	idGenero INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro", 
+	descripcion VARCHAR(50) NOT NULL COMMENT "Descripción de Genero."
+)DEFAULT CHARSET=utf8 COMMENT "Tabla de Catalogo de Genero";
+
+
 -- Tabla de Usuarios
 DROP TABLE IF EXISTS dbCONOCER.User;
 SELECT 'User';
@@ -97,6 +132,8 @@ CREATE TABLE dbCONOCER.Solicitante (
 	fechaNacimiento TIMESTAMP COMMENT "Fecha de Nacimiento",
 	ocupacion INT(1) COMMENT "Ocupación del Solicitante",
 	escolaridad INT(1) COMMENT "Escolaridad del Solicitante",
+	genero int(1) DEFAULT NULL,
+  	edad int(3) DEFAULT NULL,
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Fecha de creación del registro",
 	lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Fecha de la última actualización"
 );
