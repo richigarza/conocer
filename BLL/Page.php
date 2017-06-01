@@ -41,8 +41,10 @@
 								'ddlEntidadFederativa' => ($value->idEstado),
 								'ddlMedioContacto' => ($value->medioContacto),
 								'txtFechaNacimiento' => ($value->fechaNacimiento),
+								'txtEdad' => $value->edad,
 								'ddlOcupacion' => ($value->ocupacion),
-								'ddlEscolaridad' => ($value->escolaridad)
+								'ddlEscolaridad' => ($value->escolaridad),
+								'ddlGenero' => ($value->genero)
 								);
 			}
 			$result["output"] = $list;
@@ -154,7 +156,7 @@
 			$array["txtFechaNacimiento"] = $array["txtFechaNacimiento"] == "''" ? "NULL" : $array["txtFechaNacimiento"];
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
 			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
-			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento, escolaridad, ocupacion) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].", ".$array["ddlEscolaridad"].", ".$array["ddlOcupacion"].")";
+			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento, edad, escolaridad, ocupacion, genero) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].", ".$array["txtEdad"].", ".$array["ddlEscolaridad"].", ".$array["ddlOcupacion"].", ".$array["ddlGenero"].")";
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
 			//$list = array();
