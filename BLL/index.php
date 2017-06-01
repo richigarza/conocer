@@ -21,7 +21,7 @@
 		switch($fn){
 			case "graficas":
 				$graficas = new Graficas();
-				$result = $graficas->getAllGraficas();
+				$result = $graficas->getAllGraficas($_POST);
 			break;
 			case "test":
 				$page = new Page();
