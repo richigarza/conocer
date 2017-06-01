@@ -7,9 +7,9 @@
 
 Class Graficas{
 
-	function getAllGraficas(){
+	function getAllGraficas($array){
 		$result["estado"] = $this->getGraficaEstado();
-		$result["medio"] = $this->getGraficaMedio();
+		$result["medio"] = $this->getGraficaMedio($array);
 		$result["estatus"] = $this->getGraficaEstatus();
 		$result["estandar"] = $this->getGraficaEstandar();
 		$result["migrante"] = $this->getGraficaMigrante();
@@ -36,8 +36,8 @@ Class Graficas{
 		return $result;
 	}
 
-	function getGraficaMedio(){
-		$paramString = "SELECT cmc.descripcion AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) GROUP BY cmc.descripcion";
+	function getGraficaMedio($array){
+		$paramString = "SELECT cmc.descripcion AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN ".$array["tipoFecha"]."='exacto' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN ".$array["tipoFecha"]."='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
