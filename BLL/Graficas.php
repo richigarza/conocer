@@ -37,7 +37,7 @@ Class Graficas{
 	}
 
 	function getGraficaMedio($array){
-		$paramString = "SELECT cmc.descripcion AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN ".$array["tipoFecha"]."='exacto' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN ".$array["tipoFecha"]."='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
+		$paramString = "SELECT cmc.descripcion AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacto' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
