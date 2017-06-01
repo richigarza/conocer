@@ -36,7 +36,7 @@ GRAFICAS.app = (function($, window, document, undefined){
 }($, window, document, undefined));
 
 $("#btnGraficas").on("click", function(){	
-	GLOBAL.app.getGraficas();
+	GRAFICAS.app.getGraficas();
 })
 
 $(document).ready(function () {
