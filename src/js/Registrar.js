@@ -20,10 +20,12 @@ REGISTRAR.app = (function($, window, document, undefined){
 		datos["txtEmail"] = $("#txtEmail").val();
 		datos["txtTelefono"] = $("#txtTelefono").val();
 		datos["txtFechaNacimiento"] = $("#ddlTipoRegistro").val() == "1" ? $("#txtFechaNacimiento").val() : null;
+		datos["txtEdad"] = $("#txtEdad").val();
 		datos["ddlEntidadFederativa"] = $("#ddlEntidadFederativa").val();
 		datos["ddlMedioContacto"] = $("#ddlMedioContacto").val();
 		datos["ddlOcupacion"] = $("#ddlOcupacion").val() === null ? "0" : $("#ddlOcupacion").val();
 		datos["ddlEscolaridad"] = $("#ddlEscolaridad").val() === null ? "0" : $("#ddlEscolaridad").val();
+		datos["ddlGenero"] = $("#ddlGenero").val() === null ? "0" : $("#ddlGenero").val();
 		//datos[""] = $("#txt").val();
 		return datos;
 	}
