@@ -1,8 +1,40 @@
 // Charts
+var chartResolucion,
+    chartGenero,
+    chartEstandar,
+    chartEstado,
+    chartMigrante,
+    chartMedio;
+var GRAFICAS = window.GRAFICAS || {};
+
+GRAFICAS.app = (function($, window, document, undefined){
+
+    var getGraficas = function(){
+
+        var datos = {};
+        GLOBAL.app.sendJson("BLL/index.php?fn=graficas", datos, function(response){
+            if(response.success){
+                console.log(response.estado.output);
+
+                chartResolucion.series[0].setData(response.estatus.output);
+                chartGenero.series[0].setData(response.genero.output);
+                chartEstandar.series[0].setData(response.estandar.output);
+                chartMedio.series[0].setData(response.medio.output);
+                chartEstado.series[0].setData(response.estado.output);                
+            }
+        });
+    }
+
+    return{
+        getGraficas : getGraficas
+    }
+
+}($, window, document, undefined));
+
 $(document).ready(function () {
 
     // Build the chart
-    Highcharts.chart('resolucion', {
+    chartResolucion = Highcharts.chart('resolucion', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -42,7 +74,8 @@ $(document).ready(function () {
             }]
         }]
     });
-    Highcharts.chart('genero', {
+
+    chartGenero = Highcharts.chart('genero', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -80,7 +113,7 @@ $(document).ready(function () {
         }]
     });
 
-    Highcharts.chart('graficaConEstandar', {
+    chartEstandar = Highcharts.chart('graficaConEstandar', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -117,7 +150,8 @@ $(document).ready(function () {
             }]
         }]
     });
-        Highcharts.chart('graficaViaAtencion', {
+    
+    chartMedio = Highcharts.chart('graficaViaAtencion', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -161,7 +195,7 @@ $(document).ready(function () {
         }]
     });
 
-        Highcharts.chart('graficaEstado', {
+    chartEstado = Highcharts.chart('graficaEstado', {
         chart: {
             type: 'column'
         },

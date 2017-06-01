@@ -21,6 +21,7 @@ LOAD_PAGE.app = (function($, window, document, undefined){
 			if(response.success){
 				$("#ddlEntidadFederativa").empty();
 				$("#ddlEntidadFederativa").append('<option selected value="-1" disabled>Seleccione prestador de serivicio</option>');
+				$("#ddlEntidadFederativa").append('<option value="0">No especifica</option>');
 				response.output.forEach(function(obj){
 					GLOBAL.app.insertDDL("ddlEntidadFederativa", obj.idEstado, obj.estado);
 				});
@@ -52,16 +53,18 @@ function loadPageRegistrar(tipoRegistro){
 		$("#divNombres").show();
 		$("#divEmpresa").hide();
 		$("#divCuentaCertificacion").show();
-		$("#divColBirthDate").show();
+		$(".divColBirthDate").show();
 		$(".tipoPersona").show();
+		$(".Persona").show();
 	}else if (tipoRegistro==2){
 		$("#divMigrante").hide();
 		$("#divCuentaEstandar").show();
 		$("#divNombres").hide();
 		$("#divEmpresa").show();
 		$("#divCuentaCertificacion").hide();
-		$("#divColBirthDate").hide();
+		$(".divColBirthDate").hide();
 		$(".tipoPersona").hide();
+		$(".Persona").hide();
 	}
 	else{
 		$("#divMigrante").hide();
@@ -69,8 +72,9 @@ function loadPageRegistrar(tipoRegistro){
 		$("#divNombres").show();
 		$("#divEmpresa").hide();
 		$("#divCuentaCertificacion").hide();
-		$("#divColBirthDate").hide();
+		$(".divColBirthDate").hide();
 		$(".tipoPersona").hide();
+		$(".Persona").show();
 	}
 	$("#divContacto1").show();
 	$("#divContacto2").show();
@@ -114,6 +118,7 @@ $(".select2").select2({ width: null });
 //////////////////////////////////////////////
 LOAD_PAGE.app.cargaEstandares();
 LOAD_PAGE.app.cargaEstados();
+GRAFICAS.app.getGraficas();
 
 //////////////////////////////////////////////
 // Create INIT Cookies
