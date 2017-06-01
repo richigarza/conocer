@@ -8,6 +8,7 @@
 	require('../DTO/User.php');
 	require("../BLL/Page.php");
 	require("../BLL/User.php");
+	require("../BLL/Graficas.php");
 	require("../DAO/mysql.php");
 
 	function test(){
@@ -18,6 +19,10 @@
 		$result = array();
 		$fn = $_GET["fn"];
 		switch($fn){
+			case "graficas":
+				$graficas = new Graficas();
+				$result = $graficas->getAllGraficas();
+			break;
 			case "test":
 				$page = new Page();
 				//if($_POST["pantalla"] == "Registrar"){
