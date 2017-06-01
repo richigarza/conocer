@@ -106,6 +106,7 @@ $('.datepicker').datepicker({
     startView: 'years',
     setDate: new Date()
 });
+$('.datepicker').datepicker('setDate', new Date());
 
 //////////////////////////////////////////////
 // Select2 
