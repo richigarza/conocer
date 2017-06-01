@@ -158,7 +158,7 @@ form .error {
                 <label class="control-label">Teléfono</label>
                 <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono">
               </div>
-              <div class="col-md-4" id="divColBirthDate">
+              <div class="col-md-3 divColBirthDate">
                 <label class="control-label">Fecha de Naciemiento</label>
                 <div class="input-group">
                     <span class="input-group-addon">
@@ -166,6 +166,10 @@ form .error {
                     </span>
                     <input id="txtFechaNacimiento" type="text" name="txtFechaNacimiento" class="form-control datepicker" placeholder="Fecha de nacimiento" data-date-viewmode="years">
                 </div>
+              </div> 
+              <div class="col-md-1 divColBirthDate">
+                <label>Edad</label>
+                <input id="txtEdad" type="number" name="txtEdad" class="form-control" placeholder="Edad">
               </div>                        
             </div>
             <div class="row" id="divContacto2" style="display:none;">
@@ -173,7 +177,7 @@ form .error {
                 <label class="control-label">Entidad Federativa</label>
                 <select class="form-control" placeholder="Entidad Federativa" id="ddlEntidadFederativa" name="ddlEntidadFederativa">
                   <option selected value="-1" disabled>Seleccione entidad federativa</option>
-  <option value="0">No especifica</option>
+                  <option value="0">No especifica</option>
                 </select>
               </div> 
               <div class="col-md-4">
@@ -183,7 +187,7 @@ form .error {
                   <option value="1">Vía correo electrónico</option>
                   <option value="2">Vía chat de la página web</option>
                   <option value="3">Vía telefónica</option>
-                  <option value="3">Vía personal</option>
+                  <option value="4">Vía personal</option>
                 </select>
               </div>                              
             	<div class="col-md-4 tipoPersona">
@@ -200,8 +204,8 @@ form .error {
                 </select>
             	</div>
            </div>
-            <div class="row tipoPersona" style="display:none;">
-              <div class="col-md-4">
+            <div class="row Persona" style="display:none;">
+              <div class="col-md-4 tipoPersona" style="display:none;">
                 <label>Ocupación</label>
                 <select class="form-control" placeholder="Ocupación" id="ddlOcupacion" name="ddlOcupacion">
                   <option selected value="-1" disabled>Seleccione ocupación</option>
@@ -215,6 +219,13 @@ form .error {
                 </select>           
               </div>
               <div class="col-md-4">
+                <label>Genero</label>
+                <select class="form-control" id="ddlGenero" name="ddlGenero">
+                  <option selected value="-1">Seleccione el genero</option>
+                  <option value="0">No especifica</option>
+                  <option value="1">Hombre</option>
+                  <option value="2">Mujer</option>
+                </select>
               </div>
             </div>
             <div class="row" id="divBotones" style="display:none;">

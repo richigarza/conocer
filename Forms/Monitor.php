@@ -60,7 +60,7 @@
                   <option value="2">RENEC</option>
                   <option value="3">RENAP</option>
                   <option value="4">RENAC</option>
-	 <option value="5">Certificar cursos de capacitación</option>
+	               <option value="5">Certificar cursos de capacitación</option>
                 </select>
               </div>
             </div>
