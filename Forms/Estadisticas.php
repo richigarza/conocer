@@ -9,11 +9,11 @@
 		        </div>
 	        	<div class="col-md-3">
 		            <label>Fecha Exacta</label>
-		            <input type="radio" id="rdioRepFechaExacta" name="rdioRepFecha">
+		            <input type="radio" id="rdioRepFechaExacta" name="rdioRepFecha" value="exacta" checked>
 		        </div>
 	        	<div class="col-md-3">
 		            <label>Rango de Fechas</label>
-		            <input type="radio" id="rdioRepFechaRango" name="rdioRepFecha">
+		            <input type="radio" id="rdioRepFechaRango" name="rdioRepFecha" value="rango">
 		        </div>
 		    </div>
 	        <div class="row">
@@ -21,27 +21,27 @@
           			<label>Fecha Extacta</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaExacta">
             		</div>
 	        	</div>
 	        	<div class="col-md-4">
           			<label>Fecha Incial</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaInicial">
             		</div>
 	        	</div>
 	        	<div class="col-md-4">
           			<label>Fecha Final</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaFinal">
             		</div>
 	        	</div>
 	        </div>
 	        <div class="row">
 	        	<div class="col-md-4">
-	        		<button class="btn btn-primary">Generar Gráficas</button>
+	        		<button class="btn btn-primary" id="btnGraficas">Generar Gráficas</button>
 	        	</div>
 	        </div>
 		</div>
