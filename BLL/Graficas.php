@@ -53,7 +53,7 @@ Class Graficas{
 	}
 
 	function getGraficaEstatus($array){
-		$paramString = "SELECT cr.descripcion AS estatus, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoResolucion cr ON (cr.idResolucion = v.estatus) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cr.descripcion";
+		$paramString = "SELECT cr.descripcion AS estatus, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoResolucion cr ON (cr.idResolucion = v.estatus) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cr.descripcion";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
