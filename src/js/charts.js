@@ -10,12 +10,8 @@ var GRAFICAS = window.GRAFICAS || {};
 GRAFICAS.app = (function($, window, document, undefined){
 
     var getGraficas = function(){
+
         var datos = {};
-		datos["tipoFecha"] = $("input[name=rdioRepFecha]:checked").val();
-		datos["txtFechaExacta"] = $("#txtFechaExacta").val()
-		datos["txtFechaInicial"] = $("#txtFechaInicial").val()
-		datos["txtFechaFinal"] = $("#txtFechaFinal").val()
-		
         GLOBAL.app.sendJson("BLL/index.php?fn=graficas", datos, function(response){
             if(response.success){
                 console.log(response.estado.output);
@@ -34,10 +30,6 @@ GRAFICAS.app = (function($, window, document, undefined){
     }
 
 }($, window, document, undefined));
-
-$("#btnGraficas").on("click", function(){	
-	GRAFICAS.app.getGraficas();
-})
 
 $(document).ready(function () {
 
@@ -60,7 +52,11 @@ $(document).ready(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
@@ -101,7 +97,11 @@ $(document).ready(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
@@ -139,7 +139,11 @@ $(document).ready(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
@@ -177,7 +181,11 @@ $(document).ready(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 },
                 showInLegend: true
             }
