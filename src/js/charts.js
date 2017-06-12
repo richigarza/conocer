@@ -84,12 +84,13 @@ $("#btnGraficas").on("click", function(){
 })
 
 $(document).ready(function () {
+	/*
     GRAFICAS.app.initChart(chartEdad, 'edad', 'Edad');
     GRAFICAS.app.initChart(chartMedioEntero, 'medioEntero', 'Medio por el que se enteró de CONOCER');
     GRAFICAS.app.initChart(chartSecretaria, 'secretaria', 'Dependecias públicas desde las que se consulta');
     GRAFICAS.app.initChart(chartEscolaridad, 'escolaridad', 'Escolaridad');
     GRAFICAS.app.initChart(chartOcupacion, 'ocupacion', 'Ocupación');
-
+	*/
     // Build the chart
     chartResolucion = Highcharts.chart('resolucion', {
         chart: {
@@ -318,5 +319,257 @@ $(document).ready(function () {
             }]
         }]
     });
+	
+	chartEdad = Highcharts.chart('edad', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Edad'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
+	
+	chartMedioEntero = Highcharts.chart('medioEntero', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Medio por el que se enteró de CONOCER'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
+	chartSecretaria = Highcharts.chart('secretaria', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Dependecias públicas desde las que se consulta'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
 
+	chartEscolaridad = Highcharts.chart('escolaridad', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Escolaridad'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });	
+	chartOcupacion = Highcharts.chart('ocupacion', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Ocupación'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
 });
