@@ -9,11 +9,11 @@
 		        </div>
 	        	<div class="col-md-3">
 		            <label>Fecha Exacta</label>
-		            <input type="radio" id="rdioRepFechaExacta" name="rdioRepFecha" value="exacta" checked>
+		            <input type="radio" id="rdioRepFechaExacta" name="rdioRepFecha">
 		        </div>
 	        	<div class="col-md-3">
 		            <label>Rango de Fechas</label>
-		            <input type="radio" id="rdioRepFechaRango" name="rdioRepFecha" value="rango">
+		            <input type="radio" id="rdioRepFechaRango" name="rdioRepFecha">
 		        </div>
 		    </div>
 	        <div class="row">
@@ -21,27 +21,27 @@
           			<label>Fecha Extacta</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaExacta">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
             		</div>
 	        	</div>
 	        	<div class="col-md-4">
           			<label>Fecha Incial</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaInicial">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
             		</div>
 	        	</div>
 	        	<div class="col-md-4">
           			<label>Fecha Final</label>
             		<div class="input-group">
               			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="txtFechaFinal">
+              			<input type="text" class="form-control datepicker" data-date-viewmode="years" value="1/01/2000" data-date-format="dd/mm/yyyy" id="FechaNacimiento">
             		</div>
 	        	</div>
 	        </div>
 	        <div class="row">
 	        	<div class="col-md-4">
-	        		<button class="btn btn-primary" id="btnGraficas">Generar Gráficas</button>
+	        		<button class="btn btn-primary">Generar Gráficas</button>
 	        	</div>
 	        </div>
 		</div>
@@ -73,6 +73,24 @@
 					<div id="graficaEstado" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 			</div>
-			<div id="graficaDireccion" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+			<div class="row">
+				<div class="col-md-4">
+					<div id="medioEntero" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="secretaria" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="escolaridad" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div id="ocupacion" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="edad" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div>
 		</div>
 	</div>

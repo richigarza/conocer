@@ -4,34 +4,91 @@ var chartResolucion,
     chartEstandar,
     chartEstado,
     chartMigrante,
-    chartMedio;
+    chartMedio,
+    chartEdad,
+    chartMedioEntero,
+    chartSecretaria,
+    chartEscolaridad,
+    chartOcupacion;
 var GRAFICAS = window.GRAFICAS || {};
 
 GRAFICAS.app = (function($, window, document, undefined){
 
     var getGraficas = function(){
-
+        $("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
         var datos = {};
+        datos["tipoFecha"] = $("input[name=rdioRepFecha]:checked").val();       
+        datos["txtFechaExacta"] = $("#txtFechaExacta").val();     
+        datos["txtFechaInicial"] = $("#txtFechaInicial").val();
+        datos["txtFechaFinal"] = $("#txtFechaFinal").val();
         GLOBAL.app.sendJson("BLL/index.php?fn=graficas", datos, function(response){
             if(response.success){
                 console.log(response.estado.output);
-
                 chartResolucion.series[0].setData(response.estatus.output);
                 chartGenero.series[0].setData(response.genero.output);
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartMedio.series[0].setData(response.medio.output);
-                chartEstado.series[0].setData(response.estado.output);                
+                chartEstado.series[0].setData(response.estado.output);   
+                chartEdad.series[0].setData(response.edad.output);
+                chartMedioEntero.series[0].setData(response.medioEntero.output);
+                chartSecretaria.series[0].setData(response.secretaria.output);
+                chartEscolaridad.series[0].setData(response.escolaridad.output);
+                chartOcupacion.series[0].setData(response.ocupacion.output);
+            }
+        });
+        GLOBAL.app.closeLoadingModal();
+    }
+
+    var initChart = function(chart, name, title){
+        chart = Highcharts.chart(name, {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: title
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: 'Total percent market share'
+                }
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}'
+                    }
+                }
             }
         });
     }
 
     return{
-        getGraficas : getGraficas
+        getGraficas : getGraficas,
+        initChart : initChart
     }
 
 }($, window, document, undefined));
 
+
+$("#btnGraficas").on("click", function(){          
+    GRAFICAS.app.getGraficas();     
+})
+
 $(document).ready(function () {
+    GRAFICAS.app.initChart(chartEdad, 'edad', 'Edad');
+    GRAFICAS.app.initChart(chartMedioEntero, 'medioEntero', 'Medio por el que se enteró de CONOCER');
+    GRAFICAS.app.initChart(chartSecretaria, 'secretaria', 'Dependecias públicas desde las que se consulta');
+    GRAFICAS.app.initChart(chartEscolaridad, 'escolaridad', 'Escolaridad');
+    GRAFICAS.app.initChart(chartOcupacion, 'ocupacion', 'Ocupación');
 
     // Build the chart
     chartResolucion = Highcharts.chart('resolucion', {
@@ -220,7 +277,7 @@ $(document).ready(function () {
         },
        tooltip: {
         headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
         },
     xAxis: {
         type: 'category'
@@ -235,7 +292,7 @@ $(document).ready(function () {
             borderWidth: 0,
             dataLabels: {
                 enabled: true,
-                format: '{point.y:.1f}%'
+                format: '{point.y:.1f}'
             }
         }
     },
