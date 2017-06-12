@@ -176,4 +176,30 @@ CREATE TABLE dbCONOCER.CatalogoMotivo(
 	motivo VARCHAR(20) NOT NULL COMMENT "nombre del motivo" 
 );
 
+DROP TABLE IF EXISTS dbCONOCER.CatalogoMedioEntero;
+SELECT 'CatalogoMedioEntero';
+CREATE TABLE dbCONOCER.CatalogoMedioEntero(
+	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	medioEntero VARCHAR(20) NOT NULL COMMENT "nombre del medio por el cual se entero"
+);
 
+DROP TABLE IF EXISTS dbCONOCER.CatalogoSecretaria;
+SELECT 'CatalogoSecretaria'
+CREATE TABLE dbCONOCER.CatalogoSecretaria(
+	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	secretaria VARCHAR(20) NOT NULL COMMENT "nombre de la secretaria"
+);
+
+DROP TABLE IF EXISTS dbCONOCER.CatalogoEscolaridad;
+SELECT 'CatalogoEscolaridad'
+CREATE TABLE dbCONOCER.CatalogoEscolaridad(
+	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	escolaridad VARCHAR(20) NOT NULL COMMENT "nombre del grado de escolaridad"
+);
+
+DROP TABLE IF EXISTS dbCONOCER.CatalogoOcupacion;
+SELECT 'CatalogoOcupacion';
+CREATE TABLE dbCONOCER.CatalogoOcupacion(
+	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	ocupacion VARCHAR(20) NOT NULL COMMENT "nombre del grado de ocupación"
+);

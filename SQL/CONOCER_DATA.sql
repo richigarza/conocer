@@ -22,6 +22,52 @@ INSERT INTO dbCONOCER.CatalogoResolucion(descripcion) VALUES('Atendido');
 INSERT INTO dbCONOCER.CatalogoRespuesta(bitVal, descripcion) VALUES(0, 'No');
 INSERT INTO dbCONOCER.CatalogoRespuesta(bitVal, descripcion) VALUES(1, 'Si');
 
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Trabajo');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Internet');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Tiene una certificación');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Secretaría de gobierno');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('No proporciona');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Amistad');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Curso');
+INSERT INTO dbCONOCER.CatalogoMedioEntero(medioEntero) VALUES('Escuela');
+
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('CONACYT');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('FIDE');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('FOVISSSTE');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('IMSS');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('INAES');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('INFONAVIT');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('PGR');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('Portal del empleo');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SAGARPA');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SCT');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SECRETARÍA DE ECONOMÍA');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SECRETARÍA DE ENERGÍA');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SECRETARÍA DE SALUD');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SECTOR');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SEDESOL');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SEGOB');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SEP');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SFP');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('SRE');
+INSERT INTO dbCONOCER.CatalogoSecretaria(secretaria) VALUES('STPS');
+
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Ninguno');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Primaria');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Secundaria');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Preparatoria');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Carrera Técnica');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Licenciatura');
+INSERT INTO dbCONOCER.CatalogoEscolaridad(escolaridad) VALUES('Maestría / Doctorado');
+
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Desempleado');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Empleado Sector Público');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Empleado Sector Privado');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Dueño de Empresa');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Profesionista Independiente');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Jubilado');
+INSERT INTO dbCONOCER.CatalogoOcupacion(ocupacion) VALUES('Estudiante');
+
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Aguascalientes');
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California');
 INSERT INTO dbCONOCER.Estados(estado) VALUES('Baja California Sur');
