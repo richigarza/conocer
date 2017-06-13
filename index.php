@@ -7,11 +7,13 @@
    		<title>conocer</title>
 
     	<!-- Bootstrap CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" />
-<link rel="stylesheet" type="text/css" href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" />
+      <link rel="stylesheet" type="text/css" href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
     	<link href="css/bootstrap.min.css" rel="stylesheet">
       <link href="css/datepicker.css" rel="stylesheet">
       <link href="src/css/nav.css" rel="stylesheet">
+      <!--<link href="css/DataTable/jquery.dataTables.min.css" rel="stylesheet" />-->
+      <link href="css/DataTable/buttons.dataTables.min.css" rel="stylesheet" />
 
 		<style>
 		body {
@@ -146,20 +148,33 @@
     	<script src="js/jquery-3.1.1.min.js"></script>	
     	<script src="js/bootstrap.min.js"></script>
       <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+      <!-- Select2 -->
       <script src="js/select2-4.0.3/dist/js/select2.full.min.js"></script>
+      <!-- Jquery Validate -->
       <script src="js/validate/jquery.validate.min.js"></script>
+      <!-- Highcharts -->
       <script src="https://code.highcharts.com/highcharts.js"></script>
       <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <!-- DataTable -->
+      <script src="js/DataTable/jquery.dataTables.min.js"></script>
+      <script src="js/DataTable/dataTables.buttons.min.js"></script>
+      <script src="js/DataTable/buttons.flash.min.js"></script>
+      <script src="js/DataTable/jszip.min.js"></script>
+      <script src="js/DataTable/pdfmake.min.js"></script>
+      <script src="js/DataTable/vfs_fonts.js"></script>
+      <script src="js/DataTable/buttons.html5.min.js"></script>
+      <script src="js/DataTable/buttons.print.min.js"></script>
+      
 
       <!-- CUSTOMS SCRIPTS-->
       <script src="src/js/Global.js"></script>
-      <script src="src/js/Load_Page.js"></script>
       <script src="src/js/login.js"></script>
       <script src="src/js/Registrar.js"></script>
       <script src="src/js/Captura.js"></script>
       <script src="src/js/Monitor.js"></script>
       <script src="src/js/Reporte.js"></script>
       <script src="src/js/charts.js"></script>
+      <script src="src/js/Load_Page.js"></script>
       
 	</body>
 </html>

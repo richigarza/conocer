@@ -9,6 +9,7 @@
 	require("../BLL/Page.php");
 	require("../BLL/User.php");
 	require("../BLL/Graficas.php");
+	require("../BLL/Reporte.php");
 	require("../DAO/mysql.php");
 
 	function test(){
@@ -19,6 +20,10 @@
 		$result = array();
 		$fn = $_GET["fn"];
 		switch($fn){
+			case "reporte":
+				$reporte = new Reporte();
+				$result = $reporte->getReporte($_POST);
+			break;
 			case "graficas":
 				$graficas = new Graficas();
 				$result = $graficas->getAllGraficas($_POST);

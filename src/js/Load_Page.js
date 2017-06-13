@@ -108,6 +108,13 @@ $('.datepicker').datepicker({
 });
 $('.datepicker').datepicker('setDate', new Date());
 
+$('#tblReporte').DataTable( {
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+} );
+
 //////////////////////////////////////////////
 // Select2 
 //////////////////////////////////////////////
