@@ -166,40 +166,40 @@ DROP TABLE IF EXISTS dbCONOCER.CatalogoEstatus;
 SELECT 'CatalogoEstatus';
 CREATE TABLE dbCONOCER.CatalogoEstatus(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	estatus VARCHAR(20) NOT NULL COMMENT "nombre del estatus" 
+	estatus VARCHAR(40) NOT NULL COMMENT "nombre del estatus" 
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoMotivo;
 SELECT 'CatalogoMotivo';
 CREATE TABLE dbCONOCER.CatalogoMotivo(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	motivo VARCHAR(20) NOT NULL COMMENT "nombre del motivo" 
+	motivo VARCHAR(40) NOT NULL COMMENT "nombre del motivo" 
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoMedioEntero;
 SELECT 'CatalogoMedioEntero';
 CREATE TABLE dbCONOCER.CatalogoMedioEntero(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	medioEntero VARCHAR(20) NOT NULL COMMENT "nombre del medio por el cual se entero"
+	medioEntero VARCHAR(40) NOT NULL COMMENT "nombre del medio por el cual se entero"
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoSecretaria;
-SELECT 'CatalogoSecretaria'
+SELECT 'CatalogoSecretaria';
 CREATE TABLE dbCONOCER.CatalogoSecretaria(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	secretaria VARCHAR(20) NOT NULL COMMENT "nombre de la secretaria"
+	secretaria VARCHAR(40) NOT NULL COMMENT "nombre de la secretaria"
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoEscolaridad;
-SELECT 'CatalogoEscolaridad'
+SELECT 'CatalogoEscolaridad';
 CREATE TABLE dbCONOCER.CatalogoEscolaridad(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	escolaridad VARCHAR(20) NOT NULL COMMENT "nombre del grado de escolaridad"
+	escolaridad VARCHAR(40) NOT NULL COMMENT "nombre del grado de escolaridad"
 );
 
 DROP TABLE IF EXISTS dbCONOCER.CatalogoOcupacion;
 SELECT 'CatalogoOcupacion';
 CREATE TABLE dbCONOCER.CatalogoOcupacion(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
-	ocupacion VARCHAR(20) NOT NULL COMMENT "nombre del grado de ocupación"
+	ocupacion VARCHAR(40) NOT NULL COMMENT "nombre del grado de ocupación"
 );
