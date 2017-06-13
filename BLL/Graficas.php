@@ -7,24 +7,24 @@
 
 Class Graficas{
 
-	function getAllGraficas(){
-		$result["estado"] = $this->getGraficaEstado();
-		$result["medio"] = $this->getGraficaMedio();
-		$result["estatus"] = $this->getGraficaEstatus();
-		$result["estandar"] = $this->getGraficaEstandar();
-		$result["migrante"] = $this->getGraficaMigrante();
-		$result["genero"] = $this->getGraficaGenero();
-		$result["medioEntero"] = $this->getMedioEntero();
-    	$result["secretaria"] = $this->getSecretaria();
-    	$result["escolaridad"] = $this->getEscolaridad();
-    	$result["ocupacion"] = $this->getOcupacion();
-		$result["edad"] = $this->getEdad();
+	function getAllGraficas($array){
+		$result["estado"] = $this->getGraficaEstado($array);
+		$result["medio"] = $this->getGraficaMedio($array);
+		$result["estatus"] = $this->getGraficaEstatus($array);
+		$result["estandar"] = $this->getGraficaEstandar($array);
+		$result["migrante"] = $this->getGraficaMigrante($array);
+		$result["genero"] = $this->getGraficaGenero($array);
+		$result["medioEntero"] = $this->getMedioEntero($array);
+    		$result["secretaria"] = $this->getSecretaria($array);
+	    	$result["escolaridad"] = $this->getEscolaridad($array);
+	    	$result["ocupacion"] = $this->getOcupacion($array);
+		$result["edad"] = $this->getEdad($array);
 		$result["success"] = true;
 		return $result;
 	}
 
-	function getMedioEntero(){
-		$paramString = "SELECT cme.medioEntero AS medioEntero, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoMedioEntero cme ON (cme.id = v.id) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cme.medioEntero";
+	function getMedioEntero($array){
+		$paramString = "SELECT cme.medioEntero AS medioEntero, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoMedioEntero cme ON (cme.id = v.idMedioEntero) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cme.medioEntero";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
@@ -40,8 +40,8 @@ Class Graficas{
 		return $result;
 	}
 
-	function getSecretaria(){
-		$paramString = "SELECT cs.secretaria AS secretaria, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoSecretaria cs ON (cs.id = v.id) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cs.secretaria";
+	function getSecretaria($array){
+		$paramString = "SELECT cs.secretaria AS secretaria, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoSecretaria cs ON (cs.id = v.idSecretaria) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cs.secretaria";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
@@ -57,8 +57,8 @@ Class Graficas{
 		return $result;
 	}
 
-	function getEscolaridad(){
-		$paramString = "SELECT ce.escolaridad AS escolaridad, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoEscolaridad ce ON (ce.id = s.id) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY ce.escolaridad";
+	function getEscolaridad($array){
+		$paramString = "SELECT ce.escolaridad AS escolaridad, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoEscolaridad ce ON (ce.id = s.escolaridad) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY ce.escolaridad";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
@@ -74,8 +74,8 @@ Class Graficas{
 		return $result;
 	}
 
-	function getOcupacion(){
-		$paramString = "SELECT co.ocupacion AS ocupacion, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoOcupacion co ON (co.id = s.id) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY co.ocupacion";
+	function getOcupacion($array){
+		$paramString = "SELECT co.ocupacion AS ocupacion, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoOcupacion co ON (co.id = s.ocupacion) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY co.ocupacion";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
@@ -91,7 +91,7 @@ Class Graficas{
 		return $result;
 	}
 
-	function getEdad(){
+	function getEdad($array){
 		$paramString = "SELECT s.edad AS edad, SUM(1) AS numero FROM Solicitante s WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY s.edad";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
