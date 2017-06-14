@@ -11,6 +11,33 @@ INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía chat de la
 INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía telefónica');
 INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía personal');
 
+INSERT INTO dbCONOCER.CatalogoTipoEmpresa(tipoEmpresa) VALUES('Entidad de Certificación y Evaluación (ECE)');
+INSERT INTO dbCONOCER.CatalogoTipoEmpresa(tipoEmpresa) VALUES('Organismo Certificador (OC)');
+INSERT INTO dbCONOCER.CatalogoTipoEmpresa(tipoEmpresa) VALUES('Centro de Evaluación (CE)');
+INSERT INTO dbCONOCER.CatalogoTipoEmpresa(tipoEmpresa) VALUES('Evaluador Independiente (EI)');
+INSERT INTO dbCONOCER.CatalogoTipoEmpresa(tipoEmpresa) VALUES('Empresa que no Pertenece a la RED CONOCER');
+
+INSERT INTO dbCONOCER.CatalogoCursosCapacitacion(cursosCapacitacion) VALUES('CVC');
+INSERT INTO dbCONOCER.CatalogoCursosCapacitacion(cursosCapacitacion) VALUES('RENEC');
+INSERT INTO dbCONOCER.CatalogoCursosCapacitacion(cursosCapacitacion) VALUES('RENAP');
+INSERT INTO dbCONOCER.CatalogoCursosCapacitacion(cursosCapacitacion) VALUES('Certificar cursos de capacitación');
+
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Pasos para Certificarse');
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Prestadores de Servicios');
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Información sobre registros');
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Comités de Gestión por Competencias');
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Información CONOCER');
+INSERT INTO dbCONOCER.CatalogoTipoLlamada(tipoLlamada) VALUES('Queja');
+
+INSERT INTO dbCONOCER.CatalogoDirigidoA(dirigidoA) VALUES('DIRECCIÓN DE PROMOCÍON Y APOYO A PRESTADORES (ACREDITACIÓN INICIAL)');
+INSERT INTO dbCONOCER.CatalogoDirigidoA(dirigidoA) VALUES('DIRECCIÓN DE ACREDITACIÓN Y CERTIFICACIÓN (MESA DE AYUDA/DUPLICADOS/CERTIFICADOS EN EC Ó NTCL)');
+INSERT INTO dbCONOCER.CatalogoDirigidoA(dirigidoA) VALUES('DIRECCIÓN DE EXCELENCIA EN SERVICIO A USUARIOS (RENAC/QUEJAS)');
+INSERT INTO dbCONOCER.CatalogoDirigidoA(dirigidoA) VALUES('DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)');
+
+INSERT INTO dbCONOCER.CatalogoSolicitanteType(solicitanteType) VALUES('Persona');
+INSERT INTO dbCONOCER.CatalogoSolicitanteType(solicitanteType) VALUES('Empresa');
+INSERT INTO dbCONOCER.CatalogoSolicitanteType(solicitanteType) VALUES('Mesa de servicio');
+
 INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('Hombre');
 INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('Mujer');
 INSERT INTO dbCONOCER.CatalogoGenero(descripcion) VALUES('No especifica');
