@@ -14,8 +14,9 @@ REPORTE.app = (function($, window, document, undefined){
         GLOBAL.app.sendJson("BLL/index.php?fn=reporte", datos, function(response){
             if(response.success){
                 console.log(response);
+		var tblReporte = "";
 				response.output.forEach(function(row) {
-					strd = 		"<tr><td>"+row["idSolicitante"]+
+					tblReporte += 	"<tr><td>"+row["idSolicitante"]+
 							"</td><td>"+row["solicitanteType"]+
 							"</td><td>"+row["nombre"]+
 							"</td><td>"+row["apellidoPaterno"]+
