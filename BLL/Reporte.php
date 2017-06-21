@@ -8,7 +8,8 @@
 	class Reporte {
 
 		function getReporte($array){
-			$paramString = "SELECT "
+			$paramString = "CALL sp_getReporte";
+			/*"SELECT "
 								."s.idSolicitante AS idSolicitante,"
 								."s.solicitanteType AS solicitanteType,"
 								."s.nombre AS nombre,"
@@ -87,75 +88,75 @@
 							."LEFT JOIN CatalogoOcupacion co ON (co.id = s.ocupacion) "
 							."LEFT JOIN CatalogoGenero cg ON (cg.idGenero = s.genero) "
 							."LEFT JOIN Estados e ON (e.idEstado = s.idEstado) "
-							."LEFT JOIN Estados e2 ON (e2.idEstado = v.idEstado) "
-							."WHERE "
-								."CASE "
-									."WHEN '".$array["tipoFecha"]."'='exacta' "
-										."THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' "
-									."WHEN '".$array["tipoFecha"]."'='rango' "
-										."THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') "
-									."ELSE 1=1 "
-								."END";
+							."LEFT JOIN Estados e2 ON (e2.idEstado = v.idEstado) ";
+							// ."WHERE "
+							// 	."CASE "
+							// 		."WHEN '".$array["tipoFecha"]."'='exacta' "
+							// 			."THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' "
+							// 		."WHEN '".$array["tipoFecha"]."'='rango' "
+							// 			."THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') "
+							// 		."ELSE 1=1 "
+							// 	."END";*/
 			$comand = new dbMySQL();
 			$result = $comand->executeQuery($paramString);
-			$list = array();
+			 $list = array();
 			foreach ($result["output"] as $value) {
 				$list[] = array(
 					'idSolicitante' => ($value->idSolicitante),
 					'solicitanteType' => ($value->solicitanteType),
 					'nombre' => ($value->nombre),
-					'apellidoPaterno' => ($value->apellidoPaterno),
-					'apellidoMaterno' => ($value->apellidoMaterno),
-					'bitMigrante' => ($value->bitMigrante),
+					// 'apellidoPaterno' => ($value->apellidoPaterno),
+					// 'apellidoMaterno' => ($value->apellidoMaterno),
+					//'bitMigrante' => ($value->bitMigrante),
 					'migrante' => ($value->migrante),
-					'bitCertificado' => ($value->bitCertificado),
+					//'bitCertificado' => ($value->bitCertificado),
 					'certificado' => ($value->certificado),
-					'bitEstandarizado' => ($value->bitEstandarizado),
+					//'bitEstandarizado' => ($value->bitEstandarizado),
 					'estandarizado' => ($value->estandarizado),
 					'email' => ($value->email),
 					'telefono' => ($value->telefono),
-					'nombreEmpresa' => ($value->nombreEmpresa),
-					'idTipoEmpresa' => ($value->idTipoEmpresa),
+					// 'nombreEmpresa' => ($value->nombreEmpresa),
+					//'idTipoEmpresa' => ($value->idTipoEmpresa),
 					'tipoEmpresa' => ($value->tipoEmpresa),
-					'idEstado' => ($value->idEstado),
-					'estadoSolicitante' => ($value->estadoSolicitante),
-					'idMedioContacto' => ($value->idMedioContacto),
+					//'idEstado' => ($value->idEstado),
+					'estadoSolicitante' => ($value->estado),
+					//'idMedioContacto' => ($value->idMedioContacto),
 					'medioContacto' => ($value->medioContacto),
 					'fechaNacimiento' => ($value->fechaNacimiento),
-					'idOcupacion' => ($value->idOcupacion),
+					//'idOcupacion' => ($value->idOcupacion),
 					'ocupacion' => ($value->ocupacion),
-					'idEscolaridad' => ($value->idEscolaridad),
+					//'idEscolaridad' => ($value->idEscolaridad),
 					'escolaridad' => ($value->escolaridad),
-					'idGenero' => ($value->idGenero),
+					//'idGenero' => ($value->idGenero),
 					'genero' => ($value->genero),
 					'edad' => ($value->edad),
-					'fechaAlta' => ($value->fechaAlta),
+					'fechaAlta' => ($value->createdDate),
 					'idVisita' => ($value->idVisita),
-					'idTipoLlamada' => ($value->idTipoLlamada),
+					//'idTipoLlamada' => ($value->idTipoLlamada),
 					'tipoLlamada' => ($value->tipoLlamada),
-					'idCursosCapacitacion' => ($value->idCursosCapacitacion),
+					//'idCursosCapacitacion' => ($value->idCursosCapacitacion),
 					'cursosCapacitacion' => ($value->cursosCapacitacion),
-					'idMotivo' => ($value->idMotivo),
+					//'idMotivo' => ($value->idMotivo),
 					'motivo' => ($value->motivo),
-					'idEstandar' => ($value->idEstandar),
+					//'idEstandar' => ($value->idEstandar),
 					'estandar' => ($value->estandar),
-					'idEstadoVisita' => ($value->idEstadoVisita),
-					'estadoVisita' => ($value->estadoVisita),
-					'idPrestador' => ($value->idPrestador),
+					//'idEstadoVisita' => ($value->idEstadoVisita),
+					// 'estadoVisita' => ($value->estadoVisita),
+					//'idPrestador' => ($value->idPrestador),
 					'cedulaP' => ($value->cedulaP),
 					'nombreEmpresa' => ($value->nombreEmpresa),
-					'idRepresentante' => ($value->idRepresentante),
+					//'idRepresentante' => ($value->idRepresentante),
 					'cedulaR' => ($value->cedulaR),
 					'nombrePrestador' => ($value->nombrePrestador),
-					'idMedioEntero' => ($value->idMedioEntero),
+					//'idMedioEntero' => ($value->idMedioEntero),
 					'medioEntero' => ($value->medioEntero),
-					'idSecretaria' => ($value->idSecretaria),
+					//'idSecretaria' => ($value->idSecretaria),
 					'secretaria' => ($value->secretaria),
 					'asunto' => ($value->asunto),
-					'idDirigidoA' => ($value->idDirigidoA),
+					//'idDirigidoA' => ($value->idDirigidoA),
 					'dirigidoA' => ($value->dirigidoA),
 					'comentarios' => ($value->comentarios),
-					'idEstatus' => ($value->idEstatus),
+					//'idEstatus' => ($value->idEstatus),
 					'estatus' => ($value->estatus),
 					'fechaVisita' => ($value->fechaVisita)
 				);

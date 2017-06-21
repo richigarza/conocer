@@ -83,7 +83,7 @@
         <div class="panel panel-heading">
           Reporte
         </div>
-        <div class="panel panel-body">
+        <div class="panel panel-body" style="overflow:scroll; overflow-x: visible">
 			<table id="tblReporte" class="table table-responsive table-bordered table-striped">
 				<thead>
 					<th>idSolicitante</th>

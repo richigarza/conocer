@@ -15,11 +15,47 @@ Class Graficas{
 		$result["migrante"] = $this->getGraficaMigrante($array);
 		$result["genero"] = $this->getGraficaGenero($array);
 		$result["medioEntero"] = $this->getMedioEntero($array);
-    		$result["secretaria"] = $this->getSecretaria($array);
-	    	$result["escolaridad"] = $this->getEscolaridad($array);
-	    	$result["ocupacion"] = $this->getOcupacion($array);
+    	$result["secretaria"] = $this->getSecretaria($array);
+	    $result["escolaridad"] = $this->getEscolaridad($array);
+	    $result["ocupacion"] = $this->getOcupacion($array);
 		$result["edad"] = $this->getEdad($array);
+		$result["solicitanteType"] = $this->getTipoSolicitante($array);
+		$result["estandares"] = $this->getEstandares($array);
 		$result["success"] = true;
+		return $result;
+	}
+
+	function getEstandares($array){
+		$paramString = "SELECT ce.codigo AS estandar, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoEstandares ce ON (ce.idEstandar = v.idEstandar) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY ce.codigo";
+		$comand = new dbMySQL();
+		$result = $comand->executeQuery($paramString);
+		$list = array();
+		foreach ($result["output"] as $value) {
+			$list[] = array(
+				'name' => ($value->estandar),
+				'y' => (int)$value->numero,
+				'drilldown' => ($value->estandar),
+			);
+		}
+		$result["output"] = $list;
+		$result["query"] = $paramString;
+		return $result;
+	}
+
+	function getTipoSolicitante($array){
+		$paramString = "SELECT cst.solicitanteType AS solicitanteType, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoSolicitanteType cst ON (cst.id = s.solicitanteType) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cst.solicitanteType";
+		$comand = new dbMySQL();
+		$result = $comand->executeQuery($paramString);
+		$list = array();
+		foreach ($result["output"] as $value) {
+			$list[] = array(
+				'name' => ($value->solicitanteType),
+				'y' => (int)$value->numero,
+				'drilldown' => ($value->solicitanteType),
+			);
+		}
+		$result["output"] = $list;
+		$result["query"] = $paramString;
 		return $result;
 	}
 
@@ -125,7 +161,7 @@ Class Graficas{
 		return $result;
 	}
 	function getGraficaMedio($array){
-		$paramString = "SELECT cmc.descripcion AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
+		$paramString = "SELECT cmc.medioContacto AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();

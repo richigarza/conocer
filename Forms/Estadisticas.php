@@ -53,7 +53,7 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-4">
-					<div id="resolucion" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					<div id="solicitanteType" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 				<div class="col-md-4">
 					<div id="genero" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
@@ -67,7 +67,7 @@
 					<div id="graficaViaAtencion" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="graficaEstandar" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					<div id="graficaEstandares" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 				<div class="col-md-4">
 					<div id="graficaEstado" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
@@ -90,6 +90,9 @@
 				</div>
 				<div class="col-md-4">
 					<div id="edad" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="graficaMigrante" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 			</div>
 		</div>

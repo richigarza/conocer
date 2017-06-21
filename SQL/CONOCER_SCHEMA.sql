@@ -149,7 +149,7 @@ DROP TABLE IF EXISTS dbCONOCER.CatalogoMedioContacto;
 SELECT 'CatalogoMedioContacto';
 CREATE TABLE dbCONOCER.CatalogoMedioContacto(
 	idMedioContacto INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro", 
-	descripcion VARCHAR(50) NOT NULL COMMENT "Descripción del medio de contacto."
+	medioContacto VARCHAR(50) NOT NULL COMMENT "Descripción del medio de contacto."
 )DEFAULT CHARSET=utf8 COMMENT "Tabla de Catalogo del Medio de Contacto";
 
 -- Tabla CatalogoGenero

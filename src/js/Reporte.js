@@ -19,9 +19,6 @@ REPORTE.app = (function($, window, document, undefined){
 					tblReporte += 	"<tr><td>"+row["idSolicitante"]+
 							"</td><td>"+row["solicitanteType"]+
 							"</td><td>"+row["nombre"]+
-							" "+row["apellidoPaterno"]+
-							" "+row["apellidoMaterno"]+
-							""+row["nombreEmpresa"]+
 							//"</td><td>"+row["bitMigrante"]+
 							"</td><td>"+row["migrante"]+
 							//"</td><td>"+row["bitCertificado"]+
@@ -76,7 +73,7 @@ REPORTE.app = (function($, window, document, undefined){
 							"</td></tr>";
 				});
 				$("#tblReporte tbody").empty();
-				$("#tblReporte tbody").append();
+				$("#tblReporte tbody").append(tblReporte);
             }
         });
         GLOBAL.app.closeLoadingModal();

@@ -9,7 +9,9 @@ var chartResolucion,
     chartMedioEntero,
     chartSecretaria,
     chartEscolaridad,
-    chartOcupacion;
+    chartOcupacion,
+    chartSolicitanteType,
+    chartEstandares;
 var GRAFICAS = window.GRAFICAS || {};
 
 GRAFICAS.app = (function($, window, document, undefined){
@@ -24,16 +26,19 @@ GRAFICAS.app = (function($, window, document, undefined){
         GLOBAL.app.sendJson("BLL/index.php?fn=graficas", datos, function(response){
             if(response.success){
                 console.log(response.estado.output);
-                chartResolucion.series[0].setData(response.estatus.output);
+                //chartResolucion.series[0].setData(response.estatus.output);
                 chartGenero.series[0].setData(response.genero.output);
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartMedio.series[0].setData(response.medio.output);
                 chartEstado.series[0].setData(response.estado.output);   
                 chartEdad.series[0].setData(response.edad.output);
+                chartMigrante.series[0].setData(response.migrante.output);
                 chartMedioEntero.series[0].setData(response.medioEntero.output);
                 chartSecretaria.series[0].setData(response.secretaria.output);
                 chartEscolaridad.series[0].setData(response.escolaridad.output);
                 chartOcupacion.series[0].setData(response.ocupacion.output);
+                chartSolicitanteType.series[0].setData(response.solicitanteType.output);
+                chartEstandares.series[0].setData(response.estandares.output);
             }
         });
         GLOBAL.app.closeLoadingModal();
@@ -92,7 +97,52 @@ $(document).ready(function () {
     GRAFICAS.app.initChart(chartOcupacion, 'ocupacion', 'Ocupación');
 	*/
     // Build the chart
-    chartResolucion = Highcharts.chart('resolucion', {
+    // chartResolucion = Highcharts.chart('resolucion', {
+    //     chart: {
+    //         plotBackgroundColor: null,
+    //         plotBorderWidth: null,
+    //         plotShadow: false,
+    //         type: 'pie'
+    //     },
+    //     title: {
+    //         text: 'Porcentaje de resolución'
+    //     },
+    //     tooltip: {
+    //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    //     },
+    //     plotOptions: {
+    //         pie: {
+    //             allowPointSelect: true,
+    //             cursor: 'pointer',
+    //             dataLabels: {
+    //                 enabled: true,
+    //                 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+    //                 style: {
+    //                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    //                 }
+    //             },
+    //             showInLegend: true
+    //         }
+    //     },
+    //     series: [{
+    //         name: 'Brands',
+    //         colorByPoint: true,
+    //         data: [{
+    //             name: 'Atendido',
+    //             y: 24.03,
+    //             sliced: true,
+    //             selected: true
+    //         }, {
+    //             name: 'En Trámite',
+    //             y: 10.38
+    //         }, {
+    //             name: 'Pendiente',
+    //             y: 4.77
+    //         }]
+    //     }]
+    // });
+
+    chartSolicitanteType = Highcharts.chart('solicitanteType', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -100,7 +150,7 @@ $(document).ready(function () {
             type: 'pie'
         },
         title: {
-            text: 'Porcentaje de resolución'
+            text: 'Tipo de solicitante'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -123,16 +173,19 @@ $(document).ready(function () {
             name: 'Brands',
             colorByPoint: true,
             data: [{
-                name: 'Atendido',
+                name: 'Correo electrónico',
                 y: 24.03,
                 sliced: true,
                 selected: true
             }, {
-                name: 'En Trámite',
+                name: 'Chat',
                 y: 10.38
             }, {
-                name: 'Pendiente',
-                y: 4.77
+                name: 'Telefónica',
+                y: 10.38
+            }, {
+                name: 'Personal',
+                y: 10.38
             }]
         }]
     });
@@ -230,6 +283,54 @@ $(document).ready(function () {
         },
         title: {
             text: 'Vía de atención'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Correo electrónico',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Chat',
+                y: 10.38
+            }, {
+                name: 'Telefónica',
+                y: 10.38
+            }, {
+                name: 'Personal',
+                y: 10.38
+            }]
+        }]
+    });
+
+    chartMigrante = Highcharts.chart('graficaMigrante', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Es migrante'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -421,6 +522,8 @@ $(document).ready(function () {
             }]
         }]
     });
+
+
 	chartSecretaria = Highcharts.chart('secretaria', {
         chart: {
             type: 'column'
@@ -572,4 +675,106 @@ $(document).ready(function () {
             }]
         }]
     });
+chartEstado = Highcharts.chart('graficaEstado', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Estado'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
+	
+	chartEstandares = Highcharts.chart('graficaEstandares', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Estandares'
+        },
+       tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+        },
+        plotOptions: {
+      series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}'
+            }
+        }
+    },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'CDMX',
+                y: 24.03,
+                drilldown: 'CDMX' 
+            }, {
+                name: 'Nuevo León',
+                y: 10.38,
+                drilldown: 'Nuevo León' 
+            }, {
+                name: 'Jalisco',
+                y: 10.38,
+                drilldown: 'Jalisco'
+            }, {
+                name: 'Estado de México',
+                y: 10.38,
+                drilldown: 'Estado de México'
+            }]
+        }]
+    });
+
 });
