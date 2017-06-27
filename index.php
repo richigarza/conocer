@@ -56,7 +56,7 @@
           <li id="registro" class="nav-menu active"><a class="tool" data-toggle="tooltip" title="Registra, edita o agrega nuevas visitas">Registro</a></li>
           <li id="reporte" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Filtra y genera reportes">Reporte</a></li>
           <li id="estadisticas" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Genera estadísticas con la información en la base de datos">Estadísticas</a></li>
-          <li id="Monitoreo" class="nav-menu"><a class="tool" data-toggle="tooltip" title="Monitorea las visitas">Monitoreo</a></li>
+          <li id="Monitoreo" class="nav-menu" style="display:none;"><a class="tool" data-toggle="tooltip" title="Monitorea las visitas">Monitoreo</a></li>
         </ul>
       </div>
           ';
