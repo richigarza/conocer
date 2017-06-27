@@ -166,13 +166,21 @@
             </div>
             <div class="row panel-margin vistaNormal">
               <div class="col-md-6">
-                <label>Dirigido a</label>
+                <label>Tema</label>
                 <select name="ddlDirigidoA" id="ddlDirigidoA" class="form-control">
                   <option selected value="-1" disabled>Seleccione a donde va dirgido</option>
-                  <option value="1">DIRECCIÓN DE PROMOCÍON Y APOYO A PRESTADORES (ACREDITACIÓN INICIAL)</option>
+                  <!--<option value="1">DIRECCIÓN DE PROMOCÍON Y APOYO A PRESTADORES (ACREDITACIÓN INICIAL)</option>
                   <option value="2">DIRECCIÓN DE ACREDITACIÓN Y CERTIFICACIÓN (MESA DE AYUDA/DUPLICADOS/CERTIFICADOS EN EC Ó NTCL)</option>
                   <option value="3">DIRECCIÓN DE EXCELENCIA EN SERVICIO A USUARIOS (RENAC/QUEJAS)</option>
-                  <option value="4">DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)</option>
+                  <option value="4">DIRECCIÓN GENERAL DE PROMOCIÓN Y DESARROLLO (CGC)</option>-->
+                  <option value="1">Registro de cursos de capacitación</option>
+                  <option value="2">Constancias de NTCL y/o duplicado de certificados</option>
+                  <option value="3">Quejas (la voz del usuario)</option>
+                  <option value="4">Solicitud de cursos, conferencias o plásticas del SNC</option>
+                  <option value="5">Transferencia de conocimiento</option>
+                  <option value="6">Centro virtual del conocimiento</option>
+                  <option value="7">Integración de CGC sector privado</option>
+                  <option value="8">Integración de CGC sector público</option>
                 </select>
               </div>
             </div>
