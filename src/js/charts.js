@@ -42,7 +42,7 @@ GRAFICAS.app = (function($, window, document, undefined){
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartEstandar.setTitle({text: "Cuenta con estandar (Total "+getTotal(response.estandar.output)+")"});
                 chartMedio.series[0].setData(response.medio.output);
-                chartMedio.setTitle({text: "Vía de atención (Total "+getTotal(response.medioR.output)+")"});
+                chartMedio.setTitle({text: "Vía de atención (Total "+getTotal(response.medio.output)+")"});
                 chartEstado.series[0].setData(response.estado.output);
                 chartEstado.setTitle({text: "Estados (Total "+getTotal(response.estado.output)+")"});
                 chartEdad.series[0].setData(response.edad.output);
