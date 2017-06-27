@@ -6,6 +6,15 @@ INSERT INTO dbCONOCER.User (firstName, lastName, userName, password, email, user
 INSERT INTO dbCONOCER.CatalogoEstatus(estatus) VALUES ('Pendiente'),('En Tramite'),('Atendido');
 INSERT INTO dbCONOCER.CatalogoMotivo(motivo) VALUES ('Informativo'),('Tramite'),('Requisitos'),('Seguimiento');
 
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Registro de cursos de capacitación');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Constancias de NTCL y/o duplicado de certificados');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Quejas (la voz del usuario)');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Solicitud de cursos, conferencias o plásticas del SNC');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Transferencia de conocimiento');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Centro virtual del conocimiento');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Integración de CGC sector privado');
+INSERT INTO dbCONOCER.CatalogoTemas(temas) VALUES ('Integración de CGC sector público');
+
 INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía correo electrónico');
 INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía chat de la página web');
 INSERT INTO dbCONOCER.CatalogoMedioContacto(descripcion) VALUES('Vía telefónica');
