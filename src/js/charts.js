@@ -15,7 +15,13 @@ var chartResolucion,
 var GRAFICAS = window.GRAFICAS || {};
 
 GRAFICAS.app = (function($, window, document, undefined){
-
+    var getTotal = function(lista){
+	var total;
+     	lista.forEach(function(row){
+    		total += row.y;
+    	});
+	return total;
+    }
     var getGraficas = function(){
         $("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
         var datos = {};
@@ -27,6 +33,7 @@ GRAFICAS.app = (function($, window, document, undefined){
             if(response.success){
                 console.log(response.estado.output);
                 //chartResolucion.series[0].setData(response.estatus.output);
+		chartGenero.setTitle(getTotal('Genero (Total: ' + response.genero.output) +')');
                 chartGenero.series[0].setData(response.genero.output);
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartMedio.series[0].setData(response.medio.output);
