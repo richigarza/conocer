@@ -11,17 +11,21 @@ var chartResolucion,
     chartEscolaridad,
     chartOcupacion,
     chartSolicitanteType,
-    chartEstandares;
+    chartEstandares,
+    chartTemas;
 var GRAFICAS = window.GRAFICAS || {};
 
 GRAFICAS.app = (function($, window, document, undefined){
-    var getTotal = function(lista){
-	var total;
-     	lista.forEach(function(row){
-    		total += row.y;
-    	});
-	return total;
-    }
+    
+     var getTotal = function(grafica){
+            var tmp = 0 ;
+            grafica.forEach(function(element) {
+                    tmp += element.y;
+                    console.log(tmp);
+            });
+            return tmp;
+        }
+
     var getGraficas = function(){
         $("#myModalLoading").modal({show: true, backdrop: 'static', keyboard: false});
         var datos = {};
@@ -33,19 +37,33 @@ GRAFICAS.app = (function($, window, document, undefined){
             if(response.success){
                 console.log(response.estado.output);
                 //chartResolucion.series[0].setData(response.estatus.output);
-		chartGenero.setTitle(getTotal('Genero (Total: ' + response.genero.output) +')');
                 chartGenero.series[0].setData(response.genero.output);
+                chartGenero.setTitle({text: "Genero (Total "+getTotal(response.genero.output)+")"});
                 chartEstandar.series[0].setData(response.estandar.output);
+                chartEstandar.setTitle({text: "Cuenta con estandar (Total "+getTotal(response.estandar.output)+")"});
                 chartMedio.series[0].setData(response.medio.output);
-                chartEstado.series[0].setData(response.estado.output);   
+                chartMedio.setTitle({text: "Vía de atención (Total "+getTotal(response.medioR.output)+")"});
+                chartEstado.series[0].setData(response.estado.output);
+                chartEstado.setTitle({text: "Estados (Total "+getTotal(response.estado.output)+")"});
                 chartEdad.series[0].setData(response.edad.output);
+                chartEdad.setTitle({text: "Edad (Total "+getTotal(response.edad.output)+")"});
                 chartMigrante.series[0].setData(response.migrante.output);
+                chartMigrante.setTitle({text: "Es migrante (Total "+getTotal(response.migrante.output)+")"});
                 chartMedioEntero.series[0].setData(response.medioEntero.output);
+                chartMedioEntero.setTitle({text: "Medio por el que se enteró de CONOCER (Total "+getTotal(response.medioEntero.output)+")"});
                 chartSecretaria.series[0].setData(response.secretaria.output);
+                chartSecretaria.setTitle({text: "Dependencias públicas desde las que se consulta (Total "+getTotal(response.secretaria.output)+")"});
                 chartEscolaridad.series[0].setData(response.escolaridad.output);
+                chartEscolaridad.setTitle({text: "Escolaridad (Total "+getTotal(response.escolaridad.output)+")"});
                 chartOcupacion.series[0].setData(response.ocupacion.output);
+                chartOcupacion.setTitle({text: "Ocupación (Total "+getTotal(response.ocupacion.output)+")"});
                 chartSolicitanteType.series[0].setData(response.solicitanteType.output);
+                chartSolicitanteType.setTitle({text: "Tipo de solicitante (Total "+getTotal(response.solicitanteType.output)+")"});
                 chartEstandares.series[0].setData(response.estandares.output);
+                chartEstandares.setTitle({text: "Estandares que pregunto (Total "+getTotal(response.estandares.output)+")"});
+                chartTemas.series[0].setData(response.temas.output);
+                chartTemas.setTitle({text: "Temas (Total "+getTotal(response.temas.output)+")"});
+		
             }
         });
         GLOBAL.app.closeLoadingModal();
@@ -149,6 +167,54 @@ $(document).ready(function () {
     //     }]
     // });
 
+    chartTemas = Highcharts.chart('temas', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Temas'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Correo electrónico',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Chat',
+                y: 10.38
+            }, {
+                name: 'Telefónica',
+                y: 10.38
+            }, {
+                name: 'Personal',
+                y: 10.38
+            }]
+        }]
+    });
+	
     chartSolicitanteType = Highcharts.chart('solicitanteType', {
         chart: {
             plotBackgroundColor: null,
