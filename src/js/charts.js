@@ -11,7 +11,8 @@ var chartResolucion,
     chartEscolaridad,
     chartOcupacion,
     chartSolicitanteType,
-    chartEstandares;
+    chartEstandares,
+    chartTemas;
 var GRAFICAS = window.GRAFICAS || {};
 
 GRAFICAS.app = (function($, window, document, undefined){
@@ -23,11 +24,15 @@ GRAFICAS.app = (function($, window, document, undefined){
         datos["txtFechaExacta"] = $("#txtFechaExacta").val();     
         datos["txtFechaInicial"] = $("#txtFechaInicial").val();
         datos["txtFechaFinal"] = $("#txtFechaFinal").val();
+        console.log(datos);
         GLOBAL.app.sendJson("BLL/index.php?fn=graficas", datos, function(response){
             if(response.success){
                 console.log(response.estado.output);
                 //chartResolucion.series[0].setData(response.estatus.output);
                 chartGenero.series[0].setData(response.genero.output);
+                response.genero.output.forEach(function(element) {
+                    console.log(element);
+                }, this);
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartMedio.series[0].setData(response.medio.output);
                 chartEstado.series[0].setData(response.estado.output);   
@@ -37,8 +42,9 @@ GRAFICAS.app = (function($, window, document, undefined){
                 chartSecretaria.series[0].setData(response.secretaria.output);
                 chartEscolaridad.series[0].setData(response.escolaridad.output);
                 chartOcupacion.series[0].setData(response.ocupacion.output);
-                chartSolicitanteType.series[0].setData(response.solicitanteType.output);
-                chartEstandares.series[0].setData(response.estandares.output);
+                chartTemas.series[0].setData(response.temas.output);
+                //chartSolicitanteType.series[0].setData(response.solicitanteType.output);
+                //chartEstandares.series[0].setData(response.estandares.output);
             }
         });
         GLOBAL.app.closeLoadingModal();
@@ -231,6 +237,49 @@ $(document).ready(function () {
             }]
         }]
     });
+
+    chartTemas = Highcharts.chart('temas', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Temas'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Masculino',
+                y: 24.03,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Femenimo',
+                y: 10.38
+            }]
+        }]
+    });
+
 
     chartEstandar = Highcharts.chart('graficaConEstandar', {
         chart: {

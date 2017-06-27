@@ -95,5 +95,16 @@
 					<div id="graficaMigrante" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div id="temas" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-md-4">
+					
+				</div>
+				<div class="col-md-4">
+					
+				</div>
+			</div>
 		</div>
 	</div>

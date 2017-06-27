@@ -21,10 +21,28 @@ Class Graficas{
 		$result["edad"] = $this->getEdad($array);
 		$result["solicitanteType"] = $this->getTipoSolicitante($array);
 		$result["estandares"] = $this->getEstandares($array);
+		$result["temas"] = $this->getTemas($array);
 		$result["success"] = true;
 		return $result;
 	}
-
+	
+	function getTemas($array){
+		$paramString = "SELECT ct.temas AS temas, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoTemas ct ON (ct.id = v.dirigidoA) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY ce.codigo";
+		$comand = new dbMySQL();
+		$result = $comand->executeQuery($paramString);
+		$list = array();
+		foreach ($result["output"] as $value) {
+			$list[] = array(
+				'name' => ($value->temas. " (".$value->numero.")"),
+				'y' => (int)$value->numero,
+				'drilldown' => ($value->temas),
+			);
+		}
+		$result["output"] = $list;
+		$result["query"] = $paramString;
+		return $result;
+	}
+	
 	function getEstandares($array){
 		$paramString = "SELECT ce.codigo AS estandar, SUM(1) AS numero FROM Visita v INNER JOIN CatalogoEstandares ce ON (ce.idEstandar = v.idEstandar) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(v.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(v.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(v.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY ce.codigo";
 		$comand = new dbMySQL();
@@ -32,7 +50,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->estandar),
+				'name' => ($value->estandar. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->estandar),
 			);
@@ -49,7 +67,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->solicitanteType),
+				'name' => ($value->solicitanteType. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->solicitanteType),
 			);
@@ -66,7 +84,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->medioEntero),
+				'name' => ($value->medioEntero. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->medioEntero),
 			);
@@ -83,7 +101,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->secretaria),
+				'name' => ($value->secretaria. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->secretaria),
 			);
@@ -117,7 +135,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->ocupacion),
+				'name' => ($value->ocupacion. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->ocupacion),
 			);
@@ -134,7 +152,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->edad),
+				'name' => ($value->edad. " años (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->edad),
 			);
@@ -151,7 +169,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->estado),
+				'name' => ($value->estado. " (".$value->numero.")"),
 				'y' => (int)$value->numero,
 				'drilldown' => ($value->estado),
 			);
@@ -161,13 +179,13 @@ Class Graficas{
 		return $result;
 	}
 	function getGraficaMedio($array){
-		$paramString = "SELECT cmc.medioContacto AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.descripcion";
+		$paramString = "SELECT cmc.medioContacto AS medioContacto, SUM(1) AS numero FROM Solicitante s INNER JOIN CatalogoMedioContacto cmc ON (cmc.idMedioContacto = s.medioContacto) WHERE CASE WHEN '".$array["tipoFecha"]."'='exacta' THEN DATE(s.createdDate) = '".$array["txtFechaExacta"]."' WHEN '".$array["tipoFecha"]."'='rango' THEN (DATE(s.createdDate) >= '".$array["txtFechaInicial"]."' AND DATE(s.createdDate) <= '".$array["txtFechaFinal"]."') ELSE 1=1 END GROUP BY cmc.medioContacto";
 		$comand = new dbMySQL();
 		$result = $comand->executeQuery($paramString);
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->medioContacto),
+				'name' => ($value->medioContacto. " (".$value->numero.")"),
 				'y' => (int)$value->numero
 			);
 		}
@@ -182,7 +200,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => ($value->estatus),
+				'name' => ($value->estatus. " (".$value->numero.")"),
 				'y' => (int)$value->numero
 			);
 		}
@@ -197,7 +215,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => $value->idEstandar,
+				'name' => $value->idEstandar. " (".$value->numero.")",
 				'y' => (int)$value->numero
 			);
 		}
@@ -212,7 +230,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => $value->migrante,
+				'name' => $value->migrante. " (".$value->numero.")",
 				'y' => (int)$value->numero
 			);
 		}
@@ -227,7 +245,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => $value->genero,
+				'name' => $value->genero. " (".$value->numero.")",
 				'y' => (int)$value->numero
 			);
 		}
@@ -244,7 +262,7 @@ Class Graficas{
 		$list = array();
 		foreach ($result["output"] as $value) {
 			$list[] = array(
-				'name' => $value->idEstado,
+				'name' => $value->idEstado. " (".$value->numero.")",
 				'y' => (int)$value->numero
 			);
 		}
