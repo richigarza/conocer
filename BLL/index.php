@@ -29,9 +29,8 @@
 				$result = $graficas->getAllGraficas($_POST);
 			break;
 			case "test":
-				$page = new Page();
-				//if($_POST["pantalla"] == "Registrar"){
-				$result = $page->setVisita($_GET);
+				$graficas = new Graficas();
+				$result = $graficas->getAllGraficas($_GET);
 			break;
 			case "newUser":
 				//$User = new BLLUser();				
@@ -64,6 +63,7 @@
 				date_default_timezone_set("America/Monterrey");
 				$result["date"] = date("d/m/Y"); 
 				$result["hour"] = date("h:i:s a");  
+				$myfile = file_put_contents('/var/log/log_solicitante.txt', date("Y-m-d h:i:s a")."\t".$result["folio"]."\t".$result["query"].PHP_EOL , FILE_APPEND | LOCK_EX);
 				//$result["success"] = true;
 			break;
 			case "capturar":
@@ -74,6 +74,7 @@
 				$page = new Page();
 				//if($_POST["pantalla"] == "Registrar"){
 				$result = $page->setVisita($_POST);
+				$myfile = file_put_contents('/var/log/log_visita.txt', date("Y-m-d h:i:s a")."\t".$result["folio"]."\t".$result["query"].PHP_EOL , FILE_APPEND | LOCK_EX);
 				//}else{
 				//	$result = $page->uptadeVisita($_POST);
 				//}
