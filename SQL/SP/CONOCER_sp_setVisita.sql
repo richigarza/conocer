@@ -37,7 +37,7 @@ BEGIN
 
 	IF pantalla='Registrar'
 	THEN 
-		INSERT INTO Visita (idSolicitante, idTipoLlamada, idCursoCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
+		INSERT INTO Visita (idSolicitante, idTipoLlamada, idCursosCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion) 
 		VALUES(idSolicitante, idTipoLlamada, idCursosCapacitacion, motivo, idEstandar, idEstado, idPrestador, idRepresentante, idMedioEntero, idSecretaria, asunto, dirigidoA, comentarios, estatus, tiempoAtencion);
 
 	SELECT LAST_INSERT_ID() INTO output;
