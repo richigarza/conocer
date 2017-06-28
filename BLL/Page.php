@@ -156,6 +156,8 @@
 			$array["txtFechaNacimiento"] = $array["txtFechaNacimiento"] == "''" ? "NULL" : $array["txtFechaNacimiento"];
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
 			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
+            $array["txtEdad"] = $array["txtEdad"]==NULL ? 0 : $array["txtEdad"];
+            $array["txtEdad"] = $array["txtEdad"]=='' ? 0 : $array["txtEdad"];
 			$paramString = "INSERT INTO Solicitante (solicitanteType, nombre, apellidoPaterno, apellidoMaterno, migrante, certificado, estandarizado, email, telefono, nombreEmpresa, tipoEmpresa, idEstado, medioContacto, fechaNacimiento, edad, escolaridad, ocupacion, genero) VALUES(".$array["ddlTipoRegistro"].", '".$array["txtNombres"]."', '".$array["txtApellidoP"]."', '".$array["txtApellidoM"]."', ".$array["rdioMigrante"].", ".$array["rdioCertificacion"].", ".$array["rdioEstandar"].", '".$array["txtEmail"]."', '".$array["txtTelefono"]."', '".$array["txtNombreEmpresa"]."', ".$array["ddlTipoEmpresa"].", ".$array["ddlEntidadFederativa"].", ".$array["ddlMedioContacto"].", ".$array["txtFechaNacimiento"].", ".$array["txtEdad"].", ".$array["ddlEscolaridad"].", ".$array["ddlOcupacion"].", ".$array["ddlGenero"].")";
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
@@ -167,6 +169,8 @@
 			$array["txtFechaNacimiento"] = $array["ddlTipoRegistro"] ==  1  ? "'".$array["txtFechaNacimiento"]."'" : "NULL";
 			$array["ddlEscolaridad"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlEscolaridad"] : 0;
 			$array["ddlOcupacion"] = $array["ddlTipoRegistro"] ==  1  ? $array["ddlOcupacion"] : 0;
+            $array["txtEdad"] = $array["txtEdad"]==NULL ? 0 : $array["txtEdad"];
+            $array["txtEdad"] = $array["txtEdad"]=='' ? 0 : $array["txtEdad"];
 			$paramString = "UPDATE Solicitante SET solicitanteType=".$array["ddlTipoRegistro"].", nombre='".$array["txtNombres"]."', apellidoPaterno='".$array["txtApellidoP"]."', apellidoMaterno='".$array["txtApellidoM"]."', migrante=".$array["rdioMigrante"].", certificado=".$array["rdioCertificacion"].", estandarizado=".$array["rdioEstandar"].", email='".$array["txtEmail"]."', telefono='".$array["txtTelefono"]."', nombreEmpresa='".$array["txtNombreEmpresa"]."', tipoEmpresa=".$array["ddlTipoEmpresa"].", idEstado=".$array["ddlEntidadFederativa"].", medioContacto=".$array["ddlMedioContacto"].", fechaNacimiento=".$array["txtFechaNacimiento"].", escolaridad=".$array["ddlEscolaridad"].", ocupacion=".$array["ddlOcupacion"]." WHERE idSolicitante=".$array["txtFolio"];
 			$comand = new dbMySQL();
 			$result = $comand->insertQuery($paramString);
