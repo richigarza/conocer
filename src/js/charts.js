@@ -39,13 +39,7 @@ GRAFICAS.app = (function($, window, document, undefined){
                 console.log(response.estado.output);
                 //chartResolucion.series[0].setData(response.estatus.output);
                 chartGenero.series[0].setData(response.genero.output);
-<<<<<<< HEAD
-                response.genero.output.forEach(function(element) {
-                    console.log(element);
-                }, this);
-=======
                 chartGenero.setTitle({text: "Genero (Total "+getTotal(response.genero.output)+")"});
->>>>>>> origin/master
                 chartEstandar.series[0].setData(response.estandar.output);
                 chartEstandar.setTitle({text: "Cuenta con estandar (Total "+getTotal(response.estandar.output)+")"});
                 chartMedio.series[0].setData(response.medio.output);
@@ -63,11 +57,6 @@ GRAFICAS.app = (function($, window, document, undefined){
                 chartEscolaridad.series[0].setData(response.escolaridad.output);
                 chartEscolaridad.setTitle({text: "Escolaridad (Total "+getTotal(response.escolaridad.output)+")"});
                 chartOcupacion.series[0].setData(response.ocupacion.output);
-<<<<<<< HEAD
-                chartTemas.series[0].setData(response.temas.output);
-                //chartSolicitanteType.series[0].setData(response.solicitanteType.output);
-                //chartEstandares.series[0].setData(response.estandares.output);
-=======
                 chartOcupacion.setTitle({text: "Ocupación (Total "+getTotal(response.ocupacion.output)+")"});
                 chartSolicitanteType.series[0].setData(response.solicitanteType.output);
                 chartSolicitanteType.setTitle({text: "Tipo de solicitante (Total "+getTotal(response.solicitanteType.output)+")"});
@@ -75,8 +64,8 @@ GRAFICAS.app = (function($, window, document, undefined){
                 chartEstandares.setTitle({text: "Estandares que pregunto (Total "+getTotal(response.estandares.output)+")"});
                 chartTemas.series[0].setData(response.temas.output);
                 chartTemas.setTitle({text: "Temas (Total "+getTotal(response.temas.output)+")"});
-		
->>>>>>> origin/master
+                //chartSolicitanteType.series[0].setData(response.solicitanteType.output);
+                //chartEstandares.series[0].setData(response.estandares.output);
             }
         });
         GLOBAL.app.closeLoadingModal();
