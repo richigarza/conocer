@@ -243,3 +243,10 @@ CREATE TABLE dbCONOCER.CatalogoTemas(
 	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
 	temas VARCHAR(90) NOT NULL COMMENT "nombre del tema"
 );
+
+DROP TABLE IF EXISTS dbCONOCER.CatalogoTipoLlamada;
+SELECT 'CatalogoTipoLlamada';
+CREATE TABLE dbCONOCER.CatalogoTipoLlamada(
+	id INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del registro",
+	tipoLlamada VARCHAR(90) NOT NULL COMMENT "nombre del tipo de llamda"
+);
